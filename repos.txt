@@ -1,0 +1,7 @@
+ghcp-demos|Index + tooling for the GHCP demo suite (6 hands-on demos, easy → hard, covering every major GitHub Copilot surface).
+ghcp-demo-01-hello-completions|Hands-on intro to Copilot ghost-text completions and comment-driven coding (JS).
+ghcp-demo-02-python-quickfix|Learn Copilot Chat slash-commands (/explain, /fix, /tests, /doc, @workspace) on a small Python codebase.
+ghcp-demo-03-todo-api-ts|Scaffold a TypeScript + Express REST API by driving Copilot Chat with iterative prompts.
+ghcp-demo-04-copilot-cli-toolkit|Use the GitHub Copilot CLI for one-shot questions, multi-step refactors, log triage, and gh workflows.
+ghcp-demo-05-agents-md-customization|Customise Copilot with AGENTS.md, repo-wide instructions, path-scoped instructions, and prompt files.
+ghcp-demo-06-coding-agent-and-review|End-to-end demo of the Copilot coding agent (Issue -> PR) and Copilot code review.
