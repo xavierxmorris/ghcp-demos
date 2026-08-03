@@ -1,6 +1,6 @@
 # GHCP Demo Suite
 
-Six small, focused demos showcasing **GitHub Copilot** across its key
+Small, focused demos showcasing **GitHub Copilot** across its key
 surfaces — from comment-driven completions to the autonomous coding agent.
 They're designed to be done in order, but each repo is self-contained.
 
@@ -12,6 +12,7 @@ They're designed to be done in order, but each repo is self-contained.
 | 04 | ⭐⭐⭐     | [`ghcp-demo-04-copilot-cli-toolkit`](./ghcp-demo-04-copilot-cli-toolkit) | The Copilot **CLI** — terminal agent + `gh` workflows |
 | 05 | ⭐⭐⭐⭐   | [`ghcp-demo-05-agents-md-customization`](./ghcp-demo-05-agents-md-customization) | `AGENTS.md`, `copilot-instructions.md`, path-scoped rules, prompt files |
 | 06 | ⭐⭐⭐⭐⭐ | [`ghcp-demo-06-coding-agent-and-review`](./ghcp-demo-06-coding-agent-and-review) | Copilot **coding agent** (Issue → PR) + Copilot **code review** |
+| 09 | ⭐⭐⭐⭐   | [`ghcp-demo-09-figma-design-to-code`](./ghcp-demo-09-figma-design-to-code) | **MCP servers** in Copilot CLI — register Figma, convert a design to production HTML/CSS |
 
 ## How to use this repo
 
@@ -36,6 +37,7 @@ verify on your own machine.
 | 04    | + [GitHub Copilot CLI](https://docs.github.com/en/copilot/github-copilot-in-the-cli) |
 | 05    | Any seat. Customisations are local config. |
 | 06    | Copilot **Business or Enterprise** with coding agent + review enabled |
+| 09    | + [GitHub Copilot CLI](https://docs.github.com/en/copilot/github-copilot-in-the-cli) and a Figma account. A Figma **Dev or Full seat** is required — View/Collab seats hit a hard MCP tool-call limit. |
 
 ## Pushing these to GitHub
 

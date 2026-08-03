@@ -5,3 +5,4 @@ ghcp-demo-03-todo-api-ts|Scaffold a TypeScript + Express REST API by driving Cop
 ghcp-demo-04-copilot-cli-toolkit|Use the GitHub Copilot CLI for one-shot questions, multi-step refactors, log triage, and gh workflows.
 ghcp-demo-05-agents-md-customization|Customise Copilot with AGENTS.md, repo-wide instructions, path-scoped instructions, and prompt files.
 ghcp-demo-06-coding-agent-and-review|End-to-end demo of the Copilot coding agent (Issue -> PR) and Copilot code review.
+ghcp-demo-09-figma-design-to-code|Register the Figma MCP server with Copilot CLI and convert a real Figma design into production HTML/CSS.
