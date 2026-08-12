@@ -10,3 +10,6 @@ ghcp-demo-06-coding-agent-and-review/
 ghcp-demo-07-foundry-hosted-agents/
 ghcp-demo-08-foundry-control-plane-vs-foundry-local/
 ghcp-demo-09-figma-design-to-code/
+
+# Local run logs downloaded by `gh aw audit` / `gh aw logs`.
+.github/aw/logs/
