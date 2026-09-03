@@ -1,15 +1,7 @@
 # The demo subfolders are independent git repos (published separately).
 # This index repo only tracks the top-level files (README, scripts, repos.txt, LICENSE).
-ghcp-demo-00-design-to-clickthrough/
-ghcp-demo-01-hello-completions/
-ghcp-demo-02-python-quickfix/
-ghcp-demo-03-todo-api-ts/
-ghcp-demo-04-copilot-cli-toolkit/
-ghcp-demo-05-agents-md-customization/
-ghcp-demo-06-coding-agent-and-review/
-ghcp-demo-07-foundry-hosted-agents/
-ghcp-demo-08-foundry-control-plane-vs-foundry-local/
-ghcp-demo-09-figma-design-to-code/
+# Glob rather than an explicit list, so newly added demos are covered automatically.
+ghcp-demo-*/
 
 # Local run logs downloaded by `gh aw audit` / `gh aw logs`.
 .github/aw/logs/
