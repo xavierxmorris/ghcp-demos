@@ -1,4 +1,4 @@
-ghcp-demos|Index + tooling for the GHCP demo suite (10 hands-on demos, easy → hard, covering every major GitHub Copilot surface).
+ghcp-demos|Index + tooling for the GHCP demo suite (14 hands-on demos, easy -> hard, covering every major GitHub Copilot surface).
 ghcp-demo-00-design-to-clickthrough|One-page BRD to a working click-through app and back again — Copilot for business analysts, no code required.
 ghcp-demo-01-hello-completions|Hands-on intro to Copilot ghost-text completions and comment-driven coding (JS).
 ghcp-demo-02-python-quickfix|Learn Copilot Chat slash-commands (/explain, /fix, /tests, /doc, @workspace) on a small Python codebase.
@@ -9,3 +9,7 @@ ghcp-demo-06-coding-agent-and-review|End-to-end demo of the Copilot coding agent
 ghcp-demo-07-foundry-hosted-agents|Build, deploy and evaluate two hosted AI agents on Azure AI Foundry with Copilot as the pair-programmer.
 ghcp-demo-08-foundry-control-plane-vs-foundry-local|Sourced research brief: does the Foundry Control Plane manage local agents? Every claim traced to Microsoft Learn.
 ghcp-demo-09-figma-design-to-code|Register the Figma MCP server with Copilot CLI and convert a real Figma design into production HTML/CSS.
+ghcp-demo-10-ato-brd-to-clickthrough|An ATO-style BRD becomes a working click-through app AND a traced test pack that runs itself. 102 checks in a real browser. Fictional demo - not an ATO service.
+ghcp-demo-11-excel-merge-agent|Deterministic Excel merge/reconciliation pipeline driven by a committed GitHub Copilot agent. The agent edits YAML; Python moves the data. Refuses to produce plausible-but-wrong workbooks.
+ghcp-demo-12-cobol-c-interop|GnuCOBOL and maintained C interoperability demo: preserve COBOL rule ownership, expose an explicit C ABI, and prove both build paths with GitHub Copilot guardrails.
+ghcp-demo-13-modernize-legacy-cobol-app|Legacy COBOL to Node.js migration, proven by an executable golden-master parity harness. Built on continuous-copilot/modernize-legacy-cobol-app, rebuilt around today's GitHub Copilot customisation surface.

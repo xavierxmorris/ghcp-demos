@@ -1,9 +1,9 @@
 # GHCP Demo Suite
 
-Ten small, focused demos showcasing **GitHub Copilot** across its key surfaces —
+Fourteen small, focused demos showcasing **GitHub Copilot** across its key surfaces —
 from comment-driven completions, through the autonomous coding agent, out to MCP
-servers and hosted agents on Azure AI Foundry. They're designed to be done in
-order, but each repo is self-contained.
+servers, hosted agents on Azure AI Foundry, and mainframe modernisation. They're
+designed to be done in order, but each repo is self-contained.
 
 | # | Difficulty | Repo | What it teaches |
 |---|------------|------|-----------------|
@@ -17,6 +17,10 @@ order, but each repo is self-contained.
 | 07 | ⭐⭐⭐⭐⭐ | [`ghcp-demo-07-foundry-hosted-agents`](https://github.com/xavierxmorris/ghcp-demo-07-foundry-hosted-agents) | Copilot as pair-programmer for **hosted agents on Azure AI Foundry** — tool calling, grounding, deploy, evaluate, CI/CD |
 | 08 | 📄 (reading) | [`ghcp-demo-08-foundry-control-plane-vs-foundry-local`](https://github.com/xavierxmorris/ghcp-demo-08-foundry-control-plane-vs-foundry-local) | **Copilot as a research tool** — a sourced brief where every claim is traced to first-party docs |
 | 09 | ⭐⭐⭐⭐   | `ghcp-demo-09-figma-design-to-code` 🔒 | **MCP servers** in Copilot CLI — register Figma, convert a design to production HTML/CSS |
+| 10 | ⭐         | [`ghcp-demo-10-ato-brd-to-clickthrough`](https://github.com/xavierxmorris/ghcp-demo-10-ato-brd-to-clickthrough) | A BRD becomes a click-through app **and** a traced test pack that runs itself — separate BA and **tester** tracks |
+| 11 | ⭐⭐⭐     | [`ghcp-demo-11-excel-merge-agent`](https://github.com/xavierxmorris/ghcp-demo-11-excel-merge-agent) | A **committed agent**, not a chat transcript — the agent edits YAML, deterministic Python moves the data |
+| 12 | ⭐⭐⭐     | [`ghcp-demo-12-cobol-c-interop`](https://github.com/xavierxmorris/ghcp-demo-12-cobol-c-interop) | COBOL ↔ **C interop** with an explicit ABI boundary, proven on both build paths |
+| 13 | ⭐⭐⭐⭐   | [`ghcp-demo-13-modernize-legacy-cobol-app`](https://github.com/xavierxmorris/ghcp-demo-13-modernize-legacy-cobol-app) | COBOL → **Node.js** migration proven by an executable **golden-master parity harness** |
 
 🔒 = repo is currently **private**; the link will 404 until it's published.
 
@@ -25,6 +29,9 @@ product owners rather than developers, and it needs no toolchain at all.
 Demo **08** is a written research brief rather than a hands-on lab — it's here
 because "use Copilot to research something and make it checkable" is a real
 Copilot workflow.
+Demos **10**, **12** and **13** are the modernisation track: a BRD-to-app-plus-tests
+lab, a COBOL/C interop boundary, and a COBOL-to-Node.js migration held honest by a
+golden-master parity harness.
 
 ## How to use this repo
 
@@ -36,7 +43,9 @@ git clone https://github.com/xavierxmorris/ghcp-demo-01-hello-completions.git
 ```
 
 Rough timings: **~3 hours** for the core path (demos 01–06), **~6 hours** if you
-also do 00, 07 and 09. Demo 08 is a 15-minute read.
+also do 00, 07 and 09. Demo 08 is a 15-minute read. Demos 10 and 12 each run as a
+90-second presenter track or a short hands-on exercise; 11 and 13 are longer
+build-and-verify labs.
 
 > **Layout note:** if you clone all the demos as subfolders of this repo, they
 > stay independent git repos. `.gitignore` excludes every `ghcp-demo-*/` folder
@@ -63,6 +72,10 @@ operations leads**, and deliberately requires no toolchain.
 | 07    | + An **Azure subscription** with AI Foundry access, plus `az` and `azd` CLIs |
 | 08    | Nothing — it's a written brief. |
 | 09    | + [GitHub Copilot CLI](https://docs.github.com/en/copilot/github-copilot-in-the-cli) and a Figma account. A Figma **Dev or Full seat** is required — View/Collab seats hit a hard MCP tool-call limit. |
+| 10    | Nothing for the demo itself. Node and Edge only if you re-run the 102 checks. |
+| 11    | Python 3 (the pipeline and its tests). No Excel install and no database connector. |
+| 12    | Docker Desktop for the container build, or GnuCOBOL + GCC for a native Linux run. |
+| 13    | GnuCOBOL and Node — or just open the included devcontainer, which configures both. |
 
 ## The setup these demos were built with
 
