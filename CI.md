@@ -61,6 +61,12 @@ lock; a compiler/runtime upgrade must regenerate it and update the CI binary
 checksum together. Regeneration runs without invoking a model or publishing a
 report.
 
+Commit `.github/aw/actions-lock.json` alongside the generated workflow. It
+preserves the compiler's action-pin metadata so a clean hosted runner and a
+local compiler use the same version annotations, rather than producing
+comment-only lock drift. See the official
+[compilation-process reference](https://github.github.io/gh-aw/reference/compilation-process/).
+
 ## Version sources
 
 Reviewed **7 September 2026** using official releases, not guessed action tags:
