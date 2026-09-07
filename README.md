@@ -2,27 +2,47 @@
 
 Fourteen small, focused demos showcasing **GitHub Copilot** across its key surfaces —
 from comment-driven completions, through the autonomous coding agent, out to MCP
-servers, hosted agents on Azure AI Foundry, and mainframe modernisation. They're
-designed to be done in order, but each repo is self-contained.
+servers, hosted agents on Microsoft Foundry, and mainframe modernisation.
+Each repo is self-contained; choose a learning path rather than assuming every
+participant needs to complete the entire sequence.
 
 | # | Difficulty | Repo | What it teaches |
 |---|------------|------|-----------------|
 | 00 | ⭐         | [`ghcp-demo-00-design-to-clickthrough`](https://github.com/xavierxmorris/ghcp-demo-00-design-to-clickthrough) | Copilot for **non-developers** — a one-page BRD becomes a clickable app, then the BRD changes and the app follows |
 | 01 | ⭐         | [`ghcp-demo-01-hello-completions`](https://github.com/xavierxmorris/ghcp-demo-01-hello-completions) | Ghost-text completions, comment-driven coding |
-| 02 | ⭐⭐       | [`ghcp-demo-02-python-quickfix`](https://github.com/xavierxmorris/ghcp-demo-02-python-quickfix) | Chat slash-commands: `/explain`, `/fix`, `/tests`, `/doc`, `@workspace` |
+| 02 | ⭐⭐       | [`ghcp-demo-02-python-quickfix`](https://github.com/xavierxmorris/ghcp-demo-02-python-quickfix) | Chat-assisted root-cause analysis, regression tests, and accurate documentation |
 | 03 | ⭐⭐⭐     | [`ghcp-demo-03-todo-api-ts`](https://github.com/xavierxmorris/ghcp-demo-03-todo-api-ts) | Multi-file scaffolding with Chat; iterative prompt refinement |
 | 04 | ⭐⭐⭐     | [`ghcp-demo-04-copilot-cli-toolkit`](https://github.com/xavierxmorris/ghcp-demo-04-copilot-cli-toolkit) | The Copilot **CLI** — terminal agent + `gh` workflows |
 | 05 | ⭐⭐⭐⭐   | [`ghcp-demo-05-agents-md-customization`](https://github.com/xavierxmorris/ghcp-demo-05-agents-md-customization) | `AGENTS.md`, `copilot-instructions.md`, path-scoped rules, prompt files |
-| 06 | ⭐⭐⭐⭐⭐ | [`ghcp-demo-06-coding-agent-and-review`](https://github.com/xavierxmorris/ghcp-demo-06-coding-agent-and-review) | Copilot **coding agent** (Issue → PR) + Copilot **code review** |
+| 06 | ⭐⭐⭐⭐⭐ | [`ghcp-demo-06-coding-agent-and-review`](https://github.com/xavierxmorris/ghcp-demo-06-coding-agent-and-review) | Copilot **cloud agent** (formerly coding agent), Issue → PR, and separate **code review** |
 | 07 | ⭐⭐⭐⭐⭐ | [`ghcp-demo-07-foundry-hosted-agents`](https://github.com/xavierxmorris/ghcp-demo-07-foundry-hosted-agents) | Copilot as pair-programmer for **hosted agents on Azure AI Foundry** — tool calling, grounding, deploy, evaluate, CI/CD |
 | 08 | 📄 (reading) | [`ghcp-demo-08-foundry-control-plane-vs-foundry-local`](https://github.com/xavierxmorris/ghcp-demo-08-foundry-control-plane-vs-foundry-local) | **Copilot as a research tool** — a sourced brief where every claim is traced to first-party docs |
-| 09 | ⭐⭐⭐⭐   | `ghcp-demo-09-figma-design-to-code` 🔒 | **MCP servers** in Copilot CLI — register Figma, convert a design to production HTML/CSS |
+| 09 | ⭐⭐⭐⭐   | `ghcp-demo-09-figma-design-to-code` 🔒 | **MCP servers** in Copilot CLI — fixture replay, Figma access, and an assessed static HTML/CSS conversion |
 | 10 | ⭐         | [`ghcp-demo-10-ato-brd-to-clickthrough`](https://github.com/xavierxmorris/ghcp-demo-10-ato-brd-to-clickthrough) | A BRD becomes a click-through app **and** a traced test pack that runs itself — separate BA and **tester** tracks |
 | 11 | ⭐⭐⭐     | [`ghcp-demo-11-excel-merge-agent`](https://github.com/xavierxmorris/ghcp-demo-11-excel-merge-agent) | A **committed agent**, not a chat transcript — the agent edits YAML, deterministic Python moves the data |
 | 12 | ⭐⭐⭐     | [`ghcp-demo-12-cobol-c-interop`](https://github.com/xavierxmorris/ghcp-demo-12-cobol-c-interop) | COBOL ↔ **C interop** with an explicit ABI boundary, proven on both build paths |
 | 13 | ⭐⭐⭐⭐   | [`ghcp-demo-13-modernize-legacy-cobol-app`](https://github.com/xavierxmorris/ghcp-demo-13-modernize-legacy-cobol-app) | COBOL → **Node.js** migration proven by an executable **golden-master parity harness** |
 
-🔒 = repo is currently **private**; the link will 404 until it's published.
+🔒 = repo is **private** and requires access. Private design fixtures are not
+automatically approved for redistribution.
+
+## Go deeper
+
+Every listed demo now has a **`WORKSHOP.md`** linked from its README: a timed
+participant lab with repository-specific contracts, prompts, expected outcomes,
+negative/boundary cases, troubleshooting, evidence to keep, and explicit limits.
+These complement the short demos; they do not replace the starter exercises
+with completed solutions.
+
+Use **[FACILITATOR-GUIDE.md](FACILITATOR-GUIDE.md)** for all 14 workshop links,
+baseline expectations, run-mode differences, and session preparation.
+
+| Learning path | Demos | Learning outcome |
+| --- | --- | --- |
+| Requirements and acceptance | 00, 10 | Trace a document change to behavior and meaningful assertions |
+| Developer foundations | 01-06 | Move from local suggestions to bounded, reviewed agent changes |
+| Agents, evidence, and design | 07, 08, 09 | Separate tool correctness, research claims, and MCP/design evidence |
+| Data and modernization | 11, 12, 13 | Protect business meaning across rules, ABI boundaries, and language changes |
 
 Demo **00** is the odd one out on purpose: it's aimed at business analysts and
 product owners rather than developers, and it needs no toolchain at all.
@@ -42,10 +62,14 @@ GitHub repo — clone the one you want, follow its README, and move on to the ne
 git clone https://github.com/xavierxmorris/ghcp-demo-01-hello-completions.git
 ```
 
-Rough timings: **~3 hours** for the core path (demos 01–06), **~6 hours** if you
+Rough timings for the original short walkthroughs: **~3 hours** for the core path (demos 01–06), **~6 hours** if you
 also do 00, 07 and 09. Demo 08 is a 15-minute read. Demos 10 and 12 each run as a
 90-second presenter track or a short hands-on exercise; 11 and 13 are longer
 build-and-verify labs.
+
+The deeper workshop tracks take longer: plan **5-6 hours** for all foundation
+labs, split across sessions, with setup and cloud queues additional. Individual
+workshop times are estimates, not measured generation-speed claims.
 
 > **Layout note:** if you clone all the demos as subfolders of this repo, they
 > stay independent git repos. `.gitignore` excludes every `ghcp-demo-*/` folder
@@ -64,26 +88,37 @@ operations leads**, and deliberately requires no toolchain.
 
 | Demo | Needs |
 |------|-------|
-| 00    | Nothing. Runs off the filesystem — no install, no server, no network. |
-| 01–03 | VS Code + Copilot + Copilot Chat (any seat) |
-| 04    | + [GitHub Copilot CLI](https://docs.github.com/en/copilot/github-copilot-in-the-cli) |
-| 05    | Any seat. Customisations are local config. |
-| 06    | Copilot **Business or Enterprise** with coding agent + review enabled |
-| 07    | + An **Azure subscription** with AI Foundry access, plus `az` and `azd` CLIs |
-| 08    | Nothing — it's a written brief. |
-| 09    | + [GitHub Copilot CLI](https://docs.github.com/en/copilot/github-copilot-in-the-cli) and a Figma account. A Figma **Dev or Full seat** is required — View/Collab seats hit a hard MCP tool-call limit. |
-| 10    | Nothing for the demo itself. Node and Edge only if you re-run the 102 checks. |
-| 11    | Python 3 (the pipeline and its tests). No Excel install and no database connector. |
+| 00    | Browser for replay; PowerShell for the runner. Copilot/network only for live authoring. |
+| 01    | Copilot-enabled editor, browser, and Python 3 or another trusted HTTP server for JavaScript module imports. |
+| 02    | VS Code Chat, Python 3.10+, an isolated environment, and the declared pytest dependency. |
+| 03    | VS Code Chat, Node 20+, npm, and the declared TypeScript/Express 4/Vitest dependencies. |
+| 04    | [Copilot CLI](https://docs.github.com/en/copilot/concepts/agents/copilot-cli/about-copilot-cli), Python, and Git; `gh` only for the optional GitHub exercise. |
+| 05    | Supported Chat surface, Python 3.10+, and declared dependencies. Prompt-file support differs between extension-host and Agent Host sessions. |
+| 06    | An eligible paid Copilot plan and allowed cloud-agent/review policies; an authorized repo/fork. Python 3.11+ and Node 20+ for local work. See the starter gaps before running. |
+| 07    | Python/development requirements for offline domain tests. Azure subscription, model access, `az`, `azd`, compatible extensions, and budget for the cloud track. |
+| 08    | Browser to read; network only to refresh sources. No Azure deployment. |
+| 09    | Repo access. Node 18+ and PowerShell for raw replay; Python for HTTP preview. Copilot for agent-driven replay; authorized Figma client/account/file access and plan/seat allowance for live calls. |
+| 10    | Browser for replay; PowerShell for the runner. Node, declared `playwright-core`, and Edge for fresh automation. |
+| 11    | Python 3.10+ and the package's `dev` extra for tests. No Excel installation or database connector. Use a sample-only clone. |
 | 12    | Docker Desktop for the container build, or GnuCOBOL + GCC for a native Linux run. |
-| 13    | GnuCOBOL and Node — or just open the included devcontainer, which configures both. |
+| 13    | Node 20.11+ for the port. GnuCOBOL plus a compatible environment, or the Docker/devcontainer path, for fresh legacy evidence. No npm dependencies. |
+
+Access and service guidance was reviewed **7 September 2026** against
+[GitHub cloud-agent documentation](https://docs.github.com/en/copilot/concepts/agents/cloud-agent/about-cloud-agent),
+[code review](https://docs.github.com/en/copilot/concepts/agents/code-review), and
+[Figma rate limits/access](https://developers.figma.com/docs/figma-mcp-server/rate-limits-access/).
+Quotas, previews, and organization policies can change independently of the code.
 
 ## The setup these demos were built with
 
-Demos 04, 05, 07 and 09 assume a customised Copilot install. This is the shape
+Demos 04, 05, 07 and 09 explore a customised Copilot install. This is the shape
 of the environment they were authored and tested against — useful as a
 reference for what "configured Copilot" actually looks like in practice.
 
-**GitHub Copilot CLI** `1.0.79` on Windows 11 / PowerShell 7.
+The original examples used **GitHub Copilot CLI 1.0.79** on Windows 11 /
+PowerShell 7. The documentation refresh inspected **1.0.84-1** on
+**7 September 2026**. These are recorded versions, not a requirement that every
+demo use an identical global installation.
 
 **MCP servers** (`~/.copilot/mcp-config.json`) — extend the agent with tools
 beyond the filesystem and shell:
@@ -111,6 +146,8 @@ built-ins (`explore`, `task`, `general-purpose`, `code-review`,
 - `python-reviewer` — house Python conventions
 
 Project-scoped agents live in `.github/agents/` and travel with the repo.
+Agent names and availability depend on the host and configuration; inspect
+`/agent` and `/env` rather than assuming every listed custom agent is built in.
 
 **Skills** (`~/.copilot/skills/`) — reusable procedural playbooks the agent
 loads on demand: document generation (`docx`, `pptx`, `xlsx`), design and
@@ -122,22 +159,35 @@ installed from plugin marketplaces — the Azure pack (`azure-deploy`,
 demo 07 leans on.
 
 **Instruction layering** — this is the single highest-leverage customisation,
-and the subject of demo 05. Instructions merge from broad to narrow:
+and the subject of demo 05. These are different scopes of context, not a
+universal override chain:
 
 ```
-~/.copilot/copilot-instructions.md      personal defaults, every session
-  └─ <repo>/.github/copilot-instructions.md   repo-wide conventions
-      └─ <repo>/AGENTS.md                     agent-facing repo contract
-          └─ <subdir>/AGENTS.md               path-scoped overrides
+~/.copilot/copilot-instructions.md          personal CLI defaults
+<repo>/.github/copilot-instructions.md      repository conventions
+<repo>/AGENTS.md                           repository agent contract
+<repo>/.github/instructions/*.instructions.md  matched file/task guidance
+<subdir>/AGENTS.md                         nested guidance where supported
 ```
+
+Applicable instructions are combined; avoid conflicting rules and inspect
+what actually loaded. VS Code does not use custom instruction files for
+inline suggestions. Nested discovery and prompt-file behavior vary by host.
+See [current VS Code guidance](https://code.visualstudio.com/docs/agent-customization/custom-instructions).
 
 **Canvases** — interactive side panels (kanban boards, whiteboards, data-flow
 diagrams) for work that's easier to see than to describe in chat.
 
 ## Pushing these to GitHub
 
-If you've cloned this monorepo locally and want to publish each demo as its
-own GitHub repo:
+This is not a monorepo: each demo has its own Git history, remote, and working
+tree. Committing the index does not commit any ignored child repository.
+Inspect and commit each intended change separately before publishing.
+
+The scripts below are **publishing tools**, not setup or validation commands.
+They can create repositories and push `main`; creation is public by default.
+Review the authenticated account, target list, visibility, and staged content
+first, especially for private demo 09.
 
 ```powershell
 # Windows / PowerShell
@@ -149,10 +199,13 @@ own GitHub repo:
 ./push-all.sh
 ```
 
-The scripts read `repos.txt`, create a public repo per line under your
-authenticated `gh` user, push `main`, and disable wiki/issues defaults you
-don't need.
+The scripts read `repos.txt`, create missing repos under the authenticated
+`gh` user, and push `main`. They do not commit new edits in already-initialized
+repos, and they do not configure issue/wiki settings or establish branch
+protection. `-Private` (PowerShell) or `--private` (Bash) controls creation
+visibility; existing repositories are not made public by that choice.
 
 ## License
 
-MIT for every demo. See `LICENSE`.
+The index is MIT licensed; see `LICENSE`. Check each demo's license and any
+separate rights/permissions for incorporated design assets before redistribution.
