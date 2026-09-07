@@ -62,14 +62,21 @@ golden-master parity harness.
 
 ### Mainframe modernization to Java and .NET
 
-Start with the [AI-assisted setup and migration path](https://github.com/xavierxmorris/ghcp-demo-13-modernize-legacy-cobol-app/blob/main/docs/JAVA-DOTNET-MODERNIZATION.md).
-Use **demo 12** to preserve a COBOL rule behind an explicit boundary, **demo 13**
-to compare independent language implementations against recorded behavior, and
-the separate [CardDemo lab](https://github.com/xavierxmorris/azure-mainframe-modernization-carddemo/blob/main/docs/java-dotnet-modernization.md)
-for copybook-shaped data, shared Java/.NET overpunch fixtures, and the existing
-read-only ASP.NET Core 10 application. CardDemo is a companion repository, not
-a fifteenth numbered demo. These examples do not claim automatic COBOL
-conversion or full mainframe runtime parity.
+| Goal | Start here | What it establishes |
+| --- | --- | --- |
+| Keep a rule in COBOL and review its C boundary | [Demo 12](https://github.com/xavierxmorris/ghcp-demo-12-cobol-c-interop) | Source ownership, ABI contracts, and build-path evidence |
+| Move original behavior to Java/.NET/Node | [Demo 13 front page](https://github.com/xavierxmorris/ghcp-demo-13-modernize-legacy-cobol-app) | Recorded COBOL observations compared with independent ports |
+| Apply the method to mainframe-shaped records | [CardDemo](https://github.com/xavierxmorris/azure-mainframe-modernization-carddemo) | A read-only .NET slice and shared Java/.NET numeric contracts |
+
+Start with the [Copilot value guide](https://github.com/xavierxmorris/ghcp-demo-13-modernize-legacy-cobol-app/blob/main/docs/COPILOT-VALUE.md)
+to separate AI assistance from compiler execution, comparison evidence, and
+human approval. For a taxation-office context, use the
+[original-COBOL evidence pack](https://github.com/xavierxmorris/ghcp-demo-13-modernize-legacy-cobol-app/tree/main/examples/tax-office),
+not independently invented tax rules.
+
+CardDemo is a companion repository, not a fifteenth numbered demo. The labs
+do not claim automatic COBOL conversion, full mainframe parity, a productivity
+percentage, or production/compliance certification.
 
 ## How to use this repo
 

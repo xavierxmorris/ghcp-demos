@@ -12,4 +12,4 @@ ghcp-demo-09-figma-design-to-code|Figma MCP access and offline fixture replay wi
 ghcp-demo-10-ato-brd-to-clickthrough|An ATO-style BRD becomes a working click-through app AND a traced test pack that runs itself. 102 checks in a real browser. Fictional demo - not an ATO service.
 ghcp-demo-11-excel-merge-agent|Deterministic Excel merge/reconciliation pipeline driven by a committed GitHub Copilot agent. The agent edits YAML; Python moves the data. Refuses to produce plausible-but-wrong workbooks.
 ghcp-demo-12-cobol-c-interop|GnuCOBOL and maintained C interoperability demo: preserve COBOL rule ownership, expose an explicit C ABI, and prove both build paths with GitHub Copilot guardrails.
-ghcp-demo-13-modernize-legacy-cobol-app|AI-assisted COBOL to Node.js, Java 25, and .NET 10 modernization with independent ports, a shared golden-master oracle, and a multi-language development container.
+ghcp-demo-13-modernize-legacy-cobol-app|COBOL-to-Java/.NET/Node.js modernization lab: original-source evidence, GitHub Copilot workflows, explicit behavior changes, and repeatable checks.

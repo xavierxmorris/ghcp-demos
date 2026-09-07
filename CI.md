@@ -19,8 +19,8 @@ Each demo's `.github/workflows/ci.yml` owns its own baseline.
 | 09 | Private offline replay, complete response/exit/deadline checks and negative fixtures; no payload logs, uploads or live Figma calls |
 | 10 | Fresh Edge acceptance for both BRD versions plus test-pack integrity; historical results are not fresh CI evidence |
 | 11 | Windows/Linux pipeline tests, explicit Python 3.10 compatibility, complete sample artifacts and reason-specific drift rejection |
-| 12 | Both native build paths, signed 64-bit ABI checks and complete generated evidence |
-| 13 | Existing parity/language workflows, maintained independently with its modernization work |
+| 12 | Both build paths, signed 64-bit ABI, maintained-C contracts/sanitizers, and complete generated evidence |
+| 13 | Original COBOL replay, Node/Java/.NET comparisons, and source-to-port evidence; not full mainframe or tax-system parity |
 
 ## Shared policy
 
