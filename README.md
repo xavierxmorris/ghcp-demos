@@ -21,7 +21,7 @@ participant needs to complete the entire sequence.
 | 10 | ⭐         | [`ghcp-demo-10-ato-brd-to-clickthrough`](https://github.com/xavierxmorris/ghcp-demo-10-ato-brd-to-clickthrough) | A BRD becomes a click-through app **and** a traced test pack that runs itself — separate BA and **tester** tracks |
 | 11 | ⭐⭐⭐     | [`ghcp-demo-11-excel-merge-agent`](https://github.com/xavierxmorris/ghcp-demo-11-excel-merge-agent) | A **committed agent**, not a chat transcript — the agent edits YAML, deterministic Python moves the data |
 | 12 | ⭐⭐⭐     | [`ghcp-demo-12-cobol-c-interop`](https://github.com/xavierxmorris/ghcp-demo-12-cobol-c-interop) | COBOL ↔ **C interop** with an explicit ABI boundary, proven on both build paths |
-| 13 | ⭐⭐⭐⭐   | [`ghcp-demo-13-modernize-legacy-cobol-app`](https://github.com/xavierxmorris/ghcp-demo-13-modernize-legacy-cobol-app) | COBOL → **Node.js** migration proven by an executable **golden-master parity harness** |
+| 13 | ⭐⭐⭐⭐   | [`ghcp-demo-13-modernize-legacy-cobol-app`](https://github.com/xavierxmorris/ghcp-demo-13-modernize-legacy-cobol-app) | COBOL → **Node.js, Java 25, and .NET 10** with one executable **golden-master parity harness** |
 
 🔒 = repo is **private** and requires access. Private design fixtures are not
 automatically approved for redistribution.
@@ -50,8 +50,19 @@ Demo **08** is a written research brief rather than a hands-on lab — it's here
 because "use Copilot to research something and make it checkable" is a real
 Copilot workflow.
 Demos **10**, **12** and **13** are the modernisation track: a BRD-to-app-plus-tests
-lab, a COBOL/C interop boundary, and a COBOL-to-Node.js migration held honest by a
+lab, a COBOL/C interop boundary, and a COBOL-to-Node.js/Java/.NET migration held honest by a
 golden-master parity harness.
+
+### Mainframe modernization to Java and .NET
+
+Start with the [AI-assisted setup and migration path](https://github.com/xavierxmorris/ghcp-demo-13-modernize-legacy-cobol-app/blob/main/docs/JAVA-DOTNET-MODERNIZATION.md).
+Use **demo 12** to preserve a COBOL rule behind an explicit boundary, **demo 13**
+to compare independent language implementations against recorded behavior, and
+the separate [CardDemo lab](https://github.com/xavierxmorris/azure-mainframe-modernization-carddemo/blob/main/docs/java-dotnet-modernization.md)
+for copybook-shaped data, shared Java/.NET overpunch fixtures, and the existing
+read-only ASP.NET Core 10 application. CardDemo is a companion repository, not
+a fifteenth numbered demo. These examples do not claim automatic COBOL
+conversion or full mainframe runtime parity.
 
 ## How to use this repo
 
@@ -101,7 +112,7 @@ operations leads**, and deliberately requires no toolchain.
 | 10    | Browser for replay; PowerShell for the runner. Node, declared `playwright-core`, and Edge for fresh automation. |
 | 11    | Python 3.10+ and the package's `dev` extra for tests. No Excel installation or database connector. Use a sample-only clone. |
 | 12    | Docker Desktop for the container build, or GnuCOBOL + GCC for a native Linux run. |
-| 13    | Node 20.11+ for the port. GnuCOBOL plus a compatible environment, or the Docker/devcontainer path, for fresh legacy evidence. No npm dependencies. |
+| 13    | Node 20.11+ for the original port/harness. Optional Java 25 and .NET 10 SDKs for the new targets. The multi-language Docker/devcontainer includes all three plus GnuCOBOL. No application packages. |
 
 Access and service guidance was reviewed **7 September 2026** against
 [GitHub cloud-agent documentation](https://docs.github.com/en/copilot/concepts/agents/cloud-agent/about-cloud-agent),
