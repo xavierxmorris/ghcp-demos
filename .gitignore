@@ -5,3 +5,7 @@ ghcp-demo-*/
 
 # Local run logs downloaded by `gh aw audit` / `gh aw logs`.
 .github/aw/logs/
+
+# Local caches from the index's Python validation scripts.
+__pycache__/
+*.py[cod]

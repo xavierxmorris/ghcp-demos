@@ -26,6 +26,13 @@ participant needs to complete the entire sequence.
 🔒 = repo is **private** and requires access. Private design fixtures are not
 automatically approved for redistribution.
 
+## Continuous integration
+
+See **[CI maintenance](CI.md)** for each demo's actual gate, intentional
+workshop failures, dependency-update policy, pinned tooling, and the generated
+activity-report workflow. Each standalone repository runs its own CI; the
+index does not publish or clone the demos during validation.
+
 ## Go deeper
 
 Every listed demo now has a **`WORKSHOP.md`** linked from its README: a timed

@@ -4,6 +4,10 @@ description: Daily digest of recent repository activity — issues, pull request
 on:
   schedule: daily
   workflow_dispatch:
+timeout-minutes: 20
+engine:
+  id: copilot
+  version: '1.0.80'
 permissions:
   contents: read
   issues: read
@@ -32,12 +36,12 @@ Report on recent activity in `${{ github.repository }}` and publish the result a
 
 ## Reporting Window
 
-Use a fixed, closed window so runs are deterministic and comparable:
+Use a fixed, half-open window so runs are deterministic and comparable:
 
 - **Window**: the last 24 full hours ending at workflow start (UTC).
-- Derive `WINDOW_END` from the current UTC time at run start and `WINDOW_START` as `WINDOW_END - 24h`.
+- Derive `WINDOW_END` from this workflow run's `created_at` in the Actions API, not the current wall clock, and `WINDOW_START` as `WINDOW_END - 24h`.
 - Record both timestamps in ISO 8601 (`YYYY-MM-DDTHH:MM:SSZ`) and state them explicitly in the report.
-- Only count events whose timestamp falls inside the window. Items merely *updated* outside the window must be excluded.
+- Only count events whose own timestamp is at or after `WINDOW_START` and before `WINDOW_END`. An item's latest `updated_at` is not proof of an opening, closing, reopening, review-readiness or completion event.
 
 ## Data To Gather
 
@@ -54,18 +58,28 @@ gh pr list --repo "$GITHUB_REPOSITORY" --state all --limit 100 \
 
 gh api "repos/$GITHUB_REPOSITORY/commits?since=$WINDOW_START&until=$WINDOW_END" --paginate
 
-gh api "repos/$GITHUB_REPOSITORY/releases?per_page=10"
+gh api "repos/$GITHUB_REPOSITORY/releases?per_page=100" --paginate
 
-gh run list --repo "$GITHUB_REPOSITORY" --limit 50 \
-  --json name,displayTitle,conclusion,status,event,headBranch,createdAt,url
+gh api "repos/$GITHUB_REPOSITORY/actions/runs?status=completed&per_page=100" --paginate
 ```
+
+The list commands are discovery queries, not permission to assume complete
+coverage. If an issue/PR limit is reached, paginate the relevant REST API or
+split the search window; never publish capped counts as exact totals. For
+reopen and ready-for-review counts, inspect issue/PR timeline events and their
+timestamps. For a completed workflow run, fetch its latest-attempt jobs with
+`gh api "repos/$GITHUB_REPOSITORY/actions/runs/<run-id>/jobs?filter=latest&per_page=100" --paginate`
+and use the latest job `completed_at`, not the run's creation time. Runs without
+a reliable completion timestamp belong in an explicitly unknown bucket.
+Exclude this reporting workflow's own runs and automated-report issues from
+activity totals so the report does not perpetuate itself.
 
 Cover these dimensions:
 
 1. **Issues** — opened, closed, and reopened in the window.
 2. **Pull requests** — opened, merged, closed without merge, and moved out of draft.
 3. **Code** — commits landed on the default branch, with contributing authors and the areas or top-level directories touched.
-4. **Releases** — releases or tags published in the window.
+4. **Releases** — releases with `published_at` in the window. Do not infer a tag's publication time from its target commit date.
 5. **CI health** — workflow runs that completed in the window, with pass/fail counts and any repeatedly failing workflow.
 
 ## Grouping and Deduplication

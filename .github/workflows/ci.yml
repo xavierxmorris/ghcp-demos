@@ -1,0 +1,62 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  index:
+    name: Inventory and publishing-script syntax
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
+        with:
+          python-version: '3.14'
+      - run: python -m unittest discover -s tests -v
+      - run: python scripts/check_index.py
+      - name: Parse Bash without running the publisher
+        run: bash -n push-all.sh
+      - name: Parse PowerShell without running the publisher
+        shell: pwsh
+        run: |
+          $tokens = $null
+          $errors = $null
+          $null = [System.Management.Automation.Language.Parser]::ParseFile(
+            (Join-Path $PWD 'push-all.ps1'), [ref]$tokens, [ref]$errors)
+          if ($errors.Count) { throw ($errors | Out-String) }
+
+  agentic-source:
+    name: Agentic source and generated-lock consistency
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - name: Install checksum-verified gh-aw v0.88.2
+        run: |
+          curl --fail --show-error --location --retry 3 \
+            https://github.com/github/gh-aw/releases/download/v0.88.2/linux-amd64 \
+            --output "$RUNNER_TEMP/gh-aw"
+          echo "f9caa10ab948ac2228ff5dbd0e5109e9a2acf820a16ccff0c4f331edbe373057  $RUNNER_TEMP/gh-aw" | sha256sum --check
+          chmod +x "$RUNNER_TEMP/gh-aw"
+      - name: Regenerate, never hand-edit, the locked workflow
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          "$RUNNER_TEMP/gh-aw" compile daily-activity-report --no-check-update \
+            --action-mode release --action-tag 8e30bcd8897f5047051fa3971188e1dd4cdb23cf
+          git diff --exit-code -- .github/workflows/daily-activity-report.lock.yml
