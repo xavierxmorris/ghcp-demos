@@ -15,7 +15,7 @@ concurrency:
 
 jobs:
   index:
-    name: Inventory and publishing-script syntax
+    name: Inventory and publisher privacy contracts
     runs-on: ubuntu-24.04
     timeout-minutes: 5
     steps:

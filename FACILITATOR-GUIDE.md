@@ -1,6 +1,6 @@
 # Facilitator guide: teach the decision, not just the prompt
 
-The suite contains **14 independent repositories**, numbered 00-13.
+The suite contains **15 independent repositories**, numbered 00-14.
 Each demo's README provides orientation and links to a deeper `WORKSHOP.md`.
 Use the short presenter track to show the idea; use the workshop to let
 participants test it, make a bounded change, and explain the evidence.
@@ -29,6 +29,7 @@ repositories; publishing this index does not publish their guide files.
 | 11 | [Reconciliation semantics](https://github.com/xavierxmorris/ghcp-demo-11-excel-merge-agent/blob/main/WORKSHOP.md) | 60 min | Approved field/rule decisions and observed run evidence |
 | 12 | [The maintained ABI boundary](https://github.com/xavierxmorris/ghcp-demo-12-cobol-c-interop/blob/main/WORKSHOP.md) | 60 min | Field-level ABI explanation and two-path build evidence |
 | 13 | [Characterization and remediation](https://github.com/xavierxmorris/ghcp-demo-13-modernize-legacy-cobol-app/blob/main/WORKSHOP.md) | 75 min | Legacy observation, modern outcome, and sign-off rationale |
+| 14 | [Private: Jenkins pattern decisions](https://github.com/xavierxmorris/ghcp-demo-14-jenkins-to-github-actions-hackathon/blob/main/WORKSHOP.md) (access required) | 90 min lab / 3 build days | Source-linked triage, inactive reusable-workflow drafts, policy refusal, and human decisions |
 
 ## Choose a session
 
@@ -38,8 +39,9 @@ repositories; publishing this index does not publish their guide files.
 | Developer foundations, two half-days | 01-03, then 04-06 | Unbounded refactors and real organization housekeeping |
 | AI systems and evidence, half-day | Offline 07, research 08, authorized replay 09 | Azure provisioning and live Figma access unless prepared |
 | Modernization, half-day plus setup | 11-13 | Real exports, production databases, and changing legacy evidence |
+| CI modernization hack, three build days | 14 | Repository migration, production CI, estate-wide conversion and unapproved data/model access |
 
-Do not compress all fourteen into a single "hands-on" session. A room can watch
+Do not compress all fifteen into a single "hands-on" session. A room can watch
 many demos; participants need time to inspect and challenge a smaller number.
 
 ## Before participants arrive
@@ -77,6 +79,7 @@ separate gates.
 | 11 | Current drift is semantically meaningful; `-Drift` restores clean samples afterward |
 | 12 | Two build paths share a compiler and are not independent implementations |
 | 13 | Node-only success is not fresh COBOL replay; compare remediation claims to scenario IDs |
+| 14 | Python is deterministic; synthetic outcomes are not a customer conversion rate, and the default customer policy emits no drafts |
 
 An expected failure is a teaching artifact. An environment failure is a setup
 problem. An unexpected regression is a defect. Do not conflate them to improve
@@ -95,6 +98,7 @@ enough to infer behavior across the suite.
 | 12 `-Check` / `-Live` | Recreates build output / copied-workspace guardrail challenge |
 | 13 `-Manual` / `-Live` | Prints commands / pauses through the verification story |
 | 09 full runner/reset | User skill/MCP changes and an all-interface preview; reset deletes generated output, and `-Screenshot` overwrites a reference with an unpinned tool |
+| 14 `-Manual` / `-Check` / `-Live` | Print-only commands / offline contracts / explicit-consent, read-only Copilot on shipped synthetic context; no migration or auto-merge |
 
 Prefer normal interactive approval for new agent-driven work. A new folder,
 source hash comparison, or an instruction saying "do not touch" is not a
@@ -160,11 +164,15 @@ The index tracks its own files only. Child demo repos are ignored and keep their
 own remotes and commits. Update a demo's README and workshop together; update
 the catalog/prerequisites when a runnable contract changes.
 
-`repos.txt` is a `name|description` publishing inventory, not a dependency manifest.
+`repos.txt` is a `name|description[|public or private]` publishing inventory,
+not a dependency manifest. Legacy two-column entries retain their default
+creation behavior. Explicit private entries are created privately and refused
+if the remote is not private; the checked repository and origin push URL must match.
 The publishing scripts can create repositories and push branches. They do not
 commit new edits in existing repos, enable required reviews, or validate a demo.
-Review visibility and account ownership explicitly, and retain demo 09's privacy
-unless separately authorized to publish its contents.
+Review visibility and account ownership explicitly, and retain demos 09 and 14's
+privacy unless separately authorized to publish their contents. Keep private
+source material and engagement context out of this public index.
 
 For repeat sessions, use fresh exercise clones or preserve participant branches.
 Stop only processes you started and remove only identified exercise outputs.

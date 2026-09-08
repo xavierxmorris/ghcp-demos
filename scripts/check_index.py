@@ -10,12 +10,16 @@ DEMO_NAME = r"ghcp-demo-\d{2}-[a-z0-9]+(?:-[a-z0-9]+)*"
 
 def parse_inventory(text: str) -> list[str]:
     names = []
-    for number, line in enumerate(text.splitlines(), 1):
-        if not line.strip() or line.startswith("#"):
+    for number, raw in enumerate(text.splitlines(), 1):
+        line = raw.strip()
+        if not line or line.startswith("#"):
             continue
-        name, separator, description = line.partition("|")
-        if not separator or not description.strip():
-            raise ValueError(f"repos.txt:{number}: expected name|description")
+        parts = line.split("|")
+        if len(parts) not in (2, 3) or not parts[1].strip():
+            raise ValueError(f"repos.txt:{number}: expected name|description[|public or private]")
+        name = parts[0]
+        if len(parts) == 3 and parts[2] not in ("public", "private"):
+            raise ValueError(f"repos.txt:{number}: visibility must be public or private")
         if not re.fullmatch(rf"ghcp-demos|{DEMO_NAME}", name):
             raise ValueError(f"repos.txt:{number}: invalid repository name")
         if name in names:

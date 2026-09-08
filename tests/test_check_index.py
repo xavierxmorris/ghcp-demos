@@ -13,12 +13,20 @@ class IndexContractTests(unittest.TestCase):
     def test_valid_inventory(self) -> None:
         self.assertEqual(parse_inventory(VALID), ["ghcp-demos", "ghcp-demo-00-example"])
 
+    def test_explicit_private_visibility_preserves_the_existing_name_contract(self) -> None:
+        self.assertEqual(parse_inventory(VALID.rstrip() + "|private\n"), ["ghcp-demos", "ghcp-demo-00-example"])
+        self.assertEqual(parse_inventory(VALID.rstrip() + "|public\n"), ["ghcp-demos", "ghcp-demo-00-example"])
+
     def test_invalid_inventory_is_rejected(self) -> None:
         cases = [
             "", "ghcp-demos|Index\n", VALID + "ghcp-demo-00-example|Duplicate",
             VALID.replace("00-example", "01-example"),
             VALID.replace("00-example", "../escape"),
             VALID.replace("|Example", "|"),
+            VALID.rstrip() + "|internal\n",
+            VALID.rstrip() + "|\n",
+            VALID.rstrip() + "|private|ignored\n",
+            VALID.rstrip() + "|PRIVATE\n",
         ]
         for text in cases:
             with self.subTest(text=text), self.assertRaises(ValueError):

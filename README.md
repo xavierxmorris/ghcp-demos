@@ -1,8 +1,8 @@
 # GHCP Demo Suite
 
-Fourteen small, focused demos showcasing **GitHub Copilot** across its key surfaces —
+Fifteen focused demos and labs showcasing **GitHub Copilot** across its key surfaces —
 from comment-driven completions, through the autonomous coding agent, out to MCP
-servers, hosted agents on Microsoft Foundry, and mainframe modernisation.
+servers, hosted agents on Microsoft Foundry, mainframe modernisation, and CI modernization.
 Each repo is self-contained; choose a learning path rather than assuming every
 participant needs to complete the entire sequence.
 
@@ -22,8 +22,9 @@ participant needs to complete the entire sequence.
 | 11 | ⭐⭐⭐     | [`ghcp-demo-11-excel-merge-agent`](https://github.com/xavierxmorris/ghcp-demo-11-excel-merge-agent) | A **committed agent**, not a chat transcript — the agent edits YAML, deterministic Python moves the data |
 | 12 | ⭐⭐⭐     | [`ghcp-demo-12-cobol-c-interop`](https://github.com/xavierxmorris/ghcp-demo-12-cobol-c-interop) | COBOL ↔ **C interop** with an explicit ABI boundary, proven on both build paths |
 | 13 | ⭐⭐⭐⭐   | [`ghcp-demo-13-modernize-legacy-cobol-app`](https://github.com/xavierxmorris/ghcp-demo-13-modernize-legacy-cobol-app) | COBOL → **Node.js, Java 25, and .NET 10** with one executable **golden-master parity harness** |
+| 14 | ⭐⭐⭐⭐   | [`ghcp-demo-14-jenkins-to-github-actions-hackathon`](https://github.com/xavierxmorris/ghcp-demo-14-jenkins-to-github-actions-hackathon) 🔒 | **Jenkins modernization hackathon** — synthetic triage, policy-gated reusable Actions drafts, optional Copilot advice, and human review |
 
-🔒 = repo is **private** and requires access. Private design fixtures are not
+🔒 = repo is **private** and requires access. Private materials are not
 automatically approved for redistribution.
 
 ## Continuous integration
@@ -41,7 +42,7 @@ negative/boundary cases, troubleshooting, evidence to keep, and explicit limits.
 These complement the short demos; they do not replace the starter exercises
 with completed solutions.
 
-Use **[FACILITATOR-GUIDE.md](FACILITATOR-GUIDE.md)** for all 14 workshop links,
+Use **[FACILITATOR-GUIDE.md](FACILITATOR-GUIDE.md)** for all 15 workshop links,
 baseline expectations, run-mode differences, and session preparation.
 
 | Learning path | Demos | Learning outcome |
@@ -50,6 +51,7 @@ baseline expectations, run-mode differences, and session preparation.
 | Developer foundations | 01-06 | Move from local suggestions to bounded, reviewed agent changes |
 | Agents, evidence, and design | 07, 08, 09 | Separate tool correctness, research claims, and MCP/design evidence |
 | Data and modernization | 11, 12, 13 | Protect business meaning across rules, ABI boundaries, and language changes |
+| CI modernization | 14 | Distinguish source-pattern candidates, policy eligibility, actual AI advice, and human approval |
 
 Demo **00** is the odd one out on purpose: it's aimed at business analysts and
 product owners rather than developers, and it needs no toolchain at all.
@@ -59,6 +61,8 @@ Copilot workflow.
 Demos **10**, **12** and **13** are the modernisation track: a BRD-to-app-plus-tests
 lab, a COBOL/C interop boundary, and a COBOL-to-Node.js/Java/.NET migration held honest by a
 golden-master parity harness.
+Demo **14** is a private, three-build-day hackathon kit with a 90-minute
+participant lab. Its offline path never executes Jenkins or generated workflows.
 
 ### Mainframe modernization to Java and .NET
 
@@ -74,7 +78,7 @@ human approval. For a taxation-office context, use the
 [original-COBOL evidence pack](https://github.com/xavierxmorris/ghcp-demo-13-modernize-legacy-cobol-app/tree/main/examples/tax-office),
 not independently invented tax rules.
 
-CardDemo is a companion repository, not a fifteenth numbered demo. The labs
+CardDemo is a companion repository, not a numbered demo in this suite. The labs
 do not claim automatic COBOL conversion, full mainframe parity, a productivity
 percentage, or production/compliance certification.
 
@@ -127,6 +131,7 @@ operations leads**, and deliberately requires no toolchain.
 | 11    | Python 3.10+ and the package's `dev` extra for tests. No Excel installation or database connector. Use a sample-only clone. |
 | 12    | Docker Desktop for the container build, or GnuCOBOL + GCC for a native Linux run. |
 | 13    | Node 20.11+ for the original port/harness. Optional Java 25 and .NET 10 SDKs for the new targets. The multi-language Docker/devcontainer includes all three plus GnuCOBOL. No application packages. |
+| 14    | Private repo access and Python 3.11+; PowerShell 7+ for the runner and a browser for local reports. No network, Jenkins, Docker, Maven, or model for offline triage. Optional read-only Copilot requires permitted provider access and explicit synthetic-data consent. |
 
 Access and service guidance was reviewed **7 September 2026** against
 [GitHub cloud-agent documentation](https://docs.github.com/en/copilot/concepts/agents/cloud-agent/about-cloud-agent),
@@ -210,9 +215,9 @@ tree. Committing the index does not commit any ignored child repository.
 Inspect and commit each intended change separately before publishing.
 
 The scripts below are **publishing tools**, not setup or validation commands.
-They can create repositories and push `main`; creation is public by default.
+They can create repositories and push `main`; unmarked entries are public by default.
 Review the authenticated account, target list, visibility, and staged content
-first, especially for private demo 09.
+first, especially for private demos 09 and 14.
 
 ```powershell
 # Windows / PowerShell
@@ -224,11 +229,18 @@ first, especially for private demo 09.
 ./push-all.sh
 ```
 
-The scripts read `repos.txt`, create missing repos under the authenticated
-`gh` user, and push `main`. They do not commit new edits in already-initialized
+The scripts read `repos.txt` (`name|description[|public or private]`), create
+missing repos under the authenticated `gh` user, and push `main`.
+An explicit `|private` always creates privately and refuses a non-private
+existing target. Repository visibility is checked before content is pushed,
+and the actual origin push URL must match that checked target. A failed
+metadata request stops publication rather than being treated as a missing repo.
+They do not commit new edits in already-initialized
 repos, and they do not configure issue/wiki settings or establish branch
-protection. `-Private` (PowerShell) or `--private` (Bash) controls creation
-visibility; existing repositories are not made public by that choice.
+protection. `-Private` (PowerShell) or `--private` (Bash) requests private
+creation, including for otherwise public entries. Explicit `|private` always
+wins over public defaults; existing visibility is never changed.
+Do not remove private markers merely to get a publishing command to succeed.
 
 ## License
 

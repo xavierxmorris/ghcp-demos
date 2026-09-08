@@ -1,12 +1,12 @@
 # CI maintenance
 
 The index and every numbered demo are independent repositories. Index CI does
-not clone the child repositories, publish changes, or access private demo 09.
+not clone the child repositories, publish changes, or access private demos 09 and 14.
 Each demo's `.github/workflows/ci.yml` owns its own baseline.
 
 | Repository | Gate and intentional limits |
 | --- | --- |
-| Index | Inventory/README/facilitator consistency, publisher syntax without execution, and agentic source/lock consistency |
+| Index | Inventory/README/facilitator consistency, mocked publisher privacy/error-path contracts, publisher syntax, and agentic source/lock consistency |
 | 00 | Both replay asset sets and JavaScript syntax; not browser acceptance |
 | 01 | Module syntax/exports and page imports; not completed helper exercises |
 | 02 | Pytest with `--starter-baseline`: two named, exception-specific strict expected failures; normal pytest remains the exercise gate |
@@ -21,6 +21,7 @@ Each demo's `.github/workflows/ci.yml` owns its own baseline.
 | 11 | Windows/Linux pipeline tests, explicit Python 3.10 compatibility, complete sample artifacts and reason-specific drift rejection |
 | 12 | Both build paths, signed 64-bit ABI, maintained-C contracts/sanitizers, and complete generated evidence |
 | 13 | Original COBOL replay, Node/Java/.NET comparisons, and source-to-port evidence; not full mainframe or tax-system parity |
+| 14 | Python 3.11/3.14 on Windows/Linux: synthetic triage, policy/advisory/immutable-artifact boundaries, mocked read-only live runner, full reference integrity, and zero default customer drafts; no source/model/workflow execution |
 
 ## Shared policy
 
