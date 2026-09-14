@@ -219,15 +219,21 @@ gh api \
 Creating an empty cost centre and then adding a direct user are mutations:
 
 ```bash
-creation="$(
+if ! creation="$(
   jq -n --arg name "AI-DEMO-POWER-USERS" '{name: $name}' |
   gh api --method POST \
     -H "Accept: application/vnd.github+json" \
     -H "X-GitHub-Api-Version: 2026-03-10" \
     "/enterprises/$ENTERPRISE/settings/billing/cost-centers" \
     --input -
-)"
-export POWER_COST_CENTER_ID="$(jq -er '.id' <<<"$creation")"
+  )"; then
+  echo "Cost-centre creation failed; stop before adding resources" >&2
+elif ! POWER_COST_CENTER_ID="$(jq -er '.id' <<<"$creation")"; then
+  echo "Creation response had no cost-centre ID; stop before adding resources" >&2
+  unset POWER_COST_CENTER_ID
+else
+  export POWER_COST_CENTER_ID
+fi
 unset creation
 ```
 
@@ -480,7 +486,7 @@ jq --arg power "$POWER_COST_CENTER_ID" \
           ai_credit_pool_enabled,
           ai_credit_pool_state,
           resources: [
-            .resources[]
+            (.resources // [])[]
             | {
                 type,
                 name: (
