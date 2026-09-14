@@ -101,6 +101,9 @@ mkdir -p "$EVIDENCE_DIR"
 gh auth status
 ```
 
+The team slug/ID and default-budget ID are evidence placeholders even though the
+examples below do not mutate enterprise teams or the universal default.
+
 Keep the evidence directory outside this public repository, restrict access,
 and follow the enterprise retention policy. Never echo authentication
 environment variables or run commands that print credentials.
@@ -226,7 +229,12 @@ creation="$(
 )"
 POWER_COST_CENTER_ID="$(jq -er '.id' <<<"$creation")"
 unset creation
+```
 
+Compare `POWER_COST_CENTER_ID` with the UI and record it in the evidence pack.
+Only after that verification, run the separate direct-user mutation:
+
+```bash
 jq -n --arg user "$POWER_USER" \
   '{users: [$user]}' |
 gh api --method POST \
@@ -458,7 +466,7 @@ jq --arg power "$POWER_COST_CENTER_ID" \
   '{
     costCenters: [
       .costCenters[]
-      | select(.id == $power or .id == $standard)
+      | select((.id | tostring) == $power or (.id | tostring) == $standard)
       | {
           id,
           name,
@@ -575,7 +583,7 @@ jq --arg standard "$STANDARD_BUDGET_ID" \
     effective_budget,
     budgets: [
       .budgets[]
-      | select(.id == $standard)
+      | select((.id | tostring) == $standard)
       | {
           id,
           budget_type,

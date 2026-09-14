@@ -27,6 +27,9 @@ participant needs to complete the entire sequence.
 | 14 | ⭐⭐⭐⭐   | [`ghcp-demo-14-jenkins-to-github-actions-hackathon`](https://github.com/xavierxmorris/ghcp-demo-14-jenkins-to-github-actions-hackathon) 🔒 | **Jenkins modernization hackathon** — synthetic triage, policy-gated reusable Actions drafts, optional Copilot advice, and human review |
 | 16 | 📄 (operator lab) | [`demo-16-cost-centre-ai-credits.md`](demo-16-cost-centre-ai-credits.md) | **Enterprise cost centres and AI Credit budgets** — safe cohort allocation, overlapping controls, reporting, evidence, and rollback |
 
+Demo 15 is not currently assigned; demo 16 is intentionally the next catalogued
+guide.
+
 🔒 = repo is **private** and requires access. Private materials are not
 automatically approved for redistribution.
 
