@@ -8,7 +8,7 @@ servers, hosted agents on Microsoft Foundry, mainframe modernisation, and CI mod
 Each demo is self-contained; choose a learning path rather than assuming every
 participant needs to complete the entire sequence.
 
-| # | Difficulty | Repo | What it teaches |
+| # | Difficulty | Repo / guide | What it teaches |
 |---|------------|------|-----------------|
 | 00 | ⭐         | [`ghcp-demo-00-design-to-clickthrough`](https://github.com/xavierxmorris/ghcp-demo-00-design-to-clickthrough) | Copilot for **non-developers** — a one-page BRD becomes a clickable app, then the BRD changes and the app follows |
 | 01 | ⭐         | [`ghcp-demo-01-hello-completions`](https://github.com/xavierxmorris/ghcp-demo-01-hello-completions) | Ghost-text completions, comment-driven coding |

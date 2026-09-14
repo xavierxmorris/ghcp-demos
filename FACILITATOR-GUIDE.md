@@ -32,7 +32,7 @@ Demo 16's root guide is published with the index.
 | 12 | [The maintained ABI boundary](https://github.com/xavierxmorris/ghcp-demo-12-cobol-c-interop/blob/main/WORKSHOP.md) | 60 min | Field-level ABI explanation and two-path build evidence |
 | 13 | [Characterization and remediation](https://github.com/xavierxmorris/ghcp-demo-13-modernize-legacy-cobol-app/blob/main/WORKSHOP.md) | 75 min | Legacy observation, modern outcome, and sign-off rationale |
 | 14 | [Private: Jenkins pattern decisions](https://github.com/xavierxmorris/ghcp-demo-14-jenkins-to-github-actions-hackathon/blob/main/WORKSHOP.md) (access required) | 90 min lab / 3 build days | Source-linked triage, inactive reusable-workflow drafts, policy refusal, and human decisions |
-| 16 | [Cost-centre and AI Credit controls](demo-16-cost-centre-ai-credits.md) | 10-15 min presenter / 45-60 min operator lab | Redacted allocation, precedence, reporting, and rollback evidence |
+| 16 | [Cost-centre and AI Credit controls](demo-16-cost-centre-ai-credits.md) | 10–15 min presenter / 45–60 min operator lab | Redacted allocation, precedence, reporting, and rollback evidence |
 
 ## Choose a session
 

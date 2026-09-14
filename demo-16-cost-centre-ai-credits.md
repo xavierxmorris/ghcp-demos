@@ -227,7 +227,7 @@ creation="$(
     "/enterprises/$ENTERPRISE/settings/billing/cost-centers" \
     --input -
 )"
-POWER_COST_CENTER_ID="$(jq -er '.id' <<<"$creation")"
+export POWER_COST_CENTER_ID="$(jq -er '.id' <<<"$creation")"
 unset creation
 ```
 
@@ -271,12 +271,13 @@ the cohort draws from the shared pool.
 > response enums may lag request capabilities.
 
 ```bash
+(
 export POWER_BUDGET_AMOUNT="<WHOLE_USD_10_TO_20>"
-[[ "$POWER_BUDGET_AMOUNT" =~ ^[0-9]+$ ]] &&
-  (( POWER_BUDGET_AMOUNT >= 10 && POWER_BUDGET_AMOUNT <= 20 )) || {
+if [[ ! "$POWER_BUDGET_AMOUNT" =~ ^[0-9]+$ ]] ||
+   (( POWER_BUDGET_AMOUNT < 10 || POWER_BUDGET_AMOUNT > 20 )); then
     echo "POWER_BUDGET_AMOUNT must be a whole number from 10 to 20" >&2
     exit 1
-  }
+fi
 jq -n \
   --arg entity "$POWER_COST_CENTER_ID" \
   --arg recipient "$ALERT_RECIPIENT" \
@@ -298,6 +299,7 @@ gh api --method POST \
   -H "X-GitHub-Api-Version: 2026-03-10" \
   "/enterprises/$ENTERPRISE/settings/billing/budgets" \
   --input -
+)
 ```
 
 The documented alert setting enables GitHub's supported threshold notifications;
@@ -525,6 +527,7 @@ for scope in cost_center multi_user_cost_center; do
   : > "$EVIDENCE_DIR/budgets-$scope.redacted.jsonl"
   page=1
   while :; do
+    unset response
     response="$(
       gh api \
         -H "Accept: application/vnd.github+json" \
@@ -563,8 +566,8 @@ for scope in cost_center multi_user_cost_center; do
     [[ "$(jq -r '.has_next_page // false' <<<"$response")" == "true" ]] || break
     page=$((page + 1))
   done
+  unset response page
 done
-unset response page
 ```
 
 Inspect every file before sharing; cost-centre UUIDs and budget IDs may remain
