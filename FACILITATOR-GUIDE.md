@@ -82,7 +82,8 @@ prove permission to create enterprise teams.
 Demo 16 has the same access, spend, identity, and rollback gates. Select it when
 the operator needs Bash/`jq`, guarded request snippets, or allowlisted API-side
 evidence. It complements demo 15 and must not be used to bypass demo 15's
-comparison-only fallback or safety controls.
+comparison-only fallback or safety controls. Never run demos 15 and 16
+concurrently in the same enterprise; `-16`-suffixed resources belong to demo 16.
 
 **Billing safety:** AI Credits are real consumption; an alert-only budget does
 not enforce a spend ceiling and reporting can lag. Do not lower or replace a

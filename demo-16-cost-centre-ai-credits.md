@@ -113,6 +113,8 @@ examples below do not mutate enterprise teams or the universal default.
 Keep the evidence directory outside this public repository, restrict access,
 and follow the enterprise retention policy. Never echo authentication
 environment variables or run commands that print credentials.
+`gh auth status` can display account names; do not expose its raw output in a
+public recording or evidence pack.
 
 ## 1. Pre-demo safety and starting-state checks
 
@@ -161,7 +163,7 @@ reporting delay all affect the eventual report.
 | --- | --- | --- | --- |
 | Test users and Copilot access | `<REDACTED_REFERENCE>` | `<OWNER>` | Original access |
 | Enterprise teams/membership | `<SCREENSHOT_OR_EXPORT>` | `<OWNER>` | Original membership |
-| Cost centres/resources/UUIDs | `<SCREENSHOT_OR_EXPORT>` | `<OWNER>` | Original resources |
+| Cost centres/resources/UUIDs, including prior direct assignments | `<SCREENSHOT_OR_EXPORT>` | `<OWNER>` | Original resources and assignments |
 | Budgets and effective controls | `<SCREENSHOT_OR_EXPORT>` | `<OWNER>` | Original amounts/states |
 | Enterprise policies/default | `<SCREENSHOT_OR_EXPORT>` | `<OWNER>` | Original policy/default |
 | Shared pool/included-usage controls | `<SCREENSHOT_OR_EXPORT>` | `<OWNER>` | Original pool settings |
@@ -250,16 +252,26 @@ Compare `POWER_COST_CENTER_ID` with the UI and record it in the evidence pack.
 Only after that verification, run the separate direct-user mutation:
 
 ```bash
-jq -n --arg user "$POWER_USER" \
-  '{users: [$user]}' |
-gh api --method POST \
-  -H "Accept: application/vnd.github+json" \
-  -H "X-GitHub-Api-Version: 2026-03-10" \
-  "/enterprises/$ENTERPRISE/settings/billing/cost-centers/$POWER_COST_CENTER_ID/resource" \
-  --input -
+if ! assignment="$(
+  jq -n --arg user "$POWER_USER" \
+    '{users: [$user]}' |
+  gh api --method POST \
+    -H "Accept: application/vnd.github+json" \
+    -H "X-GitHub-Api-Version: 2026-03-10" \
+    "/enterprises/$ENTERPRISE/settings/billing/cost-centers/$POWER_COST_CENTER_ID/resource" \
+    --input -
+)"; then
+  echo "Direct-user assignment failed; stop and preserve the starting state" >&2
+  exit 1
+fi
+jq '{reassigned_resources: (.reassigned_resources // [])}' <<<"$assignment"
+unset assignment
 ```
 
-Do not substitute an enterprise team into the direct-user fallback command.
+Inspect `reassigned_resources` before proceeding and record every
+`previous_cost_center` in the restricted starting-state evidence. An unexpected
+reassignment is a stop condition. Do not substitute an enterprise team into the
+direct-user fallback command.
 
 ## 4. Create the power-user shared budget
 
@@ -288,8 +300,7 @@ the cohort draws from the shared pool.
 ```bash
 (
 export POWER_BUDGET_AMOUNT="<WHOLE_USD_10_TO_20>"
-if [[ ! "$POWER_BUDGET_AMOUNT" =~ ^[0-9]+$ ]] ||
-   (( POWER_BUDGET_AMOUNT < 10 || POWER_BUDGET_AMOUNT > 20 )); then
+if [[ ! "$POWER_BUDGET_AMOUNT" =~ ^(1[0-9]|20)$ ]]; then
     echo "POWER_BUDGET_AMOUNT must be a whole number from 10 to 20" >&2
     exit 1
 fi
@@ -468,6 +479,11 @@ GitHub Support.
 
 These commands are read-only. Recheck the latest API version and endpoint
 documentation before the session.
+Before changes, use the starting-state captures in section 1; the demo IDs do
+not exist yet. After recording the created IDs, run these exports once with a
+new `configured` `PHASE_DIR`. After cleanup, rerun the cost-centre and budget
+exports with the preserved IDs into a new `restored` directory; empty filtered
+arrays then evidence removal. The examples refuse to overwrite a capture.
 
 ### Save redacted cost-centre and budget evidence
 
@@ -477,11 +493,23 @@ non-demo resource names.
 
 ```bash
 (
-set -o pipefail
+set -e -o pipefail
 umask 077
 : "${PHASE_DIR:?Set EVIDENCE_PHASE and PHASE_DIR before collecting evidence}"
+: "${ENTERPRISE:?Set ENTERPRISE}"
+: "${POWER_COST_CENTER_ID:?Record the created power cost-centre UUID}"
+: "${STANDARD_COST_CENTER_ID:?Record the created standard cost-centre UUID}"
+: "${POWER_BUDGET_ID:?Record the created power budget ID}"
+: "${STANDARD_BUDGET_ID:?Record the created standard budget ID}"
 mkdir -p "$PHASE_DIR"
 
+cost_centres_file="$PHASE_DIR/cost-centres.redacted.json"
+[[ ! -e "$cost_centres_file" ]] || {
+  echo "Refusing to overwrite $cost_centres_file" >&2
+  exit 1
+}
+tmp_file="$(mktemp "$PHASE_DIR/.cost-centres.XXXXXX")"
+trap 'rm -f "$tmp_file"' EXIT
 gh api \
   -H "Accept: application/vnd.github+json" \
   -H "X-GitHub-Api-Version: 2026-03-10" \
@@ -514,12 +542,20 @@ jq --arg power "$POWER_COST_CENTER_ID" \
         }
     ]
   }' \
-  > "$PHASE_DIR/cost-centres.redacted.json"
+  > "$tmp_file"
+mv "$tmp_file" "$cost_centres_file"
+trap - EXIT
 
 # Get every page, but save only a scope/type inventory for unrelated budgets.
-: > "$PHASE_DIR/budgets-inventory.redacted.jsonl"
+inventory_file="$PHASE_DIR/budgets-inventory.redacted.jsonl"
+[[ ! -e "$inventory_file" ]] || {
+  echo "Refusing to overwrite $inventory_file" >&2
+  exit 1
+}
+inventory_tmp="$(mktemp "$PHASE_DIR/.budgets-inventory.XXXXXX")"
+trap 'rm -f "$inventory_tmp"' EXIT
 page=1
-while :; do
+while (( page <= 100 )); do
   if ! response="$(
     gh api \
       -H "Accept: application/vnd.github+json" \
@@ -529,6 +565,11 @@ while :; do
     echo "Budget page $page failed; evidence is incomplete" >&2
     exit 1
   fi
+  jq -e '(.budgets | type == "array") and
+    (.has_next_page | type == "boolean")' <<<"$response" >/dev/null || {
+      echo "Unexpected budget pagination schema on page $page" >&2
+      exit 1
+    }
   jq -c --argjson page "$page" \
     '{
       page: $page,
@@ -538,17 +579,29 @@ while :; do
         (.budgets // [])[]
         | {budget_scope, budget_type, budget_product_sku}
       ]
-    }' <<<"$response" >> "$PHASE_DIR/budgets-inventory.redacted.jsonl"
+    }' <<<"$response" >> "$inventory_tmp"
   [[ "$(jq -r '.has_next_page // false' <<<"$response")" == "true" ]] || break
   page=$((page + 1))
 done
+[[ "$(jq -r '.has_next_page' <<<"$response")" != "true" ]] || {
+  echo "Budget page limit reached; evidence is incomplete" >&2
+  exit 1
+}
+mv "$inventory_tmp" "$inventory_file"
+trap - EXIT
 unset response page
 
 # Exercise both documented scope filters and retain only known demo budget IDs.
 for scope in cost_center multi_user_cost_center; do
-  : > "$PHASE_DIR/budgets-$scope.redacted.jsonl"
+  scope_file="$PHASE_DIR/budgets-$scope.redacted.jsonl"
+  [[ ! -e "$scope_file" ]] || {
+    echo "Refusing to overwrite $scope_file" >&2
+    exit 1
+  }
+  scope_tmp="$(mktemp "$PHASE_DIR/.budgets-$scope.XXXXXX")"
+  trap 'rm -f "$scope_tmp"' EXIT
   page=1
-  while :; do
+  while (( page <= 100 )); do
     unset response
     if ! response="$(
       gh api \
@@ -559,6 +612,11 @@ for scope in cost_center multi_user_cost_center; do
       echo "Budget scope $scope page $page failed; evidence is incomplete" >&2
       exit 1
     fi
+    jq -e '(.budgets | type == "array") and
+      (.has_next_page | type == "boolean")' <<<"$response" >/dev/null || {
+        echo "Unexpected $scope pagination schema on page $page" >&2
+        exit 1
+      }
     jq -c --arg power "$POWER_BUDGET_ID" \
        --arg standard "$STANDARD_BUDGET_ID" \
        --argjson page "$page" \
@@ -587,10 +645,16 @@ for scope in cost_center multi_user_cost_center; do
               }
             }
         ]
-      }' <<<"$response" >> "$PHASE_DIR/budgets-$scope.redacted.jsonl"
+      }' <<<"$response" >> "$scope_tmp"
     [[ "$(jq -r '.has_next_page // false' <<<"$response")" == "true" ]] || break
     page=$((page + 1))
   done
+  [[ "$(jq -r '.has_next_page' <<<"$response")" != "true" ]] || {
+    echo "$scope page limit reached; evidence is incomplete" >&2
+    exit 1
+  }
+  mv "$scope_tmp" "$scope_file"
+  trap - EXIT
   unset response page
 done
 )
@@ -605,37 +669,71 @@ Filter budget details by the standard test username to retrieve the documented
 
 ```bash
 (
-set -o pipefail
+set -e -o pipefail
 umask 077
 : "${PHASE_DIR:?Set EVIDENCE_PHASE and PHASE_DIR before collecting evidence}"
-gh api \
-  -H "Accept: application/vnd.github+json" \
-  -H "X-GitHub-Api-Version: 2026-03-10" \
-  "/enterprises/$ENTERPRISE/settings/billing/budgets?user=$STANDARD_USER&per_page=100&page=1" |
-jq --arg standard "$STANDARD_BUDGET_ID" \
-  '{
-    has_next_page,
-    total_count,
-    effective_budget,
-    budgets: [
-      (.budgets // [])[]
-      | select((.id | tostring) == $standard)
-      | {
-          id,
-          budget_type,
-          budget_amount,
-          prevent_further_usage,
-          budget_scope,
-          budget_product_sku,
-          consumed_amount
-        }
-    ]
-  }' \
-  > "$PHASE_DIR/standard-effective-budget.redacted.json"
+: "${ENTERPRISE:?Set ENTERPRISE}"
+: "${STANDARD_USER:?Set the authorised standard test username}"
+: "${STANDARD_BUDGET_ID:?Record the created standard budget ID}"
+effective_file="$PHASE_DIR/standard-effective-budget.redacted.jsonl"
+[[ ! -e "$effective_file" ]] || {
+  echo "Refusing to overwrite $effective_file" >&2
+  exit 1
+}
+effective_tmp="$(mktemp "$PHASE_DIR/.standard-effective-budget.XXXXXX")"
+trap 'rm -f "$effective_tmp"' EXIT
+page=1
+while (( page <= 100 )); do
+  if ! response="$(
+    gh api \
+      -H "Accept: application/vnd.github+json" \
+      -H "X-GitHub-Api-Version: 2026-03-10" \
+      "/enterprises/$ENTERPRISE/settings/billing/budgets?user=$STANDARD_USER&per_page=100&page=$page"
+  )"; then
+    echo "User-filtered budget page $page failed; evidence is incomplete" >&2
+    exit 1
+  fi
+  jq -e '(.budgets | type == "array") and
+    (.has_next_page | type == "boolean")' <<<"$response" >/dev/null || {
+      echo "Unexpected user-filtered pagination schema on page $page" >&2
+      exit 1
+    }
+  jq -c --arg standard "$STANDARD_BUDGET_ID" \
+    --argjson page "$page" \
+    '{
+      page: $page,
+      has_next_page,
+      total_count,
+      effective_budget,
+      budgets: [
+        (.budgets // [])[]
+        | select((.id | tostring) == $standard)
+        | {
+            id,
+            budget_type,
+            budget_amount,
+            prevent_further_usage,
+            budget_scope,
+            budget_product_sku,
+            consumed_amount
+          }
+      ]
+    }' <<<"$response" >> "$effective_tmp"
+  [[ "$(jq -r '.has_next_page' <<<"$response")" == "true" ]] || break
+  page=$((page + 1))
+done
+[[ "$(jq -r '.has_next_page' <<<"$response")" != "true" ]] || {
+  echo "User-filtered budget page limit reached; evidence is incomplete" >&2
+  exit 1
+}
+mv "$effective_tmp" "$effective_file"
+trap - EXIT
+unset response page
 )
 ```
 
-Confirm `has_next_page` is false; if not, repeat with the next `page` value.
+The bounded loop requires a final `has_next_page: false`; otherwise it fails
+rather than presenting incomplete evidence.
 The separate `/{budget_id}/user-states` endpoint is documented specifically for
 `multi_user_customer`; do not assume it supports `multi_user_cost_center`.
 
@@ -643,23 +741,26 @@ The separate `/{budget_id}/user-states` endpoint is documented specifically for
 
 ```bash
 (
+set -e -o pipefail
 umask 077
 : "${PHASE_DIR:?Set EVIDENCE_PHASE and PHASE_DIR before collecting evidence}"
-: > "$PHASE_DIR/power-usage.redacted.jsonl"
-page=1
-while :; do
-  if ! response="$(
-    gh api \
-      -H "Accept: application/vnd.github+json" \
-      -H "X-GitHub-Api-Version: 2026-03-10" \
-      "/enterprises/$ENTERPRISE/settings/billing/ai_credit/usage?year=$USAGE_YEAR&month=$USAGE_MONTH&cost_center_id=$POWER_COST_CENTER_ID&per_page=100&page=$page"
-  )"; then
-    echo "AI Credit usage page $page failed; evidence is incomplete" >&2
-    exit 1
-  fi
-  jq -c --argjson page "$page" '{
-    page: $page,
-    has_next_page,
+: "${ENTERPRISE:?Set ENTERPRISE}"
+: "${POWER_COST_CENTER_ID:?Record the created power cost-centre UUID}"
+: "${USAGE_YEAR:?Set the usage year}"
+: "${USAGE_MONTH:?Set the usage month}"
+usage_file="$PHASE_DIR/power-usage.redacted.jsonl"
+[[ ! -e "$usage_file" ]] || {
+  echo "Refusing to overwrite $usage_file" >&2
+  exit 1
+}
+tmp_file="$(mktemp "$PHASE_DIR/.power-usage.XXXXXX")"
+trap 'rm -f "$tmp_file"' EXIT
+gh api \
+  -H "Accept: application/vnd.github+json" \
+  -H "X-GitHub-Api-Version: 2026-03-10" \
+  "/enterprises/$ENTERPRISE/settings/billing/ai_credit/usage?year=$USAGE_YEAR&month=$USAGE_MONTH&cost_center_id=$POWER_COST_CENTER_ID" |
+  jq -ce '(.usageItems | type == "array") as $valid |
+  if $valid then {
     timePeriod,
     costCenter,
     usageItems: [
@@ -678,13 +779,15 @@ while :; do
           netAmount
         }
     ]
-  }' <<<"$response" >> "$PHASE_DIR/power-usage.redacted.jsonl"
-  [[ "$(jq -r '.has_next_page // false' <<<"$response")" == "true" ]] || break
-  page=$((page + 1))
-done
-unset response page
+  } else error("Unexpected AI Credit usage schema") end' > "$tmp_file"
+mv "$tmp_file" "$usage_file"
+trap - EXIT
 )
 ```
+
+The documented AI Credit usage endpoint returns one aggregate response for the
+selected time and filters; it does not expose the budget endpoints'
+`has_next_page` pagination fields.
 
 Verify the latest API version and endpoint documentation first. Billing usage
 permissions and authentication support can differ from other REST endpoints.
@@ -719,7 +822,8 @@ Cleanup is part of the demo, not an optional afterthought:
 7. Restore any intentionally changed test-enterprise default and original
    Copilot access.
 8. Set `EVIDENCE_PHASE=restored`, update `PHASE_DIR`, and re-run the read-only
-   checks into the separate restored directory.
+   cost-centre and budget checks into the separate restored directory using the
+   preserved demo IDs. Historical usage need not disappear after cleanup.
 9. Compare the final state to the starting-state record.
 
 Deletion changes future control and attribution; it does not retroactively
@@ -803,6 +907,7 @@ A live demo is accepted only when:
 - [Cost-centre allocation](https://docs.github.com/en/enterprise-cloud@latest/billing/reference/cost-center-allocation)
 - [Cost-centres REST API](https://docs.github.com/en/enterprise-cloud@latest/rest/billing/cost-centers?apiVersion=2026-03-10)
 - [Budgets REST API](https://docs.github.com/en/enterprise-cloud@latest/rest/billing/budgets?apiVersion=2026-03-10)
+- [Billing usage REST API](https://docs.github.com/en/enterprise-cloud@latest/rest/billing/usage?apiVersion=2026-03-10)
 - [Teams in an enterprise](https://docs.github.com/en/enterprise-cloud@latest/admin/concepts/enterprise-fundamentals/teams-in-an-enterprise)
 - [Creating enterprise teams](https://docs.github.com/en/enterprise-cloud@latest/admin/managing-accounts-and-repositories/managing-users-in-your-enterprise/create-enterprise-teams)
 - [Automating usage reporting](https://docs.github.com/en/enterprise-cloud@latest/billing/tutorials/automate-usage-reporting)
