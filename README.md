@@ -1,8 +1,8 @@
 # GHCP Demo Suite
 
-Sixteen focused demos and labs—standalone repositories **00–14** plus the
-documentation-only demo **16**—showcasing **GitHub Copilot** and GitHub Enterprise
-Cloud across their key surfaces —
+Fifteen standalone repositories (**00–14**) plus one documentation-only guide
+(**16**) provide sixteen focused demos and labs showcasing **GitHub Copilot**
+and GitHub Enterprise Cloud across their key surfaces —
 from comment-driven completions, through the autonomous coding agent, out to MCP
 servers, hosted agents on Microsoft Foundry, mainframe modernisation, and CI modernization.
 Each demo is self-contained; choose a learning path rather than assuming every
