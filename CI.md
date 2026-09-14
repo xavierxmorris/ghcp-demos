@@ -1,8 +1,9 @@
 # CI maintenance
 
-The index and every numbered demo are independent repositories. Index CI does
-not clone the child repositories, publish changes, or access private demos 09 and 14.
-Each demo's `.github/workflows/ci.yml` owns its own baseline.
+The index and standalone demos 00–14 are independent repositories. Demo 16 is a
+documentation-only guide in the index. Index CI does not clone the child
+repositories, publish changes, or access private demos 09 and 14. Each standalone
+demo's `.github/workflows/ci.yml` owns its own baseline.
 
 | Repository | Gate and intentional limits |
 | --- | --- |

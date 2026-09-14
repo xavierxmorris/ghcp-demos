@@ -1,7 +1,8 @@
 # Facilitator guide: teach the decision, not just the prompt
 
-The suite contains **15 independent repositories**, numbered 00-14.
-Each demo's README provides orientation and links to a deeper `WORKSHOP.md`.
+The suite contains **16 demos**: 15 independent repositories numbered 00–14
+plus the documentation-only demo 16 in this index. Each repository demo's README
+provides orientation and links to a deeper `WORKSHOP.md`; demo 15 is not assigned.
 Use the short presenter track to show the idea; use the workshop to let
 participants test it, make a bounded change, and explain the evidence.
 
@@ -10,8 +11,9 @@ The extra plugin-spec demo is not part of this listed sequence.
 ## Workshop catalog
 
 Times are planning estimates after setup. Model latency, cloud queues, image
-downloads, and account provisioning are additional. Links point to the standalone
-repositories; publishing this index does not publish their guide files.
+downloads, and account provisioning are additional. Links for 00–14 point to
+standalone repositories, whose guide files are not published with this index.
+Demo 16's root guide is published with the index.
 
 | Demo | Deeper guide | Suggested time | Participant deliverable |
 | --- | --- | --- | --- |
@@ -30,6 +32,7 @@ repositories; publishing this index does not publish their guide files.
 | 12 | [The maintained ABI boundary](https://github.com/xavierxmorris/ghcp-demo-12-cobol-c-interop/blob/main/WORKSHOP.md) | 60 min | Field-level ABI explanation and two-path build evidence |
 | 13 | [Characterization and remediation](https://github.com/xavierxmorris/ghcp-demo-13-modernize-legacy-cobol-app/blob/main/WORKSHOP.md) | 75 min | Legacy observation, modern outcome, and sign-off rationale |
 | 14 | [Private: Jenkins pattern decisions](https://github.com/xavierxmorris/ghcp-demo-14-jenkins-to-github-actions-hackathon/blob/main/WORKSHOP.md) (access required) | 90 min lab / 3 build days | Source-linked triage, inactive reusable-workflow drafts, policy refusal, and human decisions |
+| 16 | [Cost-centre and AI Credit controls](demo-16-cost-centre-ai-credits.md) | 10-15 min presenter / 45-60 min operator lab | Redacted allocation, precedence, reporting, and rollback evidence |
 
 ## Choose a session
 
@@ -40,8 +43,9 @@ repositories; publishing this index does not publish their guide files.
 | AI systems and evidence, half-day | Offline 07, research 08, authorized replay 09 | Azure provisioning and live Figma access unless prepared |
 | Modernization, half-day plus setup | 11-13 | Real exports, production databases, and changing legacy evidence |
 | CI modernization hack, three build days | 14 | Repository migration, production CI, estate-wide conversion and unapproved data/model access |
+| Enterprise billing operations, 60 minutes | 16 | Production identities, unapproved spend, intentional outages, internal tools, and undocumented APIs |
 
-Do not compress all fifteen into a single "hands-on" session. A room can watch
+Do not compress all sixteen into a single "hands-on" session. A room can watch
 many demos; participants need time to inspect and challenge a smaller number.
 
 ## Before participants arrive
@@ -56,10 +60,22 @@ many demos; participants need time to inspect and challenge a smaller number.
 6. Pre-authorize accounts and budgets separately from code/tool permissions.
 7. Keep an honest fallback: shipped pages, captured evidence, or local analysis.
    A replay is not a live run.
+8. For demo 16, confirm enterprise-owner or billing-manager access, authorised
+   non-production test users with appropriate Copilot access, approved real spend
+   and alert recipients, a named rollback owner, and a captured billing baseline.
+   Review all overlapping enterprise, organisation, repository, cost-centre,
+   universal, and user budgets before any activity.
 
 Use the README's prerequisites, not a blanket "any Copilot seat and no setup."
 Cloud-agent policy, code-review policy, Figma access, and Azure permissions are
-separate gates.
+separate gates. Enterprise billing permissions, Copilot access, paid-usage policy,
+and approved spend are separate demo 16 gates.
+
+Demo 16 uses real billable AI Credit consumption and reporting can lag. Use only
+normal, bounded Copilot activity by authorised test users. Stop on unexpected
+cost, blocking, attribution, or production impact; preserve evidence and let the
+named owner roll back. Never use stafftools, manual charge generators, private
+internal endpoints, or synthetic production billing-emission tools.
 
 ## Know the starting state
 
@@ -80,6 +96,7 @@ separate gates.
 | 12 | Two build paths share a compiler and are not independent implementations |
 | 13 | Node-only success is not fresh COBOL replay; compare remediation claims to scenario IDs |
 | 14 | Python is deterministic; synthetic outcomes are not a customer conversion rate, and the default customer policy emits no drafts |
+| 16 | Existing teams, cost centres, budgets, policies, membership, and usage reports are the baseline; new cost centres affect future qualifying attribution and cleanup does not rewrite history |
 
 An expected failure is a teaching artifact. An environment failure is a setup
 problem. An unexpected regression is a defect. Do not conflate them to improve
@@ -117,6 +134,9 @@ Ask participants to **predict**, **observe**, **explain**, and **challenge**:
 | Challenge | What deliberate error would this check detect? | Meaningful failing case |
 | Recover | Did the bounded correction restore the contract? | Focused rerun and diff |
 
+For demo 16, the recovery evidence is a read-only billing/API recheck against the
+captured starting state, not a source diff.
+
 Avoid the "better prompt always produces better code" storyline. A model may
 succeed without the extra instruction or fail with it. Measure what happened.
 Do not require participants to stage a model failure to make the talk work.
@@ -152,6 +172,7 @@ their retrieval date is not an invented product release date.
 | Hosted-agent costs | [Foundry hosted agents](https://learn.microsoft.com/azure/foundry/agents/concepts/hosted-agents); active-session compute as well as model/evaluation use |
 | Figma | [Access and limits](https://developers.figma.com/docs/figma-mcp-server/rate-limits-access/); plan, seat, client, and read-tool exemptions |
 | COBOL | [GnuCOBOL](https://gnucobol.sourceforge.io/); stable **3.2**, released **2023-07-28**, distinct from the demos' 3.1.2 baseline |
+| Enterprise billing | [Cost control](https://docs.github.com/en/enterprise-cloud@latest/billing/tutorials/control-costs-at-scale), [AI Credit budgets](https://docs.github.com/en/enterprise-cloud@latest/copilot/concepts/billing/budgets-for-usage-based-billing), and [allocation](https://docs.github.com/en/enterprise-cloud@latest/billing/reference/cost-center-allocation); validated **14 September 2026**, but billing features and UI labels can change |
 
 The refresh also observed Node **24.13.0**, Python **3.14.2**, and azd **1.28.0**.
 That is not a claim that every demo was deployed or exercised on every one of

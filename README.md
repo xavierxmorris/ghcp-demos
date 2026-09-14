@@ -1,9 +1,11 @@
 # GHCP Demo Suite
 
-Fifteen focused demos and labs showcasing **GitHub Copilot** across its key surfaces —
+Sixteen focused demos and labs—standalone repositories **00–14** plus the
+documentation-only demo **16**—showcasing **GitHub Copilot** and GitHub Enterprise
+Cloud across their key surfaces —
 from comment-driven completions, through the autonomous coding agent, out to MCP
 servers, hosted agents on Microsoft Foundry, mainframe modernisation, and CI modernization.
-Each repo is self-contained; choose a learning path rather than assuming every
+Each demo is self-contained; choose a learning path rather than assuming every
 participant needs to complete the entire sequence.
 
 | # | Difficulty | Repo | What it teaches |
@@ -23,6 +25,7 @@ participant needs to complete the entire sequence.
 | 12 | ⭐⭐⭐     | [`ghcp-demo-12-cobol-c-interop`](https://github.com/xavierxmorris/ghcp-demo-12-cobol-c-interop) | COBOL ↔ **C interop** with an explicit ABI boundary, proven on both build paths |
 | 13 | ⭐⭐⭐⭐   | [`ghcp-demo-13-modernize-legacy-cobol-app`](https://github.com/xavierxmorris/ghcp-demo-13-modernize-legacy-cobol-app) | COBOL → **Node.js, Java 25, and .NET 10** with one executable **golden-master parity harness** |
 | 14 | ⭐⭐⭐⭐   | [`ghcp-demo-14-jenkins-to-github-actions-hackathon`](https://github.com/xavierxmorris/ghcp-demo-14-jenkins-to-github-actions-hackathon) 🔒 | **Jenkins modernization hackathon** — synthetic triage, policy-gated reusable Actions drafts, optional Copilot advice, and human review |
+| 16 | 📄 (operator lab) | [`demo-16-cost-centre-ai-credits.md`](demo-16-cost-centre-ai-credits.md) | **Enterprise cost centres and AI Credit budgets** — safe cohort allocation, overlapping controls, reporting, evidence, and rollback |
 
 🔒 = repo is **private** and requires access. Private materials are not
 automatically approved for redistribution.
@@ -36,13 +39,14 @@ index does not publish or clone the demos during validation.
 
 ## Go deeper
 
-Every listed demo now has a **`WORKSHOP.md`** linked from its README: a timed
-participant lab with repository-specific contracts, prompts, expected outcomes,
-negative/boundary cases, troubleshooting, evidence to keep, and explicit limits.
-These complement the short demos; they do not replace the starter exercises
-with completed solutions.
+Each standalone demo 00–14 has a **`WORKSHOP.md`** linked from its README: a
+timed participant lab with repository-specific contracts, prompts, expected
+outcomes, negative/boundary cases, troubleshooting, evidence to keep, and
+explicit limits. Demo 16's root guide contains its presenter and operator tracks.
+These complement the short demos; they do not replace starter exercises with
+completed solutions.
 
-Use **[FACILITATOR-GUIDE.md](FACILITATOR-GUIDE.md)** for all 15 workshop links,
+Use **[FACILITATOR-GUIDE.md](FACILITATOR-GUIDE.md)** for all 16 deeper-guide links,
 baseline expectations, run-mode differences, and session preparation.
 
 | Learning path | Demos | Learning outcome |
@@ -52,6 +56,7 @@ baseline expectations, run-mode differences, and session preparation.
 | Agents, evidence, and design | 07, 08, 09 | Separate tool correctness, research claims, and MCP/design evidence |
 | Data and modernization | 11, 12, 13 | Protect business meaning across rules, ABI boundaries, and language changes |
 | CI modernization | 14 | Distinguish source-pattern candidates, policy eligibility, actual AI advice, and human approval |
+| Enterprise billing operations | 16 | Allocate AI Credit usage safely, explain overlapping budget precedence, and prove rollback |
 
 Demo **00** is the odd one out on purpose: it's aimed at business analysts and
 product owners rather than developers, and it needs no toolchain at all.
@@ -63,6 +68,9 @@ lab, a COBOL/C interop boundary, and a COBOL-to-Node.js/Java/.NET migration held
 golden-master parity harness.
 Demo **14** is a private, three-build-day hackathon kit with a 90-minute
 participant lab. Its offline path never executes Jenkins or generated workflows.
+Demo **16** is an operator-led root guide, not a standalone repository or coding
+exercise. Its bounded live path uses authorised test identities and real billable
+AI Credit activity.
 
 ### Mainframe modernization to Java and .NET
 
@@ -84,8 +92,9 @@ percentage, or production/compliance certification.
 
 ## How to use this repo
 
-This repo is an **index + publishing tooling** repo. Each demo is a standalone
-GitHub repo — clone the one you want, follow its README, and move on to the next.
+This repo is an **index + publishing tooling** repo. Demos 00–14 are standalone
+GitHub repos — clone the one you want, follow its README, and move on to the next.
+Demo 16 is the documentation-only guide in this repository.
 
 ```bash
 git clone https://github.com/xavierxmorris/ghcp-demo-01-hello-completions.git
@@ -132,12 +141,15 @@ operations leads**, and deliberately requires no toolchain.
 | 12    | Docker Desktop for the container build, or GnuCOBOL + GCC for a native Linux run. |
 | 13    | Node 20.11+ for the original port/harness. Optional Java 25 and .NET 10 SDKs for the new targets. The multi-language Docker/devcontainer includes all three plus GnuCOBOL. No application packages. |
 | 14    | Private repo access and Python 3.11+; PowerShell 7+ for the runner and a browser for local reports. No network, Jenkins, Docker, Maven, or model for offline triage. Optional read-only Copilot requires permitted provider access and explicit synthetic-data consent. |
+| 16    | Enterprise-owner or billing-manager access to `GB18030-Action`, authorised non-production test users with appropriate Copilot access, approved real spend and alert recipients, a named rollback owner, browser access, and optional `gh`/`jq` for read-only evidence. |
 
-Access and service guidance was reviewed **7 September 2026** against
+Access and service guidance for demos 00–14 was reviewed **7 September 2026** against
 [GitHub cloud-agent documentation](https://docs.github.com/en/copilot/concepts/agents/cloud-agent/about-cloud-agent),
 [code review](https://docs.github.com/en/copilot/concepts/agents/code-review), and
 [Figma rate limits/access](https://developers.figma.com/docs/figma-mcp-server/rate-limits-access/).
 Quotas, previews, and organization policies can change independently of the code.
+Demo 16's billing guidance was validated **14 September 2026**; GitHub billing
+features and UI labels can change.
 
 ## The setup these demos were built with
 
