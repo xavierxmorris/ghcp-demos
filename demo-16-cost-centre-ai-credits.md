@@ -244,8 +244,7 @@ gh api --method POST \
   --input -
 ```
 
-Verify and record `POWER_COST_CENTER_ID` before adding the user. Do not substitute
-an enterprise team into the direct-user fallback command.
+Do not substitute an enterprise team into the direct-user fallback command.
 
 ## 4. Create the power-user shared budget
 
@@ -536,7 +535,7 @@ for scope in cost_center multi_user_cost_center; do
         has_next_page,
         budgets: [
           .budgets[]
-          | select(.id == $power or .id == $standard)
+          | select((.id | tostring) == $power or (.id | tostring) == $standard)
           | {
               id,
               budget_type,
