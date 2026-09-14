@@ -86,7 +86,7 @@ allowlisted evidence; it does not supersede or modify demo 15.
 | Primary operator shell | PowerShell 7 | Bash with `jq` |
 | Main emphasis | Comprehensive UI-first governance, comparison-only fallback, permissions, licence sources, exclusions, and bounded pagination | Concise execution path, guarded mutation snippets, pool/metered-phase predictions, and API-side evidence filtering |
 | Evidence approach | Keep raw responses private and build an explicit allowlisted PowerShell evidence object | Filter to demo records and allowlisted fields before writing redacted JSON/JSONL |
-| Reporting examples | `/usage/summary` and `/ai_credit/usage` | Focused `/ai_credit/usage` plus budget/effective-budget checks |
+| Reporting examples | `/usage/summary`, `/ai_credit/usage`, and budget/effective-budget checks | Focused `/ai_credit/usage` with Bash-generated JSONL evidence |
 | Relationship | Canonical detailed operator guide | Complementary implementation-oriented lab; not a replacement |
 
 Both guides use the same safety model: authorised non-production test users,

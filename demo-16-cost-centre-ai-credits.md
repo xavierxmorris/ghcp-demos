@@ -13,6 +13,10 @@ the session; where API and UI capabilities differ, prefer the UI.
 
 This is a facilitator/operator exercise, not a coding exercise. It uses
 placeholders throughout and requires no separate repository.
+It complements the more detailed
+[demo 15 PowerShell/UI guide](demo-15-cost-centre-ai-credits.md) with a Bash/`jq`
+path; use the [facilitator guide](FACILITATOR-GUIDE.md) to choose between them.
+Do not run both concurrently in the same enterprise.
 
 ## Learning outcomes and presenter story
 
@@ -30,8 +34,8 @@ By the end, participants can:
 
 | Cost centre | Cohort | Budget | Behaviour |
 | --- | --- | ---: | --- |
-| `AI-DEMO-POWER-USERS` | Enterprise team | `$10–$20` | Alert at 75%, 90%, and 100%; do not stop usage |
-| `AI-DEMO-STANDARD-USERS` | Enterprise team | `$2–$5 per user` | Stop usage at the effective limit |
+| `AI-DEMO-POWER-USERS-16` | Enterprise team | `$10–$20` | Alert at 75%, 90%, and 100%; do not stop usage |
+| `AI-DEMO-STANDARD-USERS-16` | Enterprise team | `$2–$5 per user` | Stop usage at the effective limit |
 | Enterprise default | Everyone else | Low test amount | Demonstrate overlapping-budget precedence |
 
 Power users need visibility without immediate blocking. Standard users inherit
@@ -96,8 +100,10 @@ export USAGE_YEAR="<YYYY>"
 export USAGE_MONTH="<1-12_NO_LEADING_ZERO>"
 export ALERT_RECIPIENT="<AUTHORISED_ALERT_RECIPIENT>"
 export EVIDENCE_DIR="$HOME/ghcp-demo-16-evidence-<SESSION_ID>"
+export EVIDENCE_PHASE="<baseline|configured|restored>"
+export PHASE_DIR="$EVIDENCE_DIR/$EVIDENCE_PHASE"
 umask 077
-mkdir -p "$EVIDENCE_DIR"
+mkdir -p "$PHASE_DIR"
 gh auth status
 ```
 
@@ -124,9 +130,11 @@ The facilitator and named rollback owner must complete and sign off this list:
       individual user-level hard limit and the shared pool is not near
       exhaustion. Otherwise create an approved small individual test-user
       budget or use evidence-only mode.
-- [ ] Search for `AI-DEMO-POWER-USERS` and `AI-DEMO-STANDARD-USERS`, including
+- [ ] Search for `AI-DEMO-POWER-USERS-16` and `AI-DEMO-STANDARD-USERS-16`, including
       archived, stale, or duplicate resources; resolve name collisions rather
       than reusing an ambiguous resource.
+- [ ] Confirm demo 15 is not running in this enterprise. It uses the same business
+      scenario; demo 16's `-16` resource suffix prevents accidental reuse.
 - [ ] Review enterprise, organisation, repository, cost-centre, universal
       (`multi_user_customer`), and explicit user budgets that could overlap.
 - [ ] Record the maximum approved real spend, approved `$10–$20` and `$2–$5`
@@ -166,9 +174,9 @@ or leave the team.
 
 1. In the enterprise, open **People** → **Enterprise teams**.
 2. Select **Create enterprise team**.
-3. Create `AI-DEMO-POWER-USERS`; record its displayed ID/slug and creation time.
+3. Create `AI-DEMO-POWER-USERS-16`; record its displayed ID/slug and creation time.
 4. Use **Add members** to add only authorised power-user test identities.
-5. Repeat for `AI-DEMO-STANDARD-USERS` and authorised standard test identities.
+5. Repeat for `AI-DEMO-STANDARD-USERS-16` and authorised standard test identities.
 6. Verify membership in the UI and capture a redacted screenshot.
 
 Do not create or call an undocumented enterprise-team REST endpoint.
@@ -183,12 +191,12 @@ the observed result.
 
 1. Open **Billing and licensing** → **Cost centres**.
 2. Select **New cost center** (preserve the exact UI spelling shown by GitHub).
-3. Name it `AI-DEMO-POWER-USERS`.
+3. Name it `AI-DEMO-POWER-USERS-16`.
 4. Under **Resources**, add the matching enterprise team, or the authorised
    direct users if using the fallback.
 5. Create the cost centre and record its returned UUID as
    `POWER_COST_CENTER_ID`.
-6. Repeat for `AI-DEMO-STANDARD-USERS` and record
+6. Repeat for `AI-DEMO-STANDARD-USERS-16` and record
    `STANDARD_COST_CENTER_ID`.
 7. Reopen each cost centre and verify its resource membership.
 
@@ -220,7 +228,7 @@ Creating an empty cost centre and then adding a direct user are mutations:
 
 ```bash
 if ! creation="$(
-  jq -n --arg name "AI-DEMO-POWER-USERS" '{name: $name}' |
+  jq -n --arg name "AI-DEMO-POWER-USERS-16" '{name: $name}' |
   gh api --method POST \
     -H "Accept: application/vnd.github+json" \
     -H "X-GitHub-Api-Version: 2026-03-10" \
@@ -228,6 +236,7 @@ if ! creation="$(
     --input -
   )"; then
   echo "Cost-centre creation failed; stop before adding resources" >&2
+  unset POWER_COST_CENTER_ID
 elif ! POWER_COST_CENTER_ID="$(jq -er '.id' <<<"$creation")"; then
   echo "Creation response had no cost-centre ID; stop before adding resources" >&2
   unset POWER_COST_CENTER_ID
@@ -257,7 +266,7 @@ Do not substitute an enterprise team into the direct-user fallback command.
 1. Open **Billing and licensing** → **Budgets and alerts**.
 2. Select **New budget**.
 3. Set **Budget type** to **Bundled AI credits budget**.
-4. Scope the budget to the `AI-DEMO-POWER-USERS` cost centre.
+4. Scope the budget to the `AI-DEMO-POWER-USERS-16` cost centre.
 5. Enter a whole-dollar amount from **$10–$20**, as pre-approved.
 6. Enable threshold alerts at **75%**, **90%**, and **100%** and select only the
    authorised alert recipients.
@@ -317,7 +326,7 @@ inventing a threshold-array field.
 1. Select **New budget** in **Budgets and alerts**.
 2. Choose the current **Users**, cost-centre-per-user, or equivalent UI scope for
    bundled AI Credits.
-3. Select `AI-DEMO-STANDARD-USERS`.
+3. Select `AI-DEMO-STANDARD-USERS-16`.
 4. Enter the approved **$2–$5 per user** amount.
 5. Confirm that the user-level budget is an inherent hard stop. If the current
    UI displays **Stop usage when budget limit is reached**, leave it enabled;
@@ -404,8 +413,8 @@ configured exhaustion behaviour in each prediction, or use evidence-only mode.
 
 | Actor | Expected cost centre | Model/surface | Start/end (UTC) | Purpose | Evidence location |
 | --- | --- | --- | --- | --- | --- |
-| `<POWER_TEST_USER>` | `AI-DEMO-POWER-USERS` | `<MODEL/SURFACE>` | `<TIMES>` | `<BOUNDED_TASK>` | `<REDACTED_REFERENCE>` |
-| `<STANDARD_TEST_USER>` | `AI-DEMO-STANDARD-USERS` | `<MODEL/SURFACE>` | `<TIMES>` | `<BOUNDED_TASK>` | `<REDACTED_REFERENCE>` |
+| `<POWER_TEST_USER>` | `AI-DEMO-POWER-USERS-16` | `<MODEL/SURFACE>` | `<TIMES>` | `<BOUNDED_TASK>` | `<REDACTED_REFERENCE>` |
+| `<STANDARD_TEST_USER>` | `AI-DEMO-STANDARD-USERS-16` | `<MODEL/SURFACE>` | `<TIMES>` | `<BOUNDED_TASK>` | `<REDACTED_REFERENCE>` |
 
 Stop before an unapproved charge or operational impact. Included usage, paid
 usage, reporting lag, plan differences, and selected models can change what and
@@ -467,7 +476,11 @@ export keeps only the two demo records and removes Azure subscription data and
 non-demo resource names.
 
 ```bash
+(
+set -o pipefail
 umask 077
+: "${PHASE_DIR:?Set EVIDENCE_PHASE and PHASE_DIR before collecting evidence}"
+mkdir -p "$PHASE_DIR"
 
 gh api \
   -H "Accept: application/vnd.github+json" \
@@ -477,7 +490,7 @@ jq --arg power "$POWER_COST_CENTER_ID" \
    --arg standard "$STANDARD_COST_CENTER_ID" \
   '{
     costCenters: [
-      .costCenters[]
+      (.costCenters // [])[]
       | select((.id | tostring) == $power or (.id | tostring) == $standard)
       | {
           id,
@@ -490,8 +503,8 @@ jq --arg power "$POWER_COST_CENTER_ID" \
             | {
                 type,
                 name: (
-                  if .name == "AI-DEMO-POWER-USERS"
-                     or .name == "AI-DEMO-STANDARD-USERS"
+                  if .name == "AI-DEMO-POWER-USERS-16"
+                     or .name == "AI-DEMO-STANDARD-USERS-16"
                   then .name
                   else "<redacted-resource>"
                   end
@@ -501,28 +514,31 @@ jq --arg power "$POWER_COST_CENTER_ID" \
         }
     ]
   }' \
-  > "$EVIDENCE_DIR/cost-centres.redacted.json"
+  > "$PHASE_DIR/cost-centres.redacted.json"
 
 # Get every page, but save only a scope/type inventory for unrelated budgets.
-: > "$EVIDENCE_DIR/budgets-inventory.redacted.jsonl"
+: > "$PHASE_DIR/budgets-inventory.redacted.jsonl"
 page=1
 while :; do
-  response="$(
+  if ! response="$(
     gh api \
       -H "Accept: application/vnd.github+json" \
       -H "X-GitHub-Api-Version: 2026-03-10" \
       "/enterprises/$ENTERPRISE/settings/billing/budgets?per_page=100&page=$page"
-  )"
-  jq --argjson page "$page" \
+  )"; then
+    echo "Budget page $page failed; evidence is incomplete" >&2
+    exit 1
+  fi
+  jq -c --argjson page "$page" \
     '{
       page: $page,
       total_count,
       has_next_page,
       budgets: [
-        .budgets[]
+        (.budgets // [])[]
         | {budget_scope, budget_type, budget_product_sku}
       ]
-    }' <<<"$response" >> "$EVIDENCE_DIR/budgets-inventory.redacted.jsonl"
+    }' <<<"$response" >> "$PHASE_DIR/budgets-inventory.redacted.jsonl"
   [[ "$(jq -r '.has_next_page // false' <<<"$response")" == "true" ]] || break
   page=$((page + 1))
 done
@@ -530,17 +546,20 @@ unset response page
 
 # Exercise both documented scope filters and retain only known demo budget IDs.
 for scope in cost_center multi_user_cost_center; do
-  : > "$EVIDENCE_DIR/budgets-$scope.redacted.jsonl"
+  : > "$PHASE_DIR/budgets-$scope.redacted.jsonl"
   page=1
   while :; do
     unset response
-    response="$(
+    if ! response="$(
       gh api \
         -H "Accept: application/vnd.github+json" \
         -H "X-GitHub-Api-Version: 2026-03-10" \
         "/enterprises/$ENTERPRISE/settings/billing/budgets?scope=$scope&per_page=100&page=$page"
-    )"
-    jq --arg power "$POWER_BUDGET_ID" \
+    )"; then
+      echo "Budget scope $scope page $page failed; evidence is incomplete" >&2
+      exit 1
+    fi
+    jq -c --arg power "$POWER_BUDGET_ID" \
        --arg standard "$STANDARD_BUDGET_ID" \
        --argjson page "$page" \
       '{
@@ -548,7 +567,7 @@ for scope in cost_center multi_user_cost_center; do
         total_count,
         has_next_page,
         budgets: [
-          .budgets[]
+          (.budgets // [])[]
           | select((.id | tostring) == $power or (.id | tostring) == $standard)
           | {
               id,
@@ -568,12 +587,13 @@ for scope in cost_center multi_user_cost_center; do
               }
             }
         ]
-      }' <<<"$response" >> "$EVIDENCE_DIR/budgets-$scope.redacted.jsonl"
+      }' <<<"$response" >> "$PHASE_DIR/budgets-$scope.redacted.jsonl"
     [[ "$(jq -r '.has_next_page // false' <<<"$response")" == "true" ]] || break
     page=$((page + 1))
   done
   unset response page
 done
+)
 ```
 
 Inspect every file before sharing; cost-centre UUIDs and budget IDs may remain
@@ -584,7 +604,10 @@ Filter budget details by the standard test username to retrieve the documented
 `effective_budget` summary:
 
 ```bash
+(
+set -o pipefail
 umask 077
+: "${PHASE_DIR:?Set EVIDENCE_PHASE and PHASE_DIR before collecting evidence}"
 gh api \
   -H "Accept: application/vnd.github+json" \
   -H "X-GitHub-Api-Version: 2026-03-10" \
@@ -595,7 +618,7 @@ jq --arg standard "$STANDARD_BUDGET_ID" \
     total_count,
     effective_budget,
     budgets: [
-      .budgets[]
+      (.budgets // [])[]
       | select((.id | tostring) == $standard)
       | {
           id,
@@ -608,7 +631,8 @@ jq --arg standard "$STANDARD_BUDGET_ID" \
         }
     ]
   }' \
-  > "$EVIDENCE_DIR/standard-effective-budget.redacted.json"
+  > "$PHASE_DIR/standard-effective-budget.redacted.json"
+)
 ```
 
 Confirm `has_next_page` is false; if not, repeat with the next `page` value.
@@ -618,32 +642,48 @@ The separate `/{budget_id}/user-states` endpoint is documented specifically for
 ### Query usage for a month and cost centre
 
 ```bash
+(
 umask 077
-gh api --paginate \
-  -H "Accept: application/vnd.github+json" \
-  -H "X-GitHub-Api-Version: 2026-03-10" \
-  "/enterprises/$ENTERPRISE/settings/billing/ai_credit/usage?year=$USAGE_YEAR&month=$USAGE_MONTH&cost_center_id=$POWER_COST_CENTER_ID" |
-jq '{
-  timePeriod,
-  costCenter,
-  usageItems: [
-    .usageItems[]
-    | {
-        product,
-        sku,
-        model,
-        unitType,
-        pricePerUnit,
-        grossQuantity,
-        discountQuantity,
-        netQuantity,
-        grossAmount,
-        discountAmount,
-        netAmount
-      }
-  ]
-}' \
-  > "$EVIDENCE_DIR/power-usage.redacted.json"
+: "${PHASE_DIR:?Set EVIDENCE_PHASE and PHASE_DIR before collecting evidence}"
+: > "$PHASE_DIR/power-usage.redacted.jsonl"
+page=1
+while :; do
+  if ! response="$(
+    gh api \
+      -H "Accept: application/vnd.github+json" \
+      -H "X-GitHub-Api-Version: 2026-03-10" \
+      "/enterprises/$ENTERPRISE/settings/billing/ai_credit/usage?year=$USAGE_YEAR&month=$USAGE_MONTH&cost_center_id=$POWER_COST_CENTER_ID&per_page=100&page=$page"
+  )"; then
+    echo "AI Credit usage page $page failed; evidence is incomplete" >&2
+    exit 1
+  fi
+  jq -c --argjson page "$page" '{
+    page: $page,
+    has_next_page,
+    timePeriod,
+    costCenter,
+    usageItems: [
+      (.usageItems // [])[]
+      | {
+          product,
+          sku,
+          model,
+          unitType,
+          pricePerUnit,
+          grossQuantity,
+          discountQuantity,
+          netQuantity,
+          grossAmount,
+          discountAmount,
+          netAmount
+        }
+    ]
+  }' <<<"$response" >> "$PHASE_DIR/power-usage.redacted.jsonl"
+  [[ "$(jq -r '.has_next_page // false' <<<"$response")" == "true" ]] || break
+  page=$((page + 1))
+done
+unset response page
+)
 ```
 
 Verify the latest API version and endpoint documentation first. Billing usage
@@ -665,19 +705,22 @@ permissions and authentication support can differ from other REST endpoints.
 
 Cleanup is part of the demo, not an optional afterthought:
 
-1. Record budget IDs and final redacted evidence, then disable or delete demo
-   budgets first.
-2. Remove authorised test users/teams from the demo cost centres.
-3. Restore any captured prior direct cost-centre assignments and effective
+1. Set `EVIDENCE_PHASE=configured`, update `PHASE_DIR`, and record final redacted
+   configured-state evidence without overwriting `baseline`.
+2. Disable or delete only budget IDs recorded as created by this demo 16 session.
+   Never delete a demo 15 or pre-existing resource merely because its name is similar.
+3. Remove authorised test users/teams only from the recorded demo 16 cost centres.
+4. Restore any captured prior direct cost-centre assignments and effective
    budgets displaced by the demo.
-4. Archive/delete demo cost centres only after confirming that no required
-   billing identity or production resource is attached.
-5. Remove test users from demo enterprise teams and delete only teams created
-   for this demo.
-6. Restore any intentionally changed test-enterprise default and original
+5. Archive/delete only cost-centre UUIDs recorded as created by this session,
+   after confirming that no required billing identity or production resource is attached.
+6. Remove test users from demo enterprise teams and delete only teams recorded
+   as created by this session.
+7. Restore any intentionally changed test-enterprise default and original
    Copilot access.
-7. Re-run the read-only API checks and capture a redacted audit-log/evidence note.
-8. Compare the final state to the starting-state record.
+8. Set `EVIDENCE_PHASE=restored`, update `PHASE_DIR`, and re-run the read-only
+   checks into the separate restored directory.
+9. Compare the final state to the starting-state record.
 
 Deletion changes future control and attribution; it does not retroactively
 change historical billing attribution.
@@ -731,7 +774,16 @@ billable usage merely to produce an email.
 Do not include tokens, credentials, real names, private prompt content, unrelated
 usage records, customer data, or Azure subscription IDs.
 
-The demo is accepted only when:
+Use one of these completion labels:
+
+- **Live accepted:** every criterion below passes, including observed future
+  attribution.
+- **Live pending:** delayed attribution or another live criterion remains open;
+  do not call the live demo accepted.
+- **Comparison-only complete:** no live enforcement/attribution claim was made,
+  and the configured-value explanation and rollback walkthrough are complete.
+
+A live demo is accepted only when:
 
 - [ ] Each cost centre has the correct team or documented direct-user fallback.
 - [ ] Power users have a shared `$10–$20` alert-only budget with 75%, 90%, and
@@ -739,8 +791,7 @@ The demo is accepted only when:
 - [ ] Standard users inherit the approved `$2–$5` per-user hard limit.
 - [ ] Enterprise-default overlap and least-headroom precedence are understood
       and evidenced without a production outage.
-- [ ] Qualifying future usage is attributed to the expected cost centre, or a
-      reporting-delay follow-up is explicitly open.
+- [ ] Qualifying future usage is observed under the expected cost centre.
 - [ ] Read-only evidence confirms the intended type, scope, amount, alerts,
       stop-usage state, and effective budget when available.
 - [ ] Cleanup restores the recorded starting state.
