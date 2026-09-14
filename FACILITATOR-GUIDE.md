@@ -1,8 +1,9 @@
 # Facilitator guide: teach the decision, not just the prompt
 
-The suite contains **16 demos**: 15 independent repositories numbered 00–14
-plus the documentation-only demo 16 in this index. Each repository demo's README
-provides orientation and links to a deeper `WORKSHOP.md`; demo 15 is not assigned.
+The suite contains **17 demos**, numbered 00–16: **15 independent repositories**
+for 00–14 and documentation-only operator guides for 15 and 16 in this index.
+Each standalone demo's README provides orientation and links to a deeper `WORKSHOP.md`.
+Demos 15 and 16 contain their presenter tracks and operator labs in their guides.
 Use the short presenter track to show the idea; use the workshop to let
 participants test it, make a bounded change, and explain the evidence.
 
@@ -11,9 +12,9 @@ The extra plugin-spec demo is not part of this listed sequence.
 ## Workshop catalog
 
 Times are planning estimates after setup. Model latency, cloud queues, image
-downloads, and account provisioning are additional. Links for 00–14 point to
-standalone repositories, whose guide files are not published with this index.
-Demo 16's root guide is published with the index.
+downloads, account provisioning, and billing-report/alert delays are additional.
+Links for 00–14 point to standalone repositories; publishing this index does not
+publish their guide files. Demos 15 and 16 are tracked and published with this index.
 
 | Demo | Deeper guide | Suggested time | Participant deliverable |
 | --- | --- | --- | --- |
@@ -32,7 +33,8 @@ Demo 16's root guide is published with the index.
 | 12 | [The maintained ABI boundary](https://github.com/xavierxmorris/ghcp-demo-12-cobol-c-interop/blob/main/WORKSHOP.md) | 60 min | Field-level ABI explanation and two-path build evidence |
 | 13 | [Characterization and remediation](https://github.com/xavierxmorris/ghcp-demo-13-modernize-legacy-cobol-app/blob/main/WORKSHOP.md) | 75 min | Legacy observation, modern outcome, and sign-off rationale |
 | 14 | [Private: Jenkins pattern decisions](https://github.com/xavierxmorris/ghcp-demo-14-jenkins-to-github-actions-hackathon/blob/main/WORKSHOP.md) (access required) | 90 min lab / 3 build days | Source-linked triage, inactive reusable-workflow drafts, policy refusal, and human decisions |
-| 16 | [Cost-centre and AI Credit controls](demo-16-cost-centre-ai-credits.md) | 10–15 min presenter / 45–60 min operator lab | Redacted allocation, precedence, reporting, and rollback evidence |
+| 15 | [Cost centres and AI Credit budgets](demo-15-cost-centre-ai-credits.md) | 10–15 min presenter / 45–60 min operator lab | Cohort/UUID mapping, shared versus inherited limits, effective-budget explanation, redacted evidence, and rollback |
+| 16 | [Complementary Bash/`jq` cost-centre controls](demo-16-cost-centre-ai-credits.md) | 10–15 min presenter / 45–60 min operator lab | Guarded API steps, pool/metered predictions, allowlisted JSON evidence, and rollback |
 
 ## Choose a session
 
@@ -43,16 +45,19 @@ Demo 16's root guide is published with the index.
 | AI systems and evidence, half-day | Offline 07, research 08, authorized replay 09 | Azure provisioning and live Figma access unless prepared |
 | Modernization, half-day plus setup | 11-13 | Real exports, production databases, and changing legacy evidence |
 | CI modernization hack, three build days | 14 | Repository migration, production CI, estate-wide conversion and unapproved data/model access |
-| Enterprise billing operations, 60 minutes | 16 | Production identities, unapproved spend, intentional outages, internal tools, and undocumented APIs |
+| Enterprise cost governance, 45–60 minutes | 15; operator-led, with read-only comparison fallback | Production-default changes, deliberate threshold/pool exhaustion, and waiting for delayed reports/alerts |
+| Enterprise billing operations, 45–60 minutes | 16; Bash/`jq` operator path, with UI-only fallback | Production identities, unapproved spend, intentional outages, internal tools, and undocumented APIs |
 
-Do not compress all sixteen into a single "hands-on" session. A room can watch
+Do not compress all seventeen into a single "hands-on" session. A room can watch
 many demos; participants need time to inspect and challenge a smaller number.
 
 ## Before participants arrive
 
 1. Confirm the audience, intended outcome, repository access, and available time.
 2. Open each demo as its own workspace. Do not use the entire user profile or
-   the index folder as the context for an individual coding exercise.
+   the index folder as the context for an individual coding exercise. Demos 15
+   and 16 are exceptions: read their guides here; the operator works in the
+   enterprise UI and an approved private terminal.
 3. Record Git revision, runtime/editor/CLI versions, selected model, and any
    nondefault instructions, agents, skills, or MCP servers.
 4. Prepare a dedicated clone and synthetic fixtures. Preserve existing work.
@@ -60,22 +65,34 @@ many demos; participants need time to inspect and challenge a smaller number.
 6. Pre-authorize accounts and budgets separately from code/tool permissions.
 7. Keep an honest fallback: shipped pages, captured evidence, or local analysis.
    A replay is not a live run.
-8. For demo 16, confirm enterprise-owner or billing-manager access, authorised
-   non-production test users with appropriate Copilot access, approved real spend
-   and alert recipients, a named rollback owner, and a captured billing baseline.
-   Review all overlapping enterprise, organisation, repository, cost-centre,
-   universal, and user budgets before any activity.
 
 Use the README's prerequisites, not a blanket "any Copilot seat and no setup."
 Cloud-agent policy, code-review policy, Figma access, and Azure permissions are
-separate gates. Enterprise billing permissions, Copilot access, paid-usage policy,
-and approved spend are separate demo 16 gates.
+separate gates.
 
-Demo 16 uses real billable AI Credit consumption and reporting can lag. Use only
-normal, bounded Copilot activity by authorised test users. Stop on unexpected
-cost, blocking, attribution, or production impact; preserve evidence and let the
-named owner roll back. Never use stafftools, manual charge generators, private
-internal endpoints, or synthetic production billing-emission tools.
+For demo 15, separately confirm enterprise-owner or billing-manager billing
+access, an authorised team administrator, appropriate Copilot licences for
+non-production-critical test users, and the enterprise's current UI/API support.
+Prepare before-state teams, cost centres, budgets, policies, and usage evidence.
+Check collisions, stale resources, direct assignments, and every potentially
+overlapping budget. Agree the maximum real spend, bounded task count, alert
+recipients, stop conditions, and rollback owners. A billing role alone does not
+prove permission to create enterprise teams.
+
+Demo 16 has the same access, spend, identity, and rollback gates. Select it when
+the operator needs Bash/`jq`, guarded request snippets, or allowlisted API-side
+evidence. It complements demo 15 and must not be used to bypass demo 15's
+comparison-only fallback or safety controls.
+
+**Billing safety:** AI Credits are real consumption; an alert-only budget does
+not enforce a spend ceiling and reporting can lag. Do not lower or replace a
+production universal budget, exhaust a pool, or deliberately block developer
+work. Use ordinary authorised test-user Copilot activity only, never stafftools,
+charge generators, private endpoints, or synthetic production billing emission.
+If safe isolation/headroom is unverified, use comparison-only mode. Preserve
+evidence, stop activity, restore only demo changes, and use GitHub Support for
+unexplained attribution/enforcement. Keep raw billing data and identity mappings
+outside the public repository.
 
 ## Know the starting state
 
@@ -96,7 +113,8 @@ internal endpoints, or synthetic production billing-emission tools.
 | 12 | Two build paths share a compiler and are not independent implementations |
 | 13 | Node-only success is not fresh COBOL replay; compare remediation claims to scenario IDs |
 | 14 | Python is deterministic; synthetic outcomes are not a customer conversion rate, and the default customer policy emits no drafts |
-| 16 | Existing teams, cost centres, budgets, policies, membership, and usage reports are the baseline; new cost centres affect future qualifying attribution and cleanup does not rewrite history |
+| 15 | Documentation-only; no runner or pre-created enterprise resources. Live enterprise state is unverified. ULB specificity differs from independent hard-budget headroom; future attribution/alerts can remain pending |
+| 16 | Documentation-only; no runner or pre-created enterprise resources. Bash/`jq` examples are optional, mutating examples require explicit approval, and live results can remain pending |
 
 An expected failure is a teaching artifact. An environment failure is a setup
 problem. An unexpected regression is a defect. Do not conflate them to improve
@@ -116,6 +134,8 @@ enough to infer behavior across the suite.
 | 13 `-Manual` / `-Live` | Prints commands / pauses through the verification story |
 | 09 full runner/reset | User skill/MCP changes and an all-interface preview; reset deletes generated output, and `-Screenshot` overwrites a reference with an unpinned tool |
 | 14 `-Manual` / `-Check` / `-Live` | Print-only commands / offline contracts / explicit-consent, read-only Copilot on shipped synthetic context; no migration or auto-merge |
+| 15 no runner | UI-first operator lab; GET-only reporting examples and separately warned optional mutations, not automated billing setup |
+| 16 no runner | UI-first operator lab with Bash/`jq` examples; no automated billing setup or CI execution of commands |
 
 Prefer normal interactive approval for new agent-driven work. A new folder,
 source hash comparison, or an instruction saying "do not touch" is not a
@@ -124,7 +144,7 @@ working tree merely because they are convenient.
 
 ## Facilitate the learning loop
 
-Ask participants to **predict**, **observe**, **explain**, and **challenge**:
+Ask participants to **predict**, **observe**, **explain**, **challenge**, and **recover**:
 
 | Step | Facilitator prompt | Evidence |
 | --- | --- | --- |
@@ -134,12 +154,14 @@ Ask participants to **predict**, **observe**, **explain**, and **challenge**:
 | Challenge | What deliberate error would this check detect? | Meaningful failing case |
 | Recover | Did the bounded correction restore the contract? | Focused rerun and diff |
 
-For demo 16, the recovery evidence is a read-only billing/API recheck against the
-captured starting state, not a source diff.
-
 Avoid the "better prompt always produces better code" storyline. A model may
 succeed without the extra instruction or fail with it. Measure what happened.
 Do not require participants to stage a model failure to make the talk work.
+For demo 15, challenge budget-precedence assumptions by comparing settings and
+effective-budget evidence, not by creating a real outage. Recover means
+restoring controls and membership; it does not undo charges or historical attribution.
+For demo 16, use the same challenge and recovery standard; its filtered JSON
+evidence is an alternative operating path, not weaker acceptance.
 
 ## Evidence and acceptance rubric
 
@@ -154,13 +176,20 @@ Use this as a learning rubric, not a certification of production readiness.
 Each participant's handoff should contain the revision, versions, input/context,
 prompt, expected versus observed result, relevant diff, and unresolved limitations.
 Include observed elapsed time only if it was actually measured.
+For demo 15, substitute a non-sensitive activity purpose/ledger for prompt
+contents, record shared/inherited/effective-budget evidence and alert delivery
+status, and require rollback confirmation. Mark delayed attribution pending;
+a comparison-only session is not a live enforcement test.
+For demo 16, additionally retain only allowlisted JSON fields and confirm every
+reported page was inspected before calling the API evidence complete.
 
 Do not put personal data, credentials, private designs, or customer telemetry
 into a public evidence bundle. Retain private evidence only in approved storage.
 
 ## Version-sensitive claims to recheck
 
-Documentation refresh date: **2026-09-07**. These sources are rolling pages;
+Documentation refresh date: **2026-09-07** for demos 00–14; demos 15 and 16
+checked billing sources on **14 September 2026**. These sources are rolling pages;
 their retrieval date is not an invented product release date.
 
 | Topic | Current source / boundary |
@@ -172,7 +201,8 @@ their retrieval date is not an invented product release date.
 | Hosted-agent costs | [Foundry hosted agents](https://learn.microsoft.com/azure/foundry/agents/concepts/hosted-agents); active-session compute as well as model/evaluation use |
 | Figma | [Access and limits](https://developers.figma.com/docs/figma-mcp-server/rate-limits-access/); plan, seat, client, and read-tool exemptions |
 | COBOL | [GnuCOBOL](https://gnucobol.sourceforge.io/); stable **3.2**, released **2023-07-28**, distinct from the demos' 3.1.2 baseline |
-| Enterprise billing | [Cost control](https://docs.github.com/en/enterprise-cloud@latest/billing/tutorials/control-costs-at-scale), [AI Credit budgets](https://docs.github.com/en/enterprise-cloud@latest/copilot/concepts/billing/budgets-for-usage-based-billing), and [allocation](https://docs.github.com/en/enterprise-cloud@latest/billing/reference/cost-center-allocation); validated **14 September 2026**, but billing features and UI labels can change |
+| Enterprise AI Credit controls | [Demo 15 sources and boundaries](demo-15-cost-centre-ai-credits.md#references); REST **2026-03-10**, current UI labels/rollout must be rechecked; no live enterprise verification |
+| Enterprise AI Credit Bash/`jq` path | [Demo 16 sources and boundaries](demo-16-cost-centre-ai-credits.md#references); complementary evidence workflow with the same REST/UI and live-verification caveats |
 
 The refresh also observed Node **24.13.0**, Python **3.14.2**, and azd **1.28.0**.
 That is not a claim that every demo was deployed or exercised on every one of
@@ -184,6 +214,10 @@ cloud/compiler evidence.
 The index tracks its own files only. Child demo repos are ignored and keep their
 own remotes and commits. Update a demo's README and workshop together; update
 the catalog/prerequisites when a runnable contract changes.
+Demos 15 and 16 are top-level guides, so update each guide and both index catalogs
+together. The suite has 17 demos but only 15 standalone demo repositories. Do
+not add demo-15 or demo-16 repository entries to `repos.txt` or create separate
+repositories.
 
 `repos.txt` is a `name|description[|public or private]` publishing inventory,
 not a dependency manifest. Legacy two-column entries retain their default

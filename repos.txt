@@ -1,4 +1,4 @@
-ghcp-demos|Index + publishing tooling and facilitator guidance for 16 GitHub Copilot and Enterprise demos: 15 standalone workshops plus one root operator guide.
+ghcp-demos|Index + publishing tooling and facilitator guidance for 17 GitHub Copilot demos and research modules: 15 standalone workshops and two in-index cost-centre AI Credit operator guides.
 ghcp-demo-00-design-to-clickthrough|One-page BRD to a working click-through app and back again — Copilot for business analysts, no code required.
 ghcp-demo-01-hello-completions|Hands-on intro to Copilot ghost-text completions and comment-driven coding (JS).
 ghcp-demo-02-python-quickfix|Learn Copilot Chat through root-cause diagnosis, deterministic regression tests, and accurate documentation on a small Python codebase.

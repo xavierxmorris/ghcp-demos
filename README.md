@@ -1,11 +1,11 @@
 # GHCP Demo Suite
 
-Fifteen standalone repositories (**00–14**) plus one documentation-only guide
-(**16**) provide sixteen focused demos and labs showcasing **GitHub Copilot**
-and GitHub Enterprise Cloud across their key surfaces —
+Seventeen focused demos and labs (00–16) showcasing **GitHub Copilot** across its key surfaces —
 from comment-driven completions, through the autonomous coding agent, out to MCP
-servers, hosted agents on Microsoft Foundry, mainframe modernisation, and CI modernization.
-Each demo is self-contained; choose a learning path rather than assuming every
+servers, hosted agents on Microsoft Foundry, mainframe modernisation, CI modernization,
+and enterprise AI Credit cost controls. Demos 00–14 have self-contained repos;
+demos 15 and 16 are complementary operator guides in this index. Choose a
+learning path rather than assuming every
 participant needs to complete the entire sequence.
 
 | # | Difficulty | Repo / guide | What it teaches |
@@ -25,10 +25,8 @@ participant needs to complete the entire sequence.
 | 12 | ⭐⭐⭐     | [`ghcp-demo-12-cobol-c-interop`](https://github.com/xavierxmorris/ghcp-demo-12-cobol-c-interop) | COBOL ↔ **C interop** with an explicit ABI boundary, proven on both build paths |
 | 13 | ⭐⭐⭐⭐   | [`ghcp-demo-13-modernize-legacy-cobol-app`](https://github.com/xavierxmorris/ghcp-demo-13-modernize-legacy-cobol-app) | COBOL → **Node.js, Java 25, and .NET 10** with one executable **golden-master parity harness** |
 | 14 | ⭐⭐⭐⭐   | [`ghcp-demo-14-jenkins-to-github-actions-hackathon`](https://github.com/xavierxmorris/ghcp-demo-14-jenkins-to-github-actions-hackathon) 🔒 | **Jenkins modernization hackathon** — synthetic triage, policy-gated reusable Actions drafts, optional Copilot advice, and human review |
-| 16 | 📄 (operator lab) | [`demo-16-cost-centre-ai-credits.md`](demo-16-cost-centre-ai-credits.md) | **Enterprise cost centres and AI Credit budgets** — safe cohort allocation, overlapping controls, reporting, evidence, and rollback |
-
-Demo 15 is not currently assigned; demo 16 is intentionally the next catalogued
-guide.
+| 15 | 📄 (operator-led) | [Cost centres and AI Credit budgets](demo-15-cost-centre-ai-credits.md) | Enterprise teams, shared alert-only and inherited hard per-user budgets, precedence, redacted evidence, and rollback in **GB18030-Action** |
+| 16 | 📄 (operator lab) | [Cost-centre and AI Credit controls](demo-16-cost-centre-ai-credits.md) | A complementary Bash/`jq` operator path with guarded mutations, allowlisted API evidence, pool/metered-phase checks, and rollback |
 
 🔒 = repo is **private** and requires access. Private materials are not
 automatically approved for redistribution.
@@ -42,14 +40,16 @@ index does not publish or clone the demos during validation.
 
 ## Go deeper
 
-Each standalone demo 00–14 has a **`WORKSHOP.md`** linked from its README: a
-timed participant lab with repository-specific contracts, prompts, expected
-outcomes, negative/boundary cases, troubleshooting, evidence to keep, and
-explicit limits. Demo 16's root guide contains its presenter and operator tracks.
-These complement the short demos; they do not replace starter exercises with
-completed solutions.
+Demos 00–14 have a **`WORKSHOP.md`** linked from their README: a timed
+participant lab with repository-specific contracts, prompts, expected outcomes,
+negative/boundary cases, troubleshooting, evidence to keep, and explicit limits.
+These complement the short demos; they do not replace the starter exercises
+with completed solutions.
+Demo 15 and demo 16 each include a **10–15 minute presenter track** and
+**45–60 minute operator lab** directly in their guides; neither needs a coding
+runner or separate repository.
 
-Use **[FACILITATOR-GUIDE.md](FACILITATOR-GUIDE.md)** for all 16 deeper-guide links,
+Use **[FACILITATOR-GUIDE.md](FACILITATOR-GUIDE.md)** for all 17 deeper-guide links,
 baseline expectations, run-mode differences, and session preparation.
 
 | Learning path | Demos | Learning outcome |
@@ -59,7 +59,8 @@ baseline expectations, run-mode differences, and session preparation.
 | Agents, evidence, and design | 07, 08, 09 | Separate tool correctness, research claims, and MCP/design evidence |
 | Data and modernization | 11, 12, 13 | Protect business meaning across rules, ABI boundaries, and language changes |
 | CI modernization | 14 | Distinguish source-pattern candidates, policy eligibility, actual AI advice, and human approval |
-| Enterprise billing operations | 16 | Allocate AI Credit usage safely, explain overlapping budget precedence, and prove rollback |
+| Enterprise cost governance | 15 | Separate cost-centre allocation, inherited user limits, independent spending controls, reporting, and recovery |
+| Enterprise billing operations | 16 | Run the same scenario through guarded Bash/`jq` examples and allowlisted API evidence |
 
 Demo **00** is the odd one out on purpose: it's aimed at business analysts and
 product owners rather than developers, and it needs no toolchain at all.
@@ -71,9 +72,26 @@ lab, a COBOL/C interop boundary, and a COBOL-to-Node.js/Java/.NET migration held
 golden-master parity harness.
 Demo **14** is a private, three-build-day hackathon kit with a 90-minute
 participant lab. Its offline path never executes Jenkins or generated workflows.
-Demo **16** is an operator-led root guide, not a standalone repository or coding
-exercise. Its bounded live path uses authorised test identities and real billable
-AI Credit activity.
+Demo **15** is a documentation-only, operator-led billing lab. Its UI steps and
+clearly labelled optional API mutations affect real billing; read-only comparison
+is the fallback, not a claim that live enforcement has been tested.
+Demo **16** is a separate, complementary operator guide. It retains the same
+business scenario but emphasises Bash/`jq`, guarded API calls, and locally
+allowlisted evidence; it does not supersede or modify demo 15.
+
+### Demo 15 and demo 16: what is different?
+
+| Area | Demo 15 | Demo 16 |
+| --- | --- | --- |
+| Primary operator shell | PowerShell 7 | Bash with `jq` |
+| Main emphasis | Comprehensive UI-first governance, comparison-only fallback, permissions, licence sources, exclusions, and bounded pagination | Concise execution path, guarded mutation snippets, pool/metered-phase predictions, and API-side evidence filtering |
+| Evidence approach | Keep raw responses private and build an explicit allowlisted PowerShell evidence object | Filter to demo records and allowlisted fields before writing redacted JSON/JSONL |
+| Reporting examples | `/usage/summary` and `/ai_credit/usage` | Focused `/ai_credit/usage` plus budget/effective-budget checks |
+| Relationship | Canonical detailed operator guide | Complementary implementation-oriented lab; not a replacement |
+
+Both guides use the same safety model: authorised non-production test users,
+approved real spend, no deliberate exhaustion/outage, read-only fallback, and
+reversible cleanup.
 
 ### Mainframe modernization to Java and .NET
 
@@ -96,8 +114,10 @@ percentage, or production/compliance certification.
 ## How to use this repo
 
 This repo is an **index + publishing tooling** repo. Demos 00–14 are standalone
-GitHub repos — clone the one you want, follow its README, and move on to the next.
-Demo 16 is the documentation-only guide in this repository.
+GitHub repos — clone the one you want and follow its README. Demos
+[15](demo-15-cost-centre-ai-credits.md) and
+[16](demo-16-cost-centre-ai-credits.md) are guides tracked here; do not create
+or publish separate repositories for them.
 
 ```bash
 git clone https://github.com/xavierxmorris/ghcp-demo-01-hello-completions.git
@@ -107,6 +127,10 @@ Rough timings for the original short walkthroughs: **~3 hours** for the core pat
 also do 00, 07 and 09. Demo 08 is a 15-minute read. Demos 10 and 12 each run as a
 90-second presenter track or a short hands-on exercise; 11 and 13 are longer
 build-and-verify labs.
+Demo 15 takes 10–15 minutes to present or 45–60 minutes as an operator lab,
+with setup and delayed billing reports/alerts outside those estimates.
+Demo 16 uses the same timing envelope and is best selected when Bash/`jq`
+evidence handling is more useful than demo 15's PowerShell path.
 
 The deeper workshop tracks take longer: plan **5-6 hours** for all foundation
 labs, split across sessions, with setup and cloud queues additional. Individual
@@ -122,8 +146,10 @@ These are **developer enablement** demos. They favour clarity and
 repeatability over flash — every step has an expected outcome you can
 verify on your own machine.
 
-Demo 00 is the exception: it's built for **business analysts, product owners and
-operations leads**, and deliberately requires no toolchain.
+Demo 00 is built for **business analysts, product owners and operations leads**,
+and deliberately requires no toolchain. Demo 15 is for **enterprise billing
+operators and facilitators**, not coding participants. Demo 16 serves the same
+audience with a Bash/`jq` operating path.
 
 ## Prerequisites (by demo)
 
@@ -144,15 +170,21 @@ operations leads**, and deliberately requires no toolchain.
 | 12    | Docker Desktop for the container build, or GnuCOBOL + GCC for a native Linux run. |
 | 13    | Node 20.11+ for the original port/harness. Optional Java 25 and .NET 10 SDKs for the new targets. The multi-language Docker/devcontainer includes all three plus GnuCOBOL. No application packages. |
 | 14    | Private repo access and Python 3.11+; PowerShell 7+ for the runner and a browser for local reports. No network, Jenkins, Docker, Maven, or model for offline triage. Optional read-only Copilot requires permitted provider access and explicit synthetic-data consent. |
-| 16    | Enterprise-owner or billing-manager access to `GB18030-Action`, authorised non-production test users with appropriate Copilot access, approved real spend and alert recipients, a named rollback owner, browser access, and optional `gh`/`jq` for read-only evidence. |
+| 15    | Browser; enterprise-owner/billing-manager billing access and authorised team administrator; licensed non-production-critical test accounts, approved spend/activity ceiling, recipients, baseline evidence, and rollback owner. Optional PowerShell 7 + `gh` for documented API checks. UI/read-only comparison if safe live access is unavailable. |
+| 16    | The same authorised enterprise/test-user/spend/rollback prerequisites as demo 15; Bash, `jq`, and `gh` only for optional API examples. UI/read-only comparison remains sufficient. |
 
-Access and service guidance for demos 00–14 was reviewed **7 September 2026** against
+Access and service guidance was reviewed **7 September 2026** against
 [GitHub cloud-agent documentation](https://docs.github.com/en/copilot/concepts/agents/cloud-agent/about-cloud-agent),
 [code review](https://docs.github.com/en/copilot/concepts/agents/code-review), and
 [Figma rate limits/access](https://developers.figma.com/docs/figma-mcp-server/rate-limits-access/).
 Quotas, previews, and organization policies can change independently of the code.
-Demo 16's billing guidance was validated **14 September 2026**; GitHub billing
-features and UI labels can change.
+The billing sources for demos 15 and 16 were checked **14 September 2026**,
+using REST API **2026-03-10**; see the
+[demo 15](demo-15-cost-centre-ai-credits.md#references) and
+[demo 16](demo-16-cost-centre-ai-credits.md#references) references.
+This is documentation validation, not a live check of GB18030-Action. AI Credit
+usage can incur real charges; do not lower production defaults or consume credits
+merely to demonstrate a threshold.
 
 ## The setup these demos were built with
 
@@ -225,8 +257,10 @@ diagrams) for work that's easier to see than to describe in chat.
 
 ## Pushing these to GitHub
 
-This is not a monorepo: each demo has its own Git history, remote, and working
-tree. Committing the index does not commit any ignored child repository.
+This is not a monorepo: each standalone demo (00–14) has its own Git history,
+remote, and working tree. Demos 15 and 16 are committed with the index, not
+added as repositories in `repos.txt`. Committing the index does not commit any
+ignored child repository.
 Inspect and commit each intended change separately before publishing.
 
 The scripts below are **publishing tools**, not setup or validation commands.
