@@ -13,6 +13,14 @@ class IndexContractTests(unittest.TestCase):
     def test_valid_inventory(self) -> None:
         self.assertEqual(parse_inventory(VALID), ["ghcp-demos", "ghcp-demo-00-example"])
 
+    def test_reserved_in_index_demo_number_can_be_skipped(self) -> None:
+        rows = [
+            "ghcp-demos|Index",
+            *[f"ghcp-demo-{number:02d}-example|Example" for number in range(15)],
+            "ghcp-demo-16-example|Example",
+        ]
+        self.assertEqual(len(parse_inventory("\n".join(rows) + "\n")), 17)
+
     def test_explicit_private_visibility_preserves_the_existing_name_contract(self) -> None:
         self.assertEqual(parse_inventory(VALID.rstrip() + "|private\n"), ["ghcp-demos", "ghcp-demo-00-example"])
         self.assertEqual(parse_inventory(VALID.rstrip() + "|public\n"), ["ghcp-demos", "ghcp-demo-00-example"])

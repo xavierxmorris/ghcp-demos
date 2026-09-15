@@ -6,6 +6,7 @@ import re
 from pathlib import Path
 
 DEMO_NAME = r"ghcp-demo-\d{2}-[a-z0-9]+(?:-[a-z0-9]+)*"
+IN_INDEX_DEMOS = {15}
 
 
 def parse_inventory(text: str) -> list[str]:
@@ -28,8 +29,15 @@ def parse_inventory(text: str) -> list[str]:
     if len(names) < 2 or names[0] != "ghcp-demos":
         raise ValueError("Inventory must start with ghcp-demos and contain at least one demo")
     numbers = [int(name.split("-")[2]) for name in names[1:]]
-    if numbers != list(range(len(numbers))):
-        raise ValueError("Demo numbers must be unique, ordered and consecutive from 00")
+    expected = [
+        number for number in range(max(numbers) + 1)
+        if number not in IN_INDEX_DEMOS
+    ]
+    if numbers != expected:
+        raise ValueError(
+            "Demo numbers must be unique, ordered and consecutive from 00, "
+            "excluding reserved in-index demos"
+        )
     return names
 
 

@@ -1,4 +1,4 @@
-ghcp-demos|Index + publishing tooling and facilitator guidance for 16 GitHub Copilot demos and research modules: 15 standalone workshops and an in-index cost-centre AI Credit operator guide.
+ghcp-demos|Index + publishing tooling and facilitator guidance for 17 GitHub Copilot demos and research modules: 16 standalone workshops and an in-index cost-centre AI Credit operator guide.
 ghcp-demo-00-design-to-clickthrough|One-page BRD to a working click-through app and back again — Copilot for business analysts, no code required.
 ghcp-demo-01-hello-completions|Hands-on intro to Copilot ghost-text completions and comment-driven coding (JS).
 ghcp-demo-02-python-quickfix|Learn Copilot Chat through root-cause diagnosis, deterministic regression tests, and accurate documentation on a small Python codebase.
@@ -14,3 +14,4 @@ ghcp-demo-11-excel-merge-agent|Deterministic Excel merge/reconciliation pipeline
 ghcp-demo-12-cobol-c-interop|GnuCOBOL and maintained C interoperability demo: preserve COBOL rule ownership, expose an explicit C ABI, and prove both build paths with GitHub Copilot guardrails.
 ghcp-demo-13-modernize-legacy-cobol-app|COBOL-to-Java/.NET/Node.js modernization lab: original-source evidence, GitHub Copilot workflows, explicit behavior changes, and repeatable checks.
 ghcp-demo-14-jenkins-to-github-actions-hackathon|Jenkins modernization hackathon: synthetic pipeline triage, policy-gated reusable GitHub Actions drafts, optional Copilot advice, and explicit human review.|private
+ghcp-demo-16-copilot-agent-migration-orchestrator|GitHub App and managed-user prototype for discovering Jenkins migrations, creating issues, and safely starting Copilot cloud-agent tasks.

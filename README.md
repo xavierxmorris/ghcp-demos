@@ -1,11 +1,12 @@
 # GHCP Demo Suite
 
-Sixteen focused demos and labs (00–15) showcasing **GitHub Copilot** across its key surfaces —
+Seventeen focused demos and labs (00–16) showcasing **GitHub Copilot** across its key surfaces —
 from comment-driven completions, through the autonomous coding agent, out to MCP
 servers, hosted agents on Microsoft Foundry, mainframe modernisation, CI modernization,
-and enterprise AI Credit cost controls. Demos 00–14 have self-contained repos;
-demo 15 is an operator guide in this index. Choose a learning path rather than assuming every
-participant needs to complete the entire sequence.
+enterprise AI Credit cost controls, and service-owned agent orchestration.
+Demos 00–14 and 16 have self-contained repos; demo 15 is an operator guide in
+this index. Choose a learning path rather than assuming every participant needs
+to complete the entire sequence.
 
 | # | Difficulty | Repo | What it teaches |
 |---|------------|------|-----------------|
@@ -25,6 +26,7 @@ participant needs to complete the entire sequence.
 | 13 | ⭐⭐⭐⭐   | [`ghcp-demo-13-modernize-legacy-cobol-app`](https://github.com/xavierxmorris/ghcp-demo-13-modernize-legacy-cobol-app) | COBOL → **Node.js, Java 25, and .NET 10** with one executable **golden-master parity harness** |
 | 14 | ⭐⭐⭐⭐   | [`ghcp-demo-14-jenkins-to-github-actions-hackathon`](https://github.com/xavierxmorris/ghcp-demo-14-jenkins-to-github-actions-hackathon) 🔒 | **Jenkins modernization hackathon** — synthetic triage, policy-gated reusable Actions drafts, optional Copilot advice, and human review |
 | 15 | 📄 (operator-led) | [Cost centres and AI Credit budgets](demo-15-cost-centre-ai-credits.md) | Enterprise teams, shared alert-only and inherited hard per-user budgets, precedence, redacted evidence, and rollback in **GB18030-Action** |
+| 16 | ⭐⭐⭐⭐   | [`ghcp-demo-16-copilot-agent-migration-orchestrator`](https://github.com/xavierxmorris/ghcp-demo-16-copilot-agent-migration-orchestrator) | **Service-owned agent orchestration** — GitHub App discovery and issue creation, managed-user Copilot assignment, idempotency, and human review |
 
 🔒 = repo is **private** and requires access. Private materials are not
 automatically approved for redistribution.
@@ -38,7 +40,7 @@ index does not publish or clone the demos during validation.
 
 ## Go deeper
 
-Demos 00–14 have a **`WORKSHOP.md`** linked from their README: a timed
+Demos 00–14 and 16 have a **`WORKSHOP.md`** linked from their README: a timed
 participant lab with repository-specific contracts, prompts, expected outcomes,
 negative/boundary cases, troubleshooting, evidence to keep, and explicit limits.
 These complement the short demos; they do not replace the starter exercises
@@ -47,7 +49,7 @@ Demo 15 includes its **10–15 minute presenter track** and **45–60 minute ope
 lab** directly in [the guide](demo-15-cost-centre-ai-credits.md); no coding runner
 or separate repository is required.
 
-Use **[FACILITATOR-GUIDE.md](FACILITATOR-GUIDE.md)** for all 16 deeper-guide links,
+Use **[FACILITATOR-GUIDE.md](FACILITATOR-GUIDE.md)** for all 17 deeper-guide links,
 baseline expectations, run-mode differences, and session preparation.
 
 | Learning path | Demos | Learning outcome |
@@ -58,6 +60,7 @@ baseline expectations, run-mode differences, and session preparation.
 | Data and modernization | 11, 12, 13 | Protect business meaning across rules, ABI boundaries, and language changes |
 | CI modernization | 14 | Distinguish source-pattern candidates, policy eligibility, actual AI advice, and human approval |
 | Enterprise cost governance | 15 | Separate cost-centre allocation, inherited user limits, independent spending controls, reporting, and recovery |
+| Agent-service orchestration | 16 | Separate App installation identity, managed-user task initiation, deterministic routing, and PR review |
 
 Demo **00** is the odd one out on purpose: it's aimed at business analysts and
 product owners rather than developers, and it needs no toolchain at all.
@@ -72,6 +75,9 @@ participant lab. Its offline path never executes Jenkins or generated workflows.
 Demo **15** is a documentation-only, operator-led billing lab. Its UI steps and
 clearly labelled optional API mutations affect real billing; read-only comparison
 is the fallback, not a claim that live enforcement has been tested.
+Demo **16** is a public, synthetic orchestration prototype. Its offline path
+proves routing and identity separation; its opt-in live workflow needs a
+registered App, managed user, protected environment, and disposable target.
 
 ### Mainframe modernization to Java and .NET
 
@@ -93,7 +99,7 @@ percentage, or production/compliance certification.
 
 ## How to use this repo
 
-This repo is an **index + publishing tooling** repo. Demos 00–14 are standalone
+This repo is an **index + publishing tooling** repo. Demos 00–14 and 16 are standalone
 GitHub repos — clone the one you want and follow its README. Demo 15 is
 [a guide tracked here](demo-15-cost-centre-ai-credits.md); do not create or publish
 a separate repository for it.
@@ -108,6 +114,8 @@ also do 00, 07 and 09. Demo 08 is a 15-minute read. Demos 10 and 12 each run as 
 build-and-verify labs.
 Demo 15 takes 10–15 minutes to present or 45–60 minutes as an operator lab,
 with setup and delayed billing reports/alerts outside those estimates.
+Demo 16 takes about five minutes to present offline or 60–75 minutes as an
+identity, idempotency, and service-design workshop. Live setup is additional.
 
 The deeper workshop tracks take longer: plan **5-6 hours** for all foundation
 labs, split across sessions, with setup and cloud queues additional. Individual
@@ -125,7 +133,8 @@ verify on your own machine.
 
 Demo 00 is built for **business analysts, product owners and operations leads**,
 and deliberately requires no toolchain. Demo 15 is for **enterprise billing
-operators and facilitators**, not coding participants.
+operators and facilitators**, not coding participants. Demo 16 is for platform,
+security, and developer-experience engineers designing agent automation.
 
 ## Prerequisites (by demo)
 
@@ -147,6 +156,7 @@ operators and facilitators**, not coding participants.
 | 13    | Node 20.11+ for the original port/harness. Optional Java 25 and .NET 10 SDKs for the new targets. The multi-language Docker/devcontainer includes all three plus GnuCOBOL. No application packages. |
 | 14    | Private repo access and Python 3.11+; PowerShell 7+ for the runner and a browser for local reports. No network, Jenkins, Docker, Maven, or model for offline triage. Optional read-only Copilot requires permitted provider access and explicit synthetic-data consent. |
 | 15    | Browser; enterprise-owner/billing-manager billing access and authorised team administrator; licensed non-production-critical test accounts, approved spend/activity ceiling, recipients, baseline evidence, and rollback owner. Optional PowerShell 7 + `gh` for documented API checks. UI/read-only comparison if safe live access is unavailable. |
+| 16    | Python 3.11+ and PowerShell 7+ offline. Live: disposable target, organization-owned GitHub App, protected environment, exact allow-list, approved managed user with Copilot access, and a bounded AI-credit/Actions budget. |
 
 Access and service guidance was reviewed **7 September 2026** against
 [GitHub cloud-agent documentation](https://docs.github.com/en/copilot/concepts/agents/cloud-agent/about-cloud-agent),
@@ -155,9 +165,11 @@ Access and service guidance was reviewed **7 September 2026** against
 Quotas, previews, and organization policies can change independently of the code.
 Demo 15's billing sources were checked **14 September 2026**, using REST API
 **2026-03-10**; see its [feature-validation note and references](demo-15-cost-centre-ai-credits.md).
-This is documentation validation, not a live check of GB18030-Action. AI Credit
-usage can incur real charges; do not lower production defaults or consume credits
-merely to demonstrate a threshold.
+Demo 16's App and Copilot authentication sources were checked
+**15 September 2026**; the Agent Tasks API remains public preview.
+The Demo 15 source review is documentation validation, not a live check of
+GB18030-Action. AI Credit usage can incur real charges; do not lower production
+defaults or consume credits merely to demonstrate a threshold.
 
 ## The setup these demos were built with
 
@@ -230,7 +242,7 @@ diagrams) for work that's easier to see than to describe in chat.
 
 ## Pushing these to GitHub
 
-This is not a monorepo: each standalone demo (00–14) has its own Git history,
+This is not a monorepo: each standalone demo (00–14 and 16) has its own Git history,
 remote, and working tree. Demo 15 is committed with the index, not added as a
 new repository in `repos.txt`. Committing the index does not commit any ignored child repository.
 Inspect and commit each intended change separately before publishing.

@@ -1,6 +1,6 @@
 # CI maintenance
 
-The index and demos 00–14 are independent repositories; demo 15 is a
+The index and demos 00–14 and 16 are independent repositories; demo 15 is a
 documentation-only guide tracked in the index, with no billing automation.
 Index CI does
 not clone the child repositories, publish changes, or access private demos 09 and 14.
@@ -25,6 +25,7 @@ Each demo's `.github/workflows/ci.yml` owns its own baseline.
 | 13 | Original COBOL replay, Node/Java/.NET comparisons, and source-to-port evidence; not full mainframe or tax-system parity |
 | 14 | Python 3.11/3.14 on Windows/Linux: synthetic triage, policy/advisory/immutable-artifact boundaries, mocked read-only live runner, full reference integrity, and zero default customer drafts; no source/model/workflow execution |
 | 15 | Index documentation only; no standalone workflow, live billing calls, spend generation, or enforcement/attribution validation |
+| 16 | Python 3.11 offline routing, identity separation, idempotent issue recovery, public-boundary checks, and pinned manual live workflow; CI never receives App/user secrets or starts Copilot |
 
 ## Shared policy
 
