@@ -1,7 +1,7 @@
 # Facilitator guide: teach the decision, not just the prompt
 
-The suite contains **17 demos**, numbered 00–16: **16 independent repositories**
-for 00–14 and 16, plus a documentation-only operator guide for 15 in this index.
+The suite contains **18 demos**, numbered 00–17: **17 independent repositories**
+for 00–14 and 16–17, plus a documentation-only operator guide for 15 in this index.
 Each standalone demo's README provides orientation and links to a deeper `WORKSHOP.md`.
 Demo 15 contains its presenter track and operator lab in the same guide.
 Use the short presenter track to show the idea; use the workshop to let
@@ -13,7 +13,7 @@ The extra plugin-spec demo is not part of this listed sequence.
 
 Times are planning estimates after setup. Model latency, cloud queues, image
 downloads, account provisioning, and billing-report/alert delays are additional.
-Links for 00–14 and 16 point to standalone repositories; publishing this index does not
+Links for 00–14 and 16–17 point to standalone repositories; publishing this index does not
 publish their guide files. Demo 15 is tracked and published with this index.
 
 | Demo | Deeper guide | Suggested time | Participant deliverable |
@@ -35,6 +35,7 @@ publish their guide files. Demo 15 is tracked and published with this index.
 | 14 | [Private: Jenkins pattern decisions](https://github.com/xavierxmorris/ghcp-demo-14-jenkins-to-github-actions-hackathon/blob/main/WORKSHOP.md) (access required) | 90 min lab / 3 build days | Source-linked triage, inactive reusable-workflow drafts, policy refusal, and human decisions |
 | 15 | [Cost centres and AI Credit budgets](demo-15-cost-centre-ai-credits.md) | 10–15 min presenter / 45–60 min operator lab | Cohort/UUID mapping, shared versus inherited limits, effective-budget explanation, redacted evidence, and rollback |
 | 16 | [App-to-agent migration orchestration](https://github.com/xavierxmorris/ghcp-demo-16-copilot-agent-migration-orchestrator/blob/main/WORKSHOP.md) | 60–75 min | Identity-boundary explanation, deterministic routing, idempotency test, and production service-gap design |
+| 17 | [Agency plugin evaluations](https://github.com/xavierxmorris/ghcp-demo-17-agency-plugin-evals/blob/main/WORKSHOP.md) | 60 min | Eval-shape decision, answer-key isolation, negative coverage, materialized tasks, and an honest regression-evidence plan |
 
 ## Choose a session
 
@@ -47,8 +48,9 @@ publish their guide files. Demo 15 is tracked and published with this index.
 | CI modernization hack, three build days | 14 | Repository migration, production CI, estate-wide conversion and unapproved data/model access |
 | Enterprise cost governance, 45–60 minutes | 15; operator-led, with read-only comparison fallback | Production-default changes, deliberate threshold/pool exhaustion, and waiting for delayed reports/alerts |
 | Agent migration orchestration, 60–75 minutes | 16 | Production credentials, automatic merge, customer pipelines, and pretending a repository workflow is an organization webhook service |
+| Plugin quality and evals, 60 minutes | 17 | Real customer incidents, production runbooks, untrusted Vally tasks, and claims based only on generated task files |
 
-Do not compress all seventeen into a single "hands-on" session. A room can watch
+Do not compress all eighteen into a single "hands-on" session. A room can watch
 many demos; participants need time to inspect and challenge a smaller number.
 
 ## Before participants arrive
@@ -95,6 +97,11 @@ discovery, issue creation, and assignment as separate observed steps. Do not use
 an employee's long-lived token or imply that the repository workflow is the
 production webhook service.
 
+For demo 17, install the pinned MCP SDK and run the deterministic gate before
+the session. If MSBench or Vally is not configured, teach task authoring and
+materialization without claiming a model-scored result. Use only synthetic
+fixtures, and use Vally only for content trusted to run as the invoking user.
+
 ## Know the starting state
 
 | Demo | Important baseline distinction |
@@ -116,6 +123,7 @@ production webhook service.
 | 14 | Python is deterministic; synthetic outcomes are not a customer conversion rate, and the default customer policy emits no drafts |
 | 15 | Documentation-only; no runner or pre-created enterprise resources. Live enterprise state is unverified. ULB specificity differs from independent hard-budget headroom; future attribution/alerts can remain pending |
 | 16 | Offline routing is real; live App/user credentials, organization policy, Copilot assignment, generated PR, and production webhook hosting remain separately configured |
+| 17 | Nine authored tasks materialize successfully; public CI checks contracts and a real local MCP session, while model scores remain unrun until a supported Agency harness is configured |
 
 An expected failure is a teaching artifact. An environment failure is a setup
 problem. An unexpected regression is a defect. Do not conflate them to improve
@@ -137,6 +145,7 @@ enough to infer behavior across the suite.
 | 14 `-Manual` / `-Check` / `-Live` | Print-only commands / offline contracts / explicit-consent, read-only Copilot on shipped synthetic context; no migration or auto-merge |
 | 15 no runner | UI-first operator lab; GET-only reporting examples and separately warned optional mutations, not automated billing setup |
 | 16 `-Check` / normal run | Offline contracts / fresh synthetic fixture report; the live workflow is separately protected and manually dispatched |
+| 17 `-Check` / normal run | Deterministic contracts plus Agency task generation / fresh scenario catalog report; neither mode runs a model-scored eval |
 
 Prefer normal interactive approval for new agent-driven work. A new folder,
 source hash comparison, or an instruction saying "do not touch" is not a
@@ -187,7 +196,8 @@ into a public evidence bundle. Retain private evidence only in approved storage.
 
 Documentation refresh date: **2026-09-07** for demos 00–14; demo 15's billing
 sources were checked **14 September 2026**; demo 16's App and Agent Tasks
-authentication sources were checked **15 September 2026**. These are rolling pages;
+authentication sources were checked **15 September 2026**; demo 17's Agency
+and MCP behavior was checked **22 September 2026**. These are rolling pages;
 their retrieval date is not an invented product release date.
 
 | Topic | Current source / boundary |
@@ -201,6 +211,7 @@ their retrieval date is not an invented product release date.
 | COBOL | [GnuCOBOL](https://gnucobol.sourceforge.io/); stable **3.2**, released **2023-07-28**, distinct from the demos' 3.1.2 baseline |
 | Enterprise AI Credit controls | [Demo 15 sources and boundaries](demo-15-cost-centre-ai-credits.md#references); REST **2026-03-10**, current UI labels/rollout must be rechecked; no live enterprise verification |
 | App-to-agent authentication | [Demo 16 sources and setup](https://github.com/xavierxmorris/ghcp-demo-16-copilot-agent-migration-orchestrator#sources); installation tokens do not currently start Agent Tasks, and preview behavior must be rechecked |
+| Agency plugin evals | [Demo 17 workshop](https://github.com/xavierxmorris/ghcp-demo-17-agency-plugin-evals/blob/main/WORKSHOP.md); checked with Agency **2026.9.16.4** and MCP Python SDK **1.30.0**; `eval-new` remains experimental |
 
 The refresh also observed Node **24.13.0**, Python **3.14.2**, and azd **1.28.0**.
 That is not a claim that every demo was deployed or exercised on every one of
@@ -213,7 +224,7 @@ The index tracks its own files only. Child demo repos are ignored and keep their
 own remotes and commits. Update a demo's README and workshop together; update
 the catalog/prerequisites when a runnable contract changes.
 Demo 15 is a top-level guide, so update it and both index catalogs together.
-The suite has 17 demos but only 16 standalone demo repositories. Demo 15 remains
+The suite has 18 demos but only 17 standalone demo repositories. Demo 15 remains
 the reserved in-index guide; do not add a demo-15 repository entry to
 `repos.txt` or create a separate repository.
 
