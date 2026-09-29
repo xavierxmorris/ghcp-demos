@@ -1,10 +1,10 @@
 # GHCP Demo Suite
 
-Eighteen focused demos and labs (00–17) showcasing **GitHub Copilot** across its key surfaces —
+Nineteen focused demos and labs (00–18) showcasing **GitHub Copilot** across its key surfaces —
 from comment-driven completions, through the autonomous coding agent, out to MCP
 servers, hosted agents on Microsoft Foundry, mainframe modernisation, CI modernization,
-enterprise AI Credit cost controls, and service-owned agent orchestration.
-Demos 00–14 and 16–17 have self-contained repos; demo 15 is an operator guide in
+enterprise AI Credit cost controls, service-owned agent orchestration, and cross-platform identity.
+Demos 00–14 and 16–18 have self-contained repos; demo 15 is an operator guide in
 this index. Choose a learning path rather than assuming every participant needs
 to complete the entire sequence.
 
@@ -28,6 +28,7 @@ to complete the entire sequence.
 | 15 | 📄 (operator-led) | [Cost centres and AI Credit budgets](demo-15-cost-centre-ai-credits.md) | Enterprise teams, shared alert-only and inherited hard per-user budgets, precedence, redacted evidence, and rollback in **GB18030-Action** |
 | 16 | ⭐⭐⭐⭐   | [`ghcp-demo-16-copilot-agent-migration-orchestrator`](https://github.com/xavierxmorris/ghcp-demo-16-copilot-agent-migration-orchestrator) | **Service-owned agent orchestration** — GitHub App discovery and issue creation, managed-user Copilot assignment, idempotency, and human review |
 | 17 | ⭐⭐⭐⭐   | [`ghcp-demo-17-agency-plugin-evals`](https://github.com/xavierxmorris/ghcp-demo-17-agency-plugin-evals) | **Agency plugin evals** — authored scenarios for skill routing, MCP tool selection, custom-agent policy behavior, negative cases, and two-tier CI |
+| 18 | ⭐⭐⭐⭐   | [`ghcp-demo-18-entra-github-agent-identity`](https://github.com/xavierxmorris/ghcp-demo-18-entra-github-agent-identity) | **Build an identity broker with Copilot** — why Entra, GitHub App and Key Vault have separate roles; durable operations, headless workloads, delegated users, and a real admin-permission boundary |
 
 🔒 = repo is **private** and requires access. Private materials are not
 automatically approved for redistribution.
@@ -41,7 +42,7 @@ index does not publish or clone the demos during validation.
 
 ## Go deeper
 
-Demos 00–14 and 16–17 have a **`WORKSHOP.md`** linked from their README: a timed
+Demos 00–14 and 16–18 have a **`WORKSHOP.md`** linked from their README: a timed
 participant lab with repository-specific contracts, prompts, expected outcomes,
 negative/boundary cases, troubleshooting, evidence to keep, and explicit limits.
 These complement the short demos; they do not replace the starter exercises
@@ -50,7 +51,7 @@ Demo 15 includes its **10–15 minute presenter track** and **45–60 minute ope
 lab** directly in [the guide](demo-15-cost-centre-ai-credits.md); no coding runner
 or separate repository is required.
 
-Use **[FACILITATOR-GUIDE.md](FACILITATOR-GUIDE.md)** for all 18 deeper-guide links,
+Use **[FACILITATOR-GUIDE.md](FACILITATOR-GUIDE.md)** for all 19 deeper-guide links,
 baseline expectations, run-mode differences, and session preparation.
 
 | Learning path | Demos | Learning outcome |
@@ -63,6 +64,7 @@ baseline expectations, run-mode differences, and session preparation.
 | Enterprise cost governance | 15 | Separate cost-centre allocation, inherited user limits, independent spending controls, reporting, and recovery |
 | Agent-service orchestration | 16 | Separate App installation identity, managed-user task initiation, deterministic routing, and PR review |
 | Extension quality and evaluations | 17 | Choose the right eval shape for skills, MCP tools, and custom agents; preserve negative coverage and honest CI evidence |
+| Governed agent identity | 18 | Reproduce an Entra-to-GitHub operation broker, explain its design, and distinguish local evidence from live authority |
 
 Demo **00** is the odd one out on purpose: it's aimed at business analysts and
 product owners rather than developers, and it needs no toolchain at all.
@@ -83,6 +85,10 @@ registered App, managed user, protected environment, and disposable target.
 Demo **17** is a public, synthetic evaluation workshop. Its hosted CI proves
 repository contracts and MCP protocol behavior; model-scored results require a
 configured Agency harness and must not be inferred from task generation alone.
+Demo **18** is a complete synthetic broker implementation and a documented build
+story. Its local/CI gates do not prove live Azure execution: the original setup
+stopped at an Entra administrator grant. Start with its
+[why/how build guide](https://github.com/xavierxmorris/ghcp-demo-18-entra-github-agent-identity/blob/main/BUILD-GUIDE.md).
 
 ### Mainframe modernization to Java and .NET
 
@@ -104,7 +110,7 @@ percentage, or production/compliance certification.
 
 ## How to use this repo
 
-This repo is an **index + publishing tooling** repo. Demos 00–14 and 16–17 are standalone
+This repo is an **index + publishing tooling** repo. Demos 00–14 and 16–18 are standalone
 GitHub repos — clone the one you want and follow its README. Demo 15 is
 [a guide tracked here](demo-15-cost-centre-ai-credits.md); do not create or publish
 a separate repository for it.
@@ -123,6 +129,9 @@ Demo 16 takes about five minutes to present offline or 60–75 minutes as an
 identity, idempotency, and service-design workshop. Live setup is additional.
 Demo 17 takes about ten minutes to present or 60 minutes as a plugin-evaluation
 workshop. Harness installation and model-scored runs are additional.
+Demo 18 takes 5-7 minutes to present or 60-90 minutes as a local identity and
+test-design workshop. Cloud setup, administrator approval and package downloads
+are additional.
 
 The deeper workshop tracks take longer: plan **5-6 hours** for all foundation
 labs, split across sessions, with setup and cloud queues additional. Individual
@@ -144,6 +153,8 @@ operators and facilitators**, not coding participants. Demo 16 is for platform,
 security, and developer-experience engineers designing agent automation. Demo
 17 is for plugin, skill, MCP, and custom-agent authors who need regression
 evidence rather than anecdotal chat results.
+Demo 18 is for platform engineers, identity/security architects and developers
+building governed headless agents.
 
 ## Prerequisites (by demo)
 
@@ -167,6 +178,7 @@ evidence rather than anecdotal chat results.
 | 15    | Browser; enterprise-owner/billing-manager billing access and authorised team administrator; licensed non-production-critical test accounts, approved spend/activity ceiling, recipients, baseline evidence, and rollback owner. Optional PowerShell 7 + `gh` for documented API checks. UI/read-only comparison if safe live access is unavailable. |
 | 16    | Python 3.11+ and PowerShell 7+ offline. Live: disposable target, organization-owned GitHub App, protected environment, exact allow-list, approved managed user with Copilot access, and a bounded AI-credit/Actions budget. |
 | 17    | Python 3.11+, PowerShell 7+, and Agency CLI 2026.9.16.4+ for plugin checks and task generation. Install the pinned MCP Python SDK. Docker plus MSBench, or Vally for trusted local content, is required only for model-scored runs. |
+| 18    | PowerShell 7.4+ and .NET SDK 10.0.401 or a compatible servicing patch for local checks; Copilot CLI only for optional authoring. Infrastructure gate: Azure CLI/Bicep and Checkov 3.3.19. Live: isolated Azure subscription resources, authorised Entra administrator grants, GitHub App approval, private bootstrap access and budget; no cloud credentials needed locally. |
 
 Access and service guidance was reviewed **7 September 2026** against
 [GitHub cloud-agent documentation](https://docs.github.com/en/copilot/concepts/agents/cloud-agent/about-cloud-agent),
@@ -180,6 +192,9 @@ Demo 16's App and Copilot authentication sources were checked
 Demo 17's Agency CLI behavior and MCP protocol path were checked
 **22 September 2026** against Agency **2026.9.16.4** and MCP Python SDK
 **1.30.0**. Agency `eval-new` remains experimental.
+Demo 18's Entra/GitHub/Azure sources were retrieved **29 September 2026**;
+Copilot CLI help was inspected at **1.0.90-1**. Its build guide separates recorded
+original evidence, fresh checks and outstanding live verification.
 The Demo 15 source review is documentation validation, not a live check of
 GB18030-Action. AI Credit usage can incur real charges; do not lower production
 defaults or consume credits merely to demonstrate a threshold.
@@ -255,7 +270,7 @@ diagrams) for work that's easier to see than to describe in chat.
 
 ## Pushing these to GitHub
 
-This is not a monorepo: each standalone demo (00–14 and 16–17) has its own Git history,
+This is not a monorepo: each standalone demo (00–14 and 16–18) has its own Git history,
 remote, and working tree. Demo 15 is committed with the index, not added as a
 new repository in `repos.txt`. Committing the index does not commit any ignored child repository.
 Inspect and commit each intended change separately before publishing.
