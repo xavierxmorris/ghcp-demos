@@ -1,10 +1,11 @@
 # GHCP Demo Suite
 
-Nineteen focused demos and labs (00–18) showcasing **GitHub Copilot** across its key surfaces —
+Twenty focused demos and labs (00–19) showcasing **GitHub Copilot** across its key surfaces —
 from comment-driven completions, through the autonomous coding agent, out to MCP
 servers, hosted agents on Microsoft Foundry, mainframe modernisation, CI modernization,
-enterprise AI Credit cost controls, service-owned agent orchestration, and cross-platform identity.
-Demos 00–14 and 16–18 have self-contained repos; demo 15 is an operator guide in
+enterprise AI Credit cost controls, service-owned agent orchestration, cross-platform identity,
+and an issue-opened cloud-agent proof.
+Demos 00–14 and 16–19 have self-contained repos; demo 15 is an operator guide in
 this index. Choose a learning path rather than assuming every participant needs
 to complete the entire sequence.
 
@@ -29,6 +30,7 @@ to complete the entire sequence.
 | 16 | ⭐⭐⭐⭐   | [`ghcp-demo-16-copilot-agent-migration-orchestrator`](https://github.com/xavierxmorris/ghcp-demo-16-copilot-agent-migration-orchestrator) | **Service-owned agent orchestration** — GitHub App discovery and issue creation, managed-user Copilot assignment, idempotency, and human review |
 | 17 | ⭐⭐⭐⭐   | [`ghcp-demo-17-agency-plugin-evals`](https://github.com/xavierxmorris/ghcp-demo-17-agency-plugin-evals) | **Agency plugin evals** — authored scenarios for skill routing, MCP tool selection, custom-agent policy behavior, negative cases, and two-tier CI |
 | 18 | ⭐⭐⭐⭐   | [`ghcp-demo-18-entra-github-agent-identity`](https://github.com/xavierxmorris/ghcp-demo-18-entra-github-agent-identity) | **Build an identity broker with Copilot** — why Entra, GitHub App and Key Vault have separate roles; durable operations, headless workloads, delegated users, and a real admin-permission boundary |
+| 19 | ⭐⭐⭐   | [`ghcp-demo-19-issue-to-cloud-agent`](https://github.com/xavierxmorris/ghcp-demo-19-issue-to-cloud-agent) | **Open an issue, start the cloud agent** — owner-approved synthetic Jenkins request, deterministic intake, separate assignment identity, inactive proposal, and a detailed build walkthrough |
 
 🔒 = repo is **private** and requires access. Private materials are not
 automatically approved for redistribution.
@@ -42,7 +44,7 @@ index does not publish or clone the demos during validation.
 
 ## Go deeper
 
-Demos 00–14 and 16–18 have a **`WORKSHOP.md`** linked from their README: a timed
+Demos 00–14 and 16–19 have a **`WORKSHOP.md`** linked from their README: a timed
 participant lab with repository-specific contracts, prompts, expected outcomes,
 negative/boundary cases, troubleshooting, evidence to keep, and explicit limits.
 These complement the short demos; they do not replace the starter exercises
@@ -51,7 +53,7 @@ Demo 15 includes its **10–15 minute presenter track** and **45–60 minute ope
 lab** directly in [the guide](demo-15-cost-centre-ai-credits.md); no coding runner
 or separate repository is required.
 
-Use **[FACILITATOR-GUIDE.md](FACILITATOR-GUIDE.md)** for all 19 deeper-guide links,
+Use **[FACILITATOR-GUIDE.md](FACILITATOR-GUIDE.md)** for all 20 deeper-guide links,
 baseline expectations, run-mode differences, and session preparation.
 
 | Learning path | Demos | Learning outcome |
@@ -65,6 +67,7 @@ baseline expectations, run-mode differences, and session preparation.
 | Agent-service orchestration | 16 | Separate App installation identity, managed-user task initiation, deterministic routing, and PR review |
 | Extension quality and evaluations | 17 | Choose the right eval shape for skills, MCP tools, and custom agents; preserve negative coverage and honest CI evidence |
 | Governed agent identity | 18 | Reproduce an Entra-to-GitHub operation broker, explain its design, and distinguish local evidence from live authority |
+| Issue-driven cloud-agent proof | 19 | Trace an unassigned issue through deterministic validation and user-authorized assignment to a separately observed cloud task and reviewed proposal |
 
 Demo **00** is the odd one out on purpose: it's aimed at business analysts and
 product owners rather than developers, and it needs no toolchain at all.
@@ -89,6 +92,10 @@ Demo **18** is a complete synthetic broker implementation and a documented build
 story. Its local/CI gates do not prove live Azure execution: the original setup
 stopped at an Entra administrator grant. Start with its
 [why/how build guide](https://github.com/xavierxmorris/ghcp-demo-18-entra-github-agent-identity/blob/main/BUILD-GUIDE.md).
+Demo **19** is the small issue-trigger proof: raising an owner-authorized,
+unassigned issue starts a guarded workflow, which assigns the existing cloud
+agent. Its README explains the build in detail. Offline evidence, assignment,
+agent execution, a PR, and migration acceptance remain separate facts.
 
 ### Mainframe modernization to Java and .NET
 
@@ -110,7 +117,7 @@ percentage, or production/compliance certification.
 
 ## How to use this repo
 
-This repo is an **index + publishing tooling** repo. Demos 00–14 and 16–18 are standalone
+This repo is an **index + publishing tooling** repo. Demos 00–14 and 16–19 are standalone
 GitHub repos — clone the one you want and follow its README. Demo 15 is
 [a guide tracked here](demo-15-cost-centre-ai-credits.md); do not create or publish
 a separate repository for it.
@@ -132,6 +139,9 @@ workshop. Harness installation and model-scored runs are additional.
 Demo 18 takes 5-7 minutes to present or 60-90 minutes as a local identity and
 test-design workshop. Cloud setup, administrator approval and package downloads
 are additional.
+Demo 19 takes about five minutes to present or 45-60 minutes as an issue,
+identity and recovery workshop. Credential setup and cloud-agent latency are
+additional; an offline preview is not a live task.
 
 The deeper workshop tracks take longer: plan **5-6 hours** for all foundation
 labs, split across sessions, with setup and cloud queues additional. Individual
@@ -155,6 +165,8 @@ security, and developer-experience engineers designing agent automation. Demo
 evidence rather than anecdotal chat results.
 Demo 18 is for platform engineers, identity/security architects and developers
 building governed headless agents.
+Demo 19 is for developers and platform engineers proving the smallest
+issue-to-cloud-agent interaction before building broader migration automation.
 
 ## Prerequisites (by demo)
 
@@ -179,6 +191,7 @@ building governed headless agents.
 | 16    | Python 3.11+ and PowerShell 7+ offline. Live: disposable target, organization-owned GitHub App, protected environment, exact allow-list, approved managed user with Copilot access, and a bounded AI-credit/Actions budget. |
 | 17    | Python 3.11+, PowerShell 7+, and Agency CLI 2026.9.16.4+ for plugin checks and task generation. Install the pinned MCP Python SDK. Docker plus MSBench, or Vally for trusted local content, is required only for model-scored runs. |
 | 18    | PowerShell 7.4+ and .NET SDK 10.0.401 or a compatible servicing patch for local checks; Copilot CLI only for optional authoring. Infrastructure gate: Azure CLI/Bicep and Checkov 3.3.19. Live: isolated Azure subscription resources, authorised Entra administrator grants, GitHub App approval, private bootstrap access and budget; no cloud credentials needed locally. |
+| 19    | Python 3.11+ and optional PowerShell 7+ offline; no packages or network. Live: personal synthetic repo, eligible Copilot user, GitHub CLI, main-only secret environment, short-lived repository-scoped user token, explicit one-task consent and Actions/AI-credit budget. |
 
 Access and service guidance was reviewed **7 September 2026** against
 [GitHub cloud-agent documentation](https://docs.github.com/en/copilot/concepts/agents/cloud-agent/about-cloud-agent),
@@ -195,6 +208,10 @@ Demo 17's Agency CLI behavior and MCP protocol path were checked
 Demo 18's Entra/GitHub/Azure sources were retrieved **29 September 2026**;
 Copilot CLI help was inspected at **1.0.90-1**. Its build guide separates recorded
 original evidence, fresh checks and outstanding live verification.
+Demo 19's issue-assignment, Actions trigger and environment sources were checked
+**1 October 2026**, with GitHub CLI **2.93.0** and REST API **2026-03-10**.
+Its README and dated evidence separate the implemented trigger from actual live
+assignment, agent execution and independent migration acceptance.
 The Demo 15 source review is documentation validation, not a live check of
 GB18030-Action. AI Credit usage can incur real charges; do not lower production
 defaults or consume credits merely to demonstrate a threshold.
@@ -270,7 +287,7 @@ diagrams) for work that's easier to see than to describe in chat.
 
 ## Pushing these to GitHub
 
-This is not a monorepo: each standalone demo (00–14 and 16–18) has its own Git history,
+This is not a monorepo: each standalone demo (00–14 and 16–19) has its own Git history,
 remote, and working tree. Demo 15 is committed with the index, not added as a
 new repository in `repos.txt`. Committing the index does not commit any ignored child repository.
 Inspect and commit each intended change separately before publishing.

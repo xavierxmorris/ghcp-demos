@@ -1,7 +1,7 @@
 # Facilitator guide: teach the decision, not just the prompt
 
-The suite contains **19 demos**, numbered 00–18: **18 independent repositories**
-for 00–14 and 16–18, plus a documentation-only operator guide for 15 in this index.
+The suite contains **20 demos**, numbered 00–19: **19 independent repositories**
+for 00–14 and 16–19, plus a documentation-only operator guide for 15 in this index.
 Each standalone demo's README provides orientation and links to a deeper `WORKSHOP.md`.
 Demo 15 contains its presenter track and operator lab in the same guide.
 Use the short presenter track to show the idea; use the workshop to let
@@ -13,7 +13,7 @@ The extra plugin-spec demo is not part of this listed sequence.
 
 Times are planning estimates after setup. Model latency, cloud queues, image
 downloads, account provisioning, and billing-report/alert delays are additional.
-Links for 00–14 and 16–18 point to standalone repositories; publishing this index does not
+Links for 00–14 and 16–19 point to standalone repositories; publishing this index does not
 publish their guide files. Demo 15 is tracked and published with this index.
 
 | Demo | Deeper guide | Suggested time | Participant deliverable |
@@ -37,6 +37,7 @@ publish their guide files. Demo 15 is tracked and published with this index.
 | 16 | [App-to-agent migration orchestration](https://github.com/xavierxmorris/ghcp-demo-16-copilot-agent-migration-orchestrator/blob/main/WORKSHOP.md) | 60–75 min | Identity-boundary explanation, deterministic routing, idempotency test, and production service-gap design |
 | 17 | [Agency plugin evaluations](https://github.com/xavierxmorris/ghcp-demo-17-agency-plugin-evals/blob/main/WORKSHOP.md) | 60 min | Eval-shape decision, answer-key isolation, negative coverage, materialized tasks, and an honest regression-evidence plan |
 | 18 | [Building the identity boundary](https://github.com/xavierxmorris/ghcp-demo-18-entra-github-agent-identity/blob/main/WORKSHOP.md) | 60-90 min | Architecture rationale, fresh local evidence, a bounded negative test and a least-privilege administrator handoff |
+| 19 | [Issue to cloud-agent proof](https://github.com/xavierxmorris/ghcp-demo-19-issue-to-cloud-agent/blob/main/WORKSHOP.md) | 45-60 min | Explicit work-order, identity-boundary explanation, one observed task or honest blocker, negative case and recovery evidence |
 
 ## Choose a session
 
@@ -51,8 +52,9 @@ publish their guide files. Demo 15 is tracked and published with this index.
 | Agent migration orchestration, 60–75 minutes | 16 | Production credentials, automatic merge, customer pipelines, and pretending a repository workflow is an organization webhook service |
 | Plugin quality and evals, 60 minutes | 17 | Real customer incidents, production runbooks, untrusted Vally tasks, and claims based only on generated task files |
 | Governed agent identity, 60-90 minutes | 18 | Live provisioning, customer data, credential exports, production permissions and any attempt to bypass admin consent |
+| Issue-trigger proof, 45-60 minutes | 19 | Broad user-token exports, enterprise source, automatic merge, complex conversion and repeated paid tasks |
 
-Do not compress all nineteen into a single "hands-on" session. A room can watch
+Do not compress all twenty into a single "hands-on" session. A room can watch
 many demos; participants need time to inspect and challenge a smaller number.
 
 ## Before participants arrive
@@ -110,6 +112,13 @@ Entra 403 as teaching material, not an excuse to broaden permissions. Live setup
 requires separate cost approval, administrator grants and GitHub App consent;
 the ordinary workshop does not provision Azure or open a real PR.
 
+For demo 19, read the detailed README build walkthrough and prepare the personal
+synthetic repository, owner consent, main-only environment and narrow expiring
+user-token secret before enabling the issue trigger. Do not add a per-issue
+environment approval to this selected automatic path; the resulting PR remains
+the independent human-review boundary. Ordinary CI and the offline preview do
+not start a model. Record the actual issue, run, session and PR separately.
+
 ## Know the starting state
 
 | Demo | Important baseline distinction |
@@ -133,6 +142,7 @@ the ordinary workshop does not provision Azure or open a real PR.
 | 16 | Offline routing is real; live App/user credentials, organization policy, Copilot assignment, generated PR, and production webhook hosting remain separately configured |
 | 17 | Nine authored tasks materialize successfully; public CI checks contracts and a real local MCP session, while model scores remain unrun until a supported Agency harness is configured |
 | 18 | Hardened broker has 177 recorded tests; fresh local/hosted gates are reproducible. The original live setup is blocked at Entra admin grants; this clone contains no deployment state |
+| 19 | Preview uses a labeled placeholder commit and no API; live helper creates an unassigned issue, the event workflow assigns Copilot, and accepted migrations remain zero |
 
 An expected failure is a teaching artifact. An environment failure is a setup
 problem. An unexpected regression is a defect. Do not conflate them to improve
@@ -156,6 +166,7 @@ enough to infer behavior across the suite.
 | 16 `-Check` / normal run | Offline contracts / fresh synthetic fixture report; the live workflow is separately protected and manually dispatched |
 | 17 `-Check` / normal run | Deterministic contracts plus Agency task generation / fresh scenario catalog report; neither mode runs a model-scored eval |
 | 18 `-Check` / `-Verify` / `-Live` | File preflight / application and offline contracts / interactive Copilot authoring with a planning prompt, not deployment; no bypass flags added, but inherited CLI permissions still apply |
+| 19 `-Check` / normal / `-Live -AcceptLiveRun` | Offline contracts / fresh request preview / real unassigned issue creation, which can trigger paid cloud-agent work after setup; no local model process |
 
 Prefer normal interactive approval for new agent-driven work. A new folder,
 source hash comparison, or an instruction saying "do not touch" is not a
@@ -208,7 +219,9 @@ Documentation refresh date: **2026-09-07** for demos 00–14; demo 15's billing
 sources were checked **14 September 2026**; demo 16's App and Agent Tasks
 authentication sources were checked **15 September 2026**; demo 17's Agency
 and MCP behavior was checked **22 September 2026**; demo 18's identity sources
-were retrieved **29 September 2026**. These are rolling pages;
+were retrieved **29 September 2026**;
+demo 19's issue-trigger, environment and assignment sources were checked
+**1 October 2026**. These are rolling pages;
 their retrieval date is not an invented product release date.
 
 | Topic | Current source / boundary |
@@ -224,6 +237,7 @@ their retrieval date is not an invented product release date.
 | App-to-agent authentication | [Demo 16 sources and setup](https://github.com/xavierxmorris/ghcp-demo-16-copilot-agent-migration-orchestrator#sources); installation tokens do not currently start Agent Tasks, and preview behavior must be rechecked |
 | Agency plugin evals | [Demo 17 workshop](https://github.com/xavierxmorris/ghcp-demo-17-agency-plugin-evals/blob/main/WORKSHOP.md); checked with Agency **2026.9.16.4** and MCP Python SDK **1.30.0**; `eval-new` remains experimental |
 | Entra/GitHub identity broker | [Demo 18 build guide](https://github.com/xavierxmorris/ghcp-demo-18-entra-github-agent-identity/blob/main/BUILD-GUIDE.md); .NET **10.0.401**, Copilot CLI help **1.0.90-1**, original live permission gate explicitly retained |
+| Issue-opened cloud-agent proof | [Demo 19 source register](https://github.com/xavierxmorris/ghcp-demo-19-issue-to-cloud-agent/blob/main/docs/SOURCES.md); GitHub CLI **2.93.0**, REST **2026-03-10**, assignment and native-automation limits checked **1 October 2026** |
 
 The refresh also observed Node **24.13.0**, Python **3.14.2**, and azd **1.28.0**.
 That is not a claim that every demo was deployed or exercised on every one of
@@ -236,7 +250,7 @@ The index tracks its own files only. Child demo repos are ignored and keep their
 own remotes and commits. Update a demo's README and workshop together; update
 the catalog/prerequisites when a runnable contract changes.
 Demo 15 is a top-level guide, so update it and both index catalogs together.
-The suite has 19 demos but only 18 standalone demo repositories. Demo 15 remains
+The suite has 20 demos but only 19 standalone demo repositories. Demo 15 remains
 the reserved in-index guide; do not add a demo-15 repository entry to
 `repos.txt` or create a separate repository.
 

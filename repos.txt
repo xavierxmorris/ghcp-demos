@@ -1,4 +1,4 @@
-ghcp-demos|Index + publishing tooling and facilitator guidance for 19 GitHub Copilot demos and research modules: 18 standalone workshops and an in-index cost-centre AI Credit operator guide.
+ghcp-demos|Index + publishing tooling and facilitator guidance for 20 GitHub Copilot demos and research modules: 19 standalone workshops and an in-index cost-centre AI Credit operator guide.
 ghcp-demo-00-design-to-clickthrough|One-page BRD to a working click-through app and back again — Copilot for business analysts, no code required.
 ghcp-demo-01-hello-completions|Hands-on intro to Copilot ghost-text completions and comment-driven coding (JS).
 ghcp-demo-02-python-quickfix|Learn Copilot Chat through root-cause diagnosis, deterministic regression tests, and accurate documentation on a small Python codebase.
@@ -17,3 +17,4 @@ ghcp-demo-14-jenkins-to-github-actions-hackathon|Jenkins modernization hackathon
 ghcp-demo-16-copilot-agent-migration-orchestrator|GitHub App and managed-user prototype for discovering Jenkins migrations, creating issues, and safely starting Copilot cloud-agent tasks.
 ghcp-demo-17-agency-plugin-evals|GitHub Copilot and Agency workshop for evaluating skill routing, MCP tool selection, custom-agent behavior, negative cases, and regression CI.
 ghcp-demo-18-entra-github-agent-identity|Build an Entra-GitHub operation broker with Copilot: architecture rationale, headless and delegated identities, private Key Vault signing, durable execution, and honest admin-permission boundaries.|public
+ghcp-demo-19-issue-to-cloud-agent|Open a structured issue to start Copilot cloud agent: synthetic Jenkins proof, strict intake, separate user identity, inactive drafts, human review, and a detailed build walkthrough.|public
