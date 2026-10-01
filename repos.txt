@@ -17,4 +17,4 @@ ghcp-demo-14-jenkins-to-github-actions-hackathon|Jenkins modernization hackathon
 ghcp-demo-16-copilot-agent-migration-orchestrator|GitHub App and managed-user prototype for discovering Jenkins migrations, creating issues, and safely starting Copilot cloud-agent tasks.
 ghcp-demo-17-agency-plugin-evals|GitHub Copilot and Agency workshop for evaluating skill routing, MCP tool selection, custom-agent behavior, negative cases, and regression CI.
 ghcp-demo-18-entra-github-agent-identity|Build an Entra-GitHub operation broker with Copilot: architecture rationale, headless and delegated identities, private Key Vault signing, durable execution, and honest admin-permission boundaries.|public
-ghcp-demo-19-issue-to-cloud-agent|Open a structured issue to start Copilot cloud agent: synthetic Jenkins proof, strict intake, separate user identity, inactive drafts, human review, and a detailed build walkthrough.|public
+ghcp-demo-19-issue-to-cloud-agent|Verified issue-to-cloud-agent proof plus runnable enterprise-design rehearsal: isolated trust-lane plans, durable local admission, duplicate protection, limits, and design rationale.|public

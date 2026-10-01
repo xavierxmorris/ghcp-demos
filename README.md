@@ -30,7 +30,7 @@ to complete the entire sequence.
 | 16 | ⭐⭐⭐⭐   | [`ghcp-demo-16-copilot-agent-migration-orchestrator`](https://github.com/xavierxmorris/ghcp-demo-16-copilot-agent-migration-orchestrator) | **Service-owned agent orchestration** — GitHub App discovery and issue creation, managed-user Copilot assignment, idempotency, and human review |
 | 17 | ⭐⭐⭐⭐   | [`ghcp-demo-17-agency-plugin-evals`](https://github.com/xavierxmorris/ghcp-demo-17-agency-plugin-evals) | **Agency plugin evals** — authored scenarios for skill routing, MCP tool selection, custom-agent policy behavior, negative cases, and two-tier CI |
 | 18 | ⭐⭐⭐⭐   | [`ghcp-demo-18-entra-github-agent-identity`](https://github.com/xavierxmorris/ghcp-demo-18-entra-github-agent-identity) | **Build an identity broker with Copilot** — why Entra, GitHub App and Key Vault have separate roles; durable operations, headless workloads, delegated users, and a real admin-permission boundary |
-| 19 | ⭐⭐⭐   | [`ghcp-demo-19-issue-to-cloud-agent`](https://github.com/xavierxmorris/ghcp-demo-19-issue-to-cloud-agent) | **Open an issue, start the cloud agent** — owner-approved synthetic Jenkins request, deterministic intake, separate assignment identity, inactive proposal, and a detailed build walkthrough |
+| 19 | ⭐⭐⭐   | [`ghcp-demo-19-issue-to-cloud-agent`](https://github.com/xavierxmorris/ghcp-demo-19-issue-to-cloud-agent) | **Issue to cloud agent, then enterprise design** — verified synthetic issue/PR path, runnable offline trust-lane/admission rehearsal, durable duplicate protection, and a detailed design-and-why walkthrough |
 
 🔒 = repo is **private** and requires access. Private materials are not
 automatically approved for redistribution.
@@ -67,7 +67,7 @@ baseline expectations, run-mode differences, and session preparation.
 | Agent-service orchestration | 16 | Separate App installation identity, managed-user task initiation, deterministic routing, and PR review |
 | Extension quality and evaluations | 17 | Choose the right eval shape for skills, MCP tools, and custom agents; preserve negative coverage and honest CI evidence |
 | Governed agent identity | 18 | Reproduce an Entra-to-GitHub operation broker, explain its design, and distinguish local evidence from live authority |
-| Issue-driven cloud-agent proof | 19 | Trace an unassigned issue through deterministic validation and user-authorized assignment to a separately observed cloud task and reviewed proposal |
+| Issue-driven cloud-agent proof | 19 | Trace a real issue/task/PR, then rehearse enterprise admission, isolated lane plans and durable replay without cloud resources |
 
 Demo **00** is the odd one out on purpose: it's aimed at business analysts and
 product owners rather than developers, and it needs no toolchain at all.
@@ -96,6 +96,9 @@ Demo **19** is the small issue-trigger proof: raising an owner-authorized,
 unassigned issue starts a guarded workflow, which assigns the existing cloud
 agent. Its README explains the build in detail. Offline evidence, assignment,
 agent execution, a PR, and migration acceptance remain separate facts.
+Its `-Enterprise` mode now runs a synthetic policy evaluator and local SQLite
+admission ledger: shared/direct/manual routes, runner/CI boundaries, duplicates,
+queue limits and a stop switch. Planned execution lanes remain unexecuted.
 
 ### Mainframe modernization to Java and .NET
 
@@ -142,6 +145,8 @@ are additional.
 Demo 19 takes about five minutes to present or 45-60 minutes as an issue,
 identity and recovery workshop. Credential setup and cloud-agent latency are
 additional; an offline preview is not a live task.
+The optional enterprise-design track adds 20-30 minutes offline and needs no
+GitHub organization, credentials or cloud provisioning.
 
 The deeper workshop tracks take longer: plan **5-6 hours** for all foundation
 labs, split across sessions, with setup and cloud queues additional. Individual
@@ -191,7 +196,7 @@ issue-to-cloud-agent interaction before building broader migration automation.
 | 16    | Python 3.11+ and PowerShell 7+ offline. Live: disposable target, organization-owned GitHub App, protected environment, exact allow-list, approved managed user with Copilot access, and a bounded AI-credit/Actions budget. |
 | 17    | Python 3.11+, PowerShell 7+, and Agency CLI 2026.9.16.4+ for plugin checks and task generation. Install the pinned MCP Python SDK. Docker plus MSBench, or Vally for trusted local content, is required only for model-scored runs. |
 | 18    | PowerShell 7.4+ and .NET SDK 10.0.401 or a compatible servicing patch for local checks; Copilot CLI only for optional authoring. Infrastructure gate: Azure CLI/Bicep and Checkov 3.3.19. Live: isolated Azure subscription resources, authorised Entra administrator grants, GitHub App approval, private bootstrap access and budget; no cloud credentials needed locally. |
-| 19    | Python 3.11+ and optional PowerShell 7+ offline; no packages or network. Live: personal synthetic repo, eligible Copilot user, GitHub CLI, main-only secret environment, short-lived repository-scoped user token, explicit one-task consent and Actions/AI-credit budget. |
+| 19    | Python 3.11+ (including its standard-library SQLite) and optional PowerShell 7+ for preview/enterprise rehearsal; no packages or network. Live: personal synthetic repo, eligible Copilot user, GitHub CLI, main-only secret environment, short-lived repository-scoped user token, explicit one-task consent and Actions/AI-credit budget. |
 
 Access and service guidance was reviewed **7 September 2026** against
 [GitHub cloud-agent documentation](https://docs.github.com/en/copilot/concepts/agents/cloud-agent/about-cloud-agent),

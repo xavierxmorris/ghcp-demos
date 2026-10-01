@@ -37,7 +37,7 @@ publish their guide files. Demo 15 is tracked and published with this index.
 | 16 | [App-to-agent migration orchestration](https://github.com/xavierxmorris/ghcp-demo-16-copilot-agent-migration-orchestrator/blob/main/WORKSHOP.md) | 60–75 min | Identity-boundary explanation, deterministic routing, idempotency test, and production service-gap design |
 | 17 | [Agency plugin evaluations](https://github.com/xavierxmorris/ghcp-demo-17-agency-plugin-evals/blob/main/WORKSHOP.md) | 60 min | Eval-shape decision, answer-key isolation, negative coverage, materialized tasks, and an honest regression-evidence plan |
 | 18 | [Building the identity boundary](https://github.com/xavierxmorris/ghcp-demo-18-entra-github-agent-identity/blob/main/WORKSHOP.md) | 60-90 min | Architecture rationale, fresh local evidence, a bounded negative test and a least-privilege administrator handoff |
-| 19 | [Issue to cloud-agent proof](https://github.com/xavierxmorris/ghcp-demo-19-issue-to-cloud-agent/blob/main/WORKSHOP.md) | 45-60 min | Explicit work-order, identity-boundary explanation, one observed task or honest blocker, negative case and recovery evidence |
+| 19 | [Issue to cloud agent and enterprise design](https://github.com/xavierxmorris/ghcp-demo-19-issue-to-cloud-agent/blob/main/WORKSHOP.md) | 45-60 min; optional 20-30 min enterprise track | Observed work-order/task evidence plus offline admission, trust-lane rationale, durable replay and negative cases |
 
 ## Choose a session
 
@@ -119,6 +119,13 @@ environment approval to this selected automatic path; the resulting PR remains
 the independent human-review boundary. Ordinary CI and the offline preview do
 not start a model. Record the actual issue, run, session and PR separately.
 
+The optional demo 19 enterprise track needs no live setup. Use `-Enterprise`
+for nine synthetic requests and a real local SQLite ledger. First-run counts
+are 2 admitted locally, 1 duplicate, 2 manual, 3 blocked and 1 deferred;
+explicit replay adds no work. Explain why planned runner/network/credential
+boundaries are not verified platform settings. Keep the ledger outside sealed
+reports and use new output directories.
+
 ## Know the starting state
 
 | Demo | Important baseline distinction |
@@ -142,7 +149,7 @@ not start a model. Record the actual issue, run, session and PR separately.
 | 16 | Offline routing is real; live App/user credentials, organization policy, Copilot assignment, generated PR, and production webhook hosting remain separately configured |
 | 17 | Nine authored tasks materialize successfully; public CI checks contracts and a real local MCP session, while model scores remain unrun until a supported Agency harness is configured |
 | 18 | Hardened broker has 177 recorded tests; fresh local/hosted gates are reproducible. The original live setup is blocked at Entra admin grants; this clone contains no deployment state |
-| 19 | Preview uses a labeled placeholder commit and no API; live helper creates an unassigned issue, the event workflow assigns Copilot, and accepted migrations remain zero |
+| 19 | Preview makes no API calls; enterprise mode reserves synthetic work locally and executes no lane; the separate live path creates the real issue/task/PR, never migration acceptance |
 
 An expected failure is a teaching artifact. An environment failure is a setup
 problem. An unexpected regression is a defect. Do not conflate them to improve
@@ -166,7 +173,7 @@ enough to infer behavior across the suite.
 | 16 `-Check` / normal run | Offline contracts / fresh synthetic fixture report; the live workflow is separately protected and manually dispatched |
 | 17 `-Check` / normal run | Deterministic contracts plus Agency task generation / fresh scenario catalog report; neither mode runs a model-scored eval |
 | 18 `-Check` / `-Verify` / `-Live` | File preflight / application and offline contracts / interactive Copilot authoring with a planning prompt, not deployment; no bypass flags added, but inherited CLI permissions still apply |
-| 19 `-Check` / normal / `-Live -AcceptLiveRun` | Offline contracts / fresh request preview / real unassigned issue creation, which can trigger paid cloud-agent work after setup; no local model process |
+| 19 `-Check` / normal / `-Enterprise` / `-Live -AcceptLiveRun` | Offline contracts / request preview / local admission and lane-plan rehearsal / real unassigned issue creation, which can trigger paid cloud work after setup |
 
 Prefer normal interactive approval for new agent-driven work. A new folder,
 source hash comparison, or an instruction saying "do not touch" is not a

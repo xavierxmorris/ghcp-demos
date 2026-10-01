@@ -28,7 +28,7 @@ Each demo's `.github/workflows/ci.yml` owns its own baseline.
 | 16 | Python 3.11 offline routing, identity separation, idempotent issue recovery, public-boundary checks, and pinned manual live workflow; CI never receives App/user secrets or starts Copilot |
 | 17 | Windows/Linux deterministic contracts, nine authored-task definitions, negative coverage, report generation, and a real stdio MCP protocol smoke test; full model-scored Agency evals are manual on an explicitly configured self-hosted runner |
 | 18 | .NET broker tests and delegated-client build, offline provisioning contracts, runner failure/flag tests and local Markdown targets, Bicep compilation and resource-scoped Checkov exceptions; no Entra grants, Azure deployment or live GitHub writes |
-| 19 | Python 3.11/3.14 on Windows/Linux: exact issue/source/proposal contracts, identity separation, duplicate and uncertain-assignment handling, redacted evidence and runner-consent tests; ordinary CI never receives the assignment secret or starts Copilot |
+| 19 | Python 3.11/3.14 on Windows/Linux: issue/source/proposal contracts, identity/uncertain-assignment handling, enterprise policy and real SQLite concurrency/replay/capacity cases, evidence integrity and runner modes; ordinary CI receives no assignment secret and starts no cloud jobs |
 
 ## Shared policy
 
@@ -108,3 +108,6 @@ upload-artifact v7.0.1 pins, rechecked **1 October 2026**. Its separate owner-on
 strict intake. A main-only environment holds the separate user token. The
 generated Hello World proposal is inactive and has no action dependencies;
 no CI result is presented as migration acceptance or customer action approval.
+The same gate covers its offline enterprise rehearsal: local admission decisions
+and five modeled execution lanes, not provisioned bank runners or automatic
+workflow-approval configuration.
