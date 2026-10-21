@@ -29,6 +29,7 @@ Each demo's `.github/workflows/ci.yml` owns its own baseline.
 | 17 | Windows/Linux deterministic contracts, nine authored-task definitions, negative coverage, report generation, and a real stdio MCP protocol smoke test; full model-scored Agency evals are manual on an explicitly configured self-hosted runner |
 | 18 | .NET broker tests and delegated-client build, offline provisioning contracts, runner failure/flag tests and local Markdown targets, Bicep compilation and resource-scoped Checkov exceptions; no Entra grants, Azure deployment or live GitHub writes |
 | 19 | Python 3.11/3.14 on Windows/Linux: issue/source/proposal contracts, identity/uncertain-assignment handling, enterprise policy and real SQLite concurrency/replay/capacity cases, evidence integrity and runner modes; ordinary CI receives no assignment secret and starts no cloud jobs |
+| 20 | Python 3.11/3.14 on Windows/Linux: 3-pillar priority ordering, multi-org/multi-enterprise policy resolution, Oct 22 default-feature cutover, 28-day adoption cohorts & DAU reconciliation, two-rule AI Credit budgets, content-exclusion surface boundaries, and PowerShell runner syntax |
 
 ## Shared policy
 

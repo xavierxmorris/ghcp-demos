@@ -1,7 +1,7 @@
 # Facilitator guide: teach the decision, not just the prompt
 
-The suite contains **20 demos**, numbered 00–19: **19 independent repositories**
-for 00–14 and 16–19, plus a documentation-only operator guide for 15 in this index.
+The suite contains **21 demos**, numbered 00–20: **20 independent repositories**
+for 00–14 and 16–20, plus a documentation-only operator guide for 15 in this index.
 Each standalone demo's README provides orientation and links to a deeper `WORKSHOP.md`.
 Demo 15 contains its presenter track and operator lab in the same guide.
 Use the short presenter track to show the idea; use the workshop to let
@@ -38,6 +38,7 @@ publish their guide files. Demo 15 is tracked and published with this index.
 | 17 | [Agency plugin evaluations](https://github.com/xavierxmorris/ghcp-demo-17-agency-plugin-evals/blob/main/WORKSHOP.md) | 60 min | Eval-shape decision, answer-key isolation, negative coverage, materialized tasks, and an honest regression-evidence plan |
 | 18 | [Building the identity boundary](https://github.com/xavierxmorris/ghcp-demo-18-entra-github-agent-identity/blob/main/WORKSHOP.md) | 60-90 min | Architecture rationale, fresh local evidence, a bounded negative test and a least-privilege administrator handoff |
 | 19 | [Issue to cloud agent and enterprise design](https://github.com/xavierxmorris/ghcp-demo-19-issue-to-cloud-agent/blob/main/WORKSHOP.md) | 45-60 min; optional 20-30 min enterprise track | Observed work-order/task evidence plus offline admission, trust-lane rationale, durable replay and negative cases |
+| 20 | [Enterprise governance, usage, and security](https://github.com/xavierxmorris/ghcp-demo-20-copilot-governance-usage-security/blob/main/WORKSHOP.md) | 30 min presenter / 60 min lab | Multi-org policy resolution, 28-day cohort & DAU reconciliation, two-rule budget evaluation, and content-exclusion boundary design |
 
 ## Choose a session
 

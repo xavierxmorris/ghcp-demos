@@ -1,11 +1,11 @@
 # GHCP Demo Suite
 
-Twenty focused demos and labs (00–19) showcasing **GitHub Copilot** across its key surfaces —
+Twenty-one focused demos and labs (00–20) showcasing **GitHub Copilot** across its key surfaces —
 from comment-driven completions, through the autonomous coding agent, out to MCP
 servers, hosted agents on Microsoft Foundry, mainframe modernisation, CI modernization,
 enterprise AI Credit cost controls, service-owned agent orchestration, cross-platform identity,
-and an issue-opened cloud-agent proof.
-Demos 00–14 and 16–19 have self-contained repos; demo 15 is an operator guide in
+an issue-opened cloud-agent proof, and a 30-minute enterprise governance/usage/security briefing.
+Demos 00–14 and 16–20 have self-contained repos; demo 15 is an operator guide in
 this index. Choose a learning path rather than assuming every participant needs
 to complete the entire sequence.
 
@@ -31,6 +31,7 @@ to complete the entire sequence.
 | 17 | ⭐⭐⭐⭐   | [`ghcp-demo-17-agency-plugin-evals`](https://github.com/xavierxmorris/ghcp-demo-17-agency-plugin-evals) | **Agency plugin evals** — authored scenarios for skill routing, MCP tool selection, custom-agent policy behavior, negative cases, and two-tier CI |
 | 18 | ⭐⭐⭐⭐   | [`ghcp-demo-18-entra-github-agent-identity`](https://github.com/xavierxmorris/ghcp-demo-18-entra-github-agent-identity) | **Build an identity broker with Copilot** — why Entra, GitHub App and Key Vault have separate roles; durable operations, headless workloads, delegated users, and a real admin-permission boundary |
 | 19 | ⭐⭐⭐   | [`ghcp-demo-19-issue-to-cloud-agent`](https://github.com/xavierxmorris/ghcp-demo-19-issue-to-cloud-agent) | **Issue to cloud agent, then enterprise design** — verified synthetic issue/PR path, runnable offline trust-lane/admission rehearsal, durable duplicate protection, and a detailed design-and-why walkthrough |
+| 20 | ⭐⭐⭐⭐ | [`ghcp-demo-20-copilot-governance-usage-security`](https://github.com/xavierxmorris/ghcp-demo-20-copilot-governance-usage-security) | **Enterprise Governance, Usage & Security (30-min demo)** — multi-org policy conflicts, Oct 22 default-feature cutover, Usage Metrics NDJSON & adoption cohorts, two-rule budgets, content-exclusion boundaries, and 30 discovery questions |
 
 🔒 = repo is **private** and requires access. Private materials are not
 automatically approved for redistribution.
@@ -197,6 +198,7 @@ issue-to-cloud-agent interaction before building broader migration automation.
 | 17    | Python 3.11+, PowerShell 7+, and Agency CLI 2026.9.16.4+ for plugin checks and task generation. Install the pinned MCP Python SDK. Docker plus MSBench, or Vally for trusted local content, is required only for model-scored runs. |
 | 18    | PowerShell 7.4+ and .NET SDK 10.0.401 or a compatible servicing patch for local checks; Copilot CLI only for optional authoring. Infrastructure gate: Azure CLI/Bicep and Checkov 3.3.19. Live: isolated Azure subscription resources, authorised Entra administrator grants, GitHub App approval, private bootstrap access and budget; no cloud credentials needed locally. |
 | 19    | Python 3.11+ (including its standard-library SQLite) and optional PowerShell 7+ for preview/enterprise rehearsal; no packages or network. Live: personal synthetic repo, eligible Copilot user, GitHub CLI, main-only secret environment, short-lived repository-scoped user token, explicit one-task consent and Actions/AI-credit budget. |
+| 20    | Python 3.11+ (standard library only), PowerShell 7+ for `go.ps1`, and a browser for `docs\demo-console.html`. Optional read-only `-Live` check requires `gh` and enterprise metrics permission. |
 
 Access and service guidance was reviewed **7 September 2026** against
 [GitHub cloud-agent documentation](https://docs.github.com/en/copilot/concepts/agents/cloud-agent/about-cloud-agent),
