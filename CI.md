@@ -1,6 +1,6 @@
 # CI maintenance
 
-The index and demos 00–14 and 16–19 are independent repositories; demo 15 is a
+The index and demos 00–14 and 16–21 are independent repositories; demo 15 is a
 documentation-only guide tracked in the index, with no billing automation.
 Index CI does
 not clone the child repositories, publish changes, or access private demos 09 and 14.
@@ -30,6 +30,7 @@ Each demo's `.github/workflows/ci.yml` owns its own baseline.
 | 18 | .NET broker tests and delegated-client build, offline provisioning contracts, runner failure/flag tests and local Markdown targets, Bicep compilation and resource-scoped Checkov exceptions; no Entra grants, Azure deployment or live GitHub writes |
 | 19 | Python 3.11/3.14 on Windows/Linux: issue/source/proposal contracts, identity/uncertain-assignment handling, enterprise policy and real SQLite concurrency/replay/capacity cases, evidence integrity and runner modes; ordinary CI receives no assignment secret and starts no cloud jobs |
 | 20 | Python 3.11/3.14 on Windows/Linux: 3-pillar priority ordering, multi-org/multi-enterprise policy resolution, Oct 22 default-feature cutover, 28-day adoption cohorts & DAU reconciliation, two-rule AI Credit budgets, content-exclusion surface boundaries, and PowerShell runner syntax |
+| 21 | Windows only (the legacy half is .NET Framework 4.8): `go.ps1 -Check` builds and tests both apps, executes every VS Code task as written, runs one HTTP contract against the legacy and modern apps, proves the disposable workspace and `-Compare`, proves seeded regressions are caught, and checks documentation links; the Copilot upgrade agent run is a UI step and is not in CI |
 
 ## Shared policy
 

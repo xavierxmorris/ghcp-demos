@@ -1,8 +1,9 @@
 # Facilitator guide: teach the decision, not just the prompt
 
-The suite contains **21 demos**, numbered 00–20: **20 independent repositories**
-for 00–14 and 16–20, plus a documentation-only operator guide for 15 in this index.
-Each standalone demo's README provides orientation and links to a deeper `WORKSHOP.md`.
+The suite contains **22 demos**, numbered 00–21: **21 independent repositories**
+for 00–14 and 16–21, plus a documentation-only operator guide for 15 in this index.
+Each standalone demo's README provides orientation and links to a deeper guide
+(a `WORKSHOP.md`, or for demo 21 its `RUN-SHEET.md`).
 Demo 15 contains its presenter track and operator lab in the same guide.
 Use the short presenter track to show the idea; use the workshop to let
 participants test it, make a bounded change, and explain the evidence.
@@ -39,6 +40,7 @@ publish their guide files. Demo 15 is tracked and published with this index.
 | 18 | [Building the identity boundary](https://github.com/xavierxmorris/ghcp-demo-18-entra-github-agent-identity/blob/main/WORKSHOP.md) | 60-90 min | Architecture rationale, fresh local evidence, a bounded negative test and a least-privilege administrator handoff |
 | 19 | [Issue to cloud agent and enterprise design](https://github.com/xavierxmorris/ghcp-demo-19-issue-to-cloud-agent/blob/main/WORKSHOP.md) | 45-60 min; optional 20-30 min enterprise track | Observed work-order/task evidence plus offline admission, trust-lane rationale, durable replay and negative cases |
 | 20 | [Enterprise governance, usage, and security](https://github.com/xavierxmorris/ghcp-demo-20-copilot-governance-usage-security/blob/main/WORKSHOP.md) | 30 min presenter / 60 min lab | Multi-org policy resolution, 28-day cohort & DAU reconciliation, two-rule budget evaluation, and content-exclusion boundary design |
+| 21 | [Agent upgrade, then prove it (run sheet)](https://github.com/xavierxmorris/ghcp-demo-21-modernize-dotnet-tax-app/blob/main/RUN-SHEET.md) | 30 min presenter; 60–90 min with a live agent run | A rehearsed upgrade run, a `-Compare` verdict, and a classification of any failing contract check as regression or deliberate change |
 
 ## Choose a session
 
@@ -54,6 +56,7 @@ publish their guide files. Demo 15 is tracked and published with this index.
 | Plugin quality and evals, 60 minutes | 17 | Real customer incidents, production runbooks, untrusted Vally tasks, and claims based only on generated task files |
 | Governed agent identity, 60-90 minutes | 18 | Live provisioning, customer data, credential exports, production permissions and any attempt to bypass admin consent |
 | Issue-trigger proof, 45-60 minutes | 19 | Broad user-token exports, enterprise source, automatic merge, complex conversion and repeated paid tasks |
+| Agent-driven framework upgrade, 30 min to 90 min | 21 | Bypass Approvals outside the disposable workspace, presenting the prebaked reference as agent output, and any claim the repository did not run |
 
 Do not compress all twenty into a single "hands-on" session. A room can watch
 many demos; participants need time to inspect and challenge a smaller number.
@@ -151,6 +154,7 @@ reports and use new output directories.
 | 17 | Nine authored tasks materialize successfully; public CI checks contracts and a real local MCP session, while model scores remain unrun until a supported Agency harness is configured |
 | 18 | Hardened broker has 177 recorded tests; fresh local/hosted gates are reproducible. The original live setup is blocked at Entra admin grants; this clone contains no deployment state |
 | 19 | Preview makes no API calls; enterprise mode reserves synthetic work locally and executes no lane; the separate live path creates the real issue/task/PR, never migration acceptance |
+| 21 | `go.ps1 -Check` is the only machine claim. The Copilot upgrade agent, its confirmation questions, `assessment.md`/`plan.md`/`tasks.md`, Keep/Undo, the dashboard and F5 under the debugger are UI steps. `modern/` is a hand-built reference, not agent output; the legacy app runs through a dev-only in-process host, not IIS |
 
 An expected failure is a teaching artifact. An environment failure is a setup
 problem. An unexpected regression is a defect. Do not conflate them to improve
@@ -175,6 +179,7 @@ enough to infer behavior across the suite.
 | 17 `-Check` / normal run | Deterministic contracts plus Agency task generation / fresh scenario catalog report; neither mode runs a model-scored eval |
 | 18 `-Check` / `-Verify` / `-Live` | File preflight / application and offline contracts / interactive Copilot authoring with a planning prompt, not deployment; no bypass flags added, but inherited CLI permissions still apply |
 | 19 `-Check` / normal / `-Enterprise` / `-Live -AcceptLiveRun` | Offline contracts / request preview / local admission and lane-plan rehearsal / real unassigned issue creation, which can trigger paid cloud work after setup |
+| 21 `-Check` / `-Run` / `-Reset` / `-Compare` / `-DriftDemo` / `-Live` | Full verification (about five minutes) / start the legacy or modern site / create a throwaway git workspace and open VS Code / judge an upgraded app by build, tests and HTTP contract / seed regressions into a scratch copy / guided run with pauses. No flag runs the Copilot agent for you |
 
 Prefer normal interactive approval for new agent-driven work. A new folder,
 source hash comparison, or an instruction saying "do not touch" is not a

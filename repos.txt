@@ -1,4 +1,4 @@
-ghcp-demos|Index + publishing tooling and facilitator guidance for 21 GitHub Copilot demos and research modules: 20 standalone workshops and an in-index cost-centre AI Credit operator guide.
+ghcp-demos|Index + publishing tooling and facilitator guidance for 22 GitHub Copilot demos and research modules: 21 standalone workshops and an in-index cost-centre AI Credit operator guide.
 ghcp-demo-00-design-to-clickthrough|One-page BRD to a working click-through app and back again — Copilot for business analysts, no code required.
 ghcp-demo-01-hello-completions|Hands-on intro to Copilot ghost-text completions and comment-driven coding (JS).
 ghcp-demo-02-python-quickfix|Learn Copilot Chat through root-cause diagnosis, deterministic regression tests, and accurate documentation on a small Python codebase.
@@ -19,3 +19,4 @@ ghcp-demo-17-agency-plugin-evals|GitHub Copilot and Agency workshop for evaluati
 ghcp-demo-18-entra-github-agent-identity|Build an Entra-GitHub operation broker with Copilot: architecture rationale, headless and delegated identities, private Key Vault signing, durable execution, and honest admin-permission boundaries.|public
 ghcp-demo-19-issue-to-cloud-agent|Verified issue-to-cloud-agent proof plus runnable enterprise-design rehearsal: isolated trust-lane plans, durable local admission, duplicate protection, limits, and design rationale.|public
 ghcp-demo-20-copilot-governance-usage-security|30-minute enterprise demo and deterministic evaluator for GitHub Copilot Governance & Guardrails, Usage/Reporting/Administration, and Security/Compliance/Auditability, with 30 discovery questions.|public
+ghcp-demo-21-modernize-dotnet-tax-app|Runnable rebuild of the dotnet team's "Modernize .NET Apps with GitHub Copilot" demo: a .NET Framework 4.8 MVC Tax App upgraded to .NET 10 with the GitHub Copilot upgrade agent in VS Code, plus a golden master, an HTTP contract and VS Code tasks that the checks execute.|public

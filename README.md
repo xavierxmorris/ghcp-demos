@@ -1,11 +1,12 @@
 # GHCP Demo Suite
 
-Twenty-one focused demos and labs (00–20) showcasing **GitHub Copilot** across its key surfaces —
+Twenty-two focused demos and labs (00–21) showcasing **GitHub Copilot** across its key surfaces —
 from comment-driven completions, through the autonomous coding agent, out to MCP
 servers, hosted agents on Microsoft Foundry, mainframe modernisation, CI modernization,
 enterprise AI Credit cost controls, service-owned agent orchestration, cross-platform identity,
-an issue-opened cloud-agent proof, and a 30-minute enterprise governance/usage/security briefing.
-Demos 00–14 and 16–20 have self-contained repos; demo 15 is an operator guide in
+an issue-opened cloud-agent proof, a 30-minute enterprise governance/usage/security briefing,
+and an agent-driven .NET Framework to .NET 10 upgrade with an executable behaviour contract.
+Demos 00–14 and 16–21 have self-contained repos; demo 15 is an operator guide in
 this index. Choose a learning path rather than assuming every participant needs
 to complete the entire sequence.
 
@@ -32,6 +33,7 @@ to complete the entire sequence.
 | 18 | ⭐⭐⭐⭐   | [`ghcp-demo-18-entra-github-agent-identity`](https://github.com/xavierxmorris/ghcp-demo-18-entra-github-agent-identity) | **Build an identity broker with Copilot** — why Entra, GitHub App and Key Vault have separate roles; durable operations, headless workloads, delegated users, and a real admin-permission boundary |
 | 19 | ⭐⭐⭐   | [`ghcp-demo-19-issue-to-cloud-agent`](https://github.com/xavierxmorris/ghcp-demo-19-issue-to-cloud-agent) | **Issue to cloud agent, then enterprise design** — verified synthetic issue/PR path, runnable offline trust-lane/admission rehearsal, durable duplicate protection, and a detailed design-and-why walkthrough |
 | 20 | ⭐⭐⭐⭐ | [`ghcp-demo-20-copilot-governance-usage-security`](https://github.com/xavierxmorris/ghcp-demo-20-copilot-governance-usage-security) | **Enterprise Governance, Usage & Security (30-min demo)** — multi-org policy conflicts, Oct 22 default-feature cutover, Usage Metrics NDJSON & adoption cohorts, two-rule budgets, content-exclusion boundaries, and 30 discovery questions |
+| 21 | ⭐⭐⭐ | [`ghcp-demo-21-modernize-dotnet-tax-app`](https://github.com/xavierxmorris/ghcp-demo-21-modernize-dotnet-tax-app) | **Upgrade a .NET Framework app with the Copilot upgrade agent, then prove it** — a runnable rebuild of the dotnet team's video: an ASP.NET MVC 5 Tax App goes to .NET 10 in VS Code, and a golden master, an HTTP contract and a seeded-regression self-test show whether behaviour survived |
 
 🔒 = repo is **private** and requires access. Private materials are not
 automatically approved for redistribution.
@@ -69,6 +71,7 @@ baseline expectations, run-mode differences, and session preparation.
 | Extension quality and evaluations | 17 | Choose the right eval shape for skills, MCP tools, and custom agents; preserve negative coverage and honest CI evidence |
 | Governed agent identity | 18 | Reproduce an Entra-to-GitHub operation broker, explain its design, and distinguish local evidence from live authority |
 | Issue-driven cloud-agent proof | 19 | Trace a real issue/task/PR, then rehearse enterprise admission, isolated lane plans and durable replay without cloud resources |
+| Agent-driven framework upgrade | 21 | Run the Copilot upgrade agent on a legacy .NET Framework app, then prove the business behaviour survived with a golden master and an HTTP contract, and see what drift looks like |
 
 Demo **00** is the odd one out on purpose: it's aimed at business analysts and
 product owners rather than developers, and it needs no toolchain at all.
@@ -199,6 +202,7 @@ issue-to-cloud-agent interaction before building broader migration automation.
 | 18    | PowerShell 7.4+ and .NET SDK 10.0.401 or a compatible servicing patch for local checks; Copilot CLI only for optional authoring. Infrastructure gate: Azure CLI/Bicep and Checkov 3.3.19. Live: isolated Azure subscription resources, authorised Entra administrator grants, GitHub App approval, private bootstrap access and budget; no cloud credentials needed locally. |
 | 19    | Python 3.11+ (including its standard-library SQLite) and optional PowerShell 7+ for preview/enterprise rehearsal; no packages or network. Live: personal synthetic repo, eligible Copilot user, GitHub CLI, main-only secret environment, short-lived repository-scoped user token, explicit one-task consent and Actions/AI-credit budget. |
 | 20    | Python 3.11+ (standard library only), PowerShell 7+ for `go.ps1`, and a browser for `docs\demo-console.html`. Optional read-only `-Live` check requires `gh` and enterprise metrics permission. |
+| 21    | Windows 10/11 (the legacy half is .NET Framework 4.8), .NET SDK 10, PowerShell 7+, Git and VS Code. Optional Python 3 for the golden-master reproducibility check. `go.ps1 -Check` needs NuGet access once. The live agent run needs the GitHub Copilot upgrade extension (`ms-dotnettools.upgrade-agent`) and a Copilot plan; that run is a UI step and is not machine-verified. |
 
 Access and service guidance was reviewed **7 September 2026** against
 [GitHub cloud-agent documentation](https://docs.github.com/en/copilot/concepts/agents/cloud-agent/about-cloud-agent),
@@ -219,6 +223,11 @@ Demo 19's issue-assignment, Actions trigger and environment sources were checked
 **1 October 2026**, with GitHub CLI **2.93.0** and REST API **2026-03-10**.
 Its README and dated evidence separate the implemented trigger from actual live
 assignment, agent execution and independent migration acceptance.
+Demo 21's Microsoft Learn, Marketplace, VS Code and ATO sources were read on
+**26 October 2026**, against the `ms-dotnettools.upgrade-agent` extension **1.1.718**.
+The video it rebuilds predates the deprecation of the Modernize .NET agent in favour
+of GitHub Copilot upgrade; its README separates machine-verified checks, the
+prebaked .NET 10 reference and the UI steps that nobody here has machine-verified.
 The Demo 15 source review is documentation validation, not a live check of
 GB18030-Action. AI Credit usage can incur real charges; do not lower production
 defaults or consume credits merely to demonstrate a threshold.
